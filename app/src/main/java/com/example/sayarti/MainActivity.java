@@ -10,8 +10,8 @@ import android.view.View;
 
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
- private CardView c1,c2,c3;
+public class MainActivity extends AppCompatActivity  {
+ private CardView c1,c2,c3,c4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,30 +19,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         c1 = (CardView) findViewById(R.id.card_view1);
-        c1.setOnClickListener(this);
-        c2 = (CardView) findViewById(R.id.card_view2);
-        c2.setOnClickListener(this);
-        c3 = (CardView) findViewById(R.id.card_view3);
-        c3.setOnClickListener(this);
-    }
+        c1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag,new voiture_neuve()).addToBackStack("frg").commit();
+            }
+        });
 
-    @Override
-    public void onClick(View v) {
-        Intent i ;
-        switch (v.getId())
-        {
-            case R.id.card_view1 :
-                i = new Intent(this,Bienvenu.class);
-                startActivity(i);
-                break;
-            case R.id.card_view2 :
-                i = new Intent(this,Bienvenu.class);
-                startActivity(i);
-                break;
-            case R.id.card_view3 :
-                i = new Intent(this,Bienvenu.class);
-                startActivity(i);
-                break;
-        }
-    }
-}
+        c4 = (CardView) findViewById(R.id.card_view4);
+        c4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag,new Sos()).addToBackStack("frg").commit();
+            }});
+
+
+
+}}
