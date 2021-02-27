@@ -10,8 +10,9 @@ import android.view.View;
 
 
 
-public class MainActivity extends AppCompatActivity  {
- private CardView c1,c2,c3,c4;
+public class MainActivity extends AppCompatActivity {
+    private CardView c1, c2, c3, c4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity  {
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.frag,new voiture_neuve()).addToBackStack("frg").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag, new voiture_neuve()).addToBackStack("frg").commit();
             }
         });
 
@@ -30,9 +31,8 @@ public class MainActivity extends AppCompatActivity  {
         c4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.frag,new Sos()).addToBackStack("frg").commit();
-            }});
-
-
-
-}}
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag, new Sos()).addToBackStack("frg").commit();
+            }
+        });
+    }
+}
