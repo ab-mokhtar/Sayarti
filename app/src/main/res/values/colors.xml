@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="trans">#EFEFEFEF</color>
     <color name="yellow">#F8E04A</color>
+    <color name="red">#B90000</color>
 </resources>
