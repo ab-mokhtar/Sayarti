@@ -89,6 +89,7 @@
             android:layout_marginTop="5dp"
             android:id="@+id/local"
             android:padding="12dp"
+            android:editable="false"
             android:background="@drawable/custom_input"
             />
     </LinearLayout>
