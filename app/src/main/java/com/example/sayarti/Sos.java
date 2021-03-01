@@ -77,12 +77,20 @@ public class Sos extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                declaration.setMatricule(e2.getText().toString().trim());
-                declaration.setType_panne(e3.getText().toString().trim());
-                declaration.setLocalisation(e1.getText().toString().trim());
-                declaration.setEtat(false);
-                db.push().setValue(declaration);
-                Toast.makeText(getContext(),"data insert sucessfully",Toast.LENGTH_SHORT).show();
+                String mat = e2.getText().toString().trim();
+                String type_panne = e3.getText().toString().trim();
+                String local = e1.getText().toString().trim();
+                if(mat.length()==0|| type_panne.length()==0 || local.length()==0) {
+                    Toast.makeText(getContext(), "vérifier que les champs rempli ou vérifier votre correction internet", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    declaration.setMatricule(e2.getText().toString().trim());
+                    declaration.setType_panne(e3.getText().toString().trim());
+                    declaration.setLocalisation(e1.getText().toString().trim());
+                    declaration.setEtat(false);
+                    db.push().setValue(declaration);
+                    Toast.makeText(getContext(), "data insert sucessfully", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
