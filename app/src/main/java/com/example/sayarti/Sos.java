@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.audiofx.BassBoost;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,21 +33,30 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Sos extends Fragment {
 
-   EditText e1;
+   EditText e1,e2,e3;
    ImageView i1;
+   Button btn;
    FusedLocationProviderClient client;
-
+   DatabaseReference db;
+    ImageView i2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_sos, container, false);
         e1 = v.findViewById(R.id.local);
+        e2 = v.findViewById(R.id.matricule);
+        e3= v.findViewById(R.id.type_panne);
+        btn = v.findViewById(R.id.env);
         i1 = v.findViewById(R.id.btnlocal);
+        i2 = v.findViewById(R.id.callsos);
+        Declaration declaration;
         client = LocationServices.getFusedLocationProviderClient(getActivity());
         i1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +72,29 @@ public class Sos extends Fragment {
 
             }
         });
+        declaration = new Declaration();
+        db = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/").getReference().child("declarations");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                declaration.setMatricule(e2.getText().toString().trim());
+                declaration.setType_panne(e3.getText().toString().trim());
+                declaration.setLocalisation(e1.getText().toString().trim());
+                declaration.setEtat(false);
+                db.push().setValue(declaration);
+                Toast.makeText(getContext(),"data insert sucessfully",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        i2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:71200300"));
+                startActivity(intent);
+            }
+        });
+
     return v;
     }
 
