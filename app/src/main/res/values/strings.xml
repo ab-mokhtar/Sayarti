@@ -5,4 +5,7 @@
     <string name="input">Recherche par : marque, modèle, catégorie ...</string>
     <string name="generator">This is the first sentence<br />This is the second scentence<br />This is the third sentence</string>
     <string name="in">Voit toutes la liste</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="remember">Sauvgarder mes données</string>
 </resources>
