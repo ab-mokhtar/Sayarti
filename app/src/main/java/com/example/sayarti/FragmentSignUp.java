@@ -1,5 +1,6 @@
 package com.example.sayarti;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
 public class FragmentSignUp extends Fragment {
-
+    private FirebaseAuth mAuth;
     DatabaseReference db;
     private EditText Nom;
     private EditText PasswordInpSignUP;
@@ -36,8 +41,7 @@ public class FragmentSignUp extends Fragment {
         PasswordInpSignUP = v.findViewById(R.id.signUpMDP);
         Mat = v.findViewById(R.id.signUpMat);
         btnReg = v.findViewById(R.id.SignUpbtn);
-        user = new User();
-        db = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/").getReference().child("User");
+        mAuth = FirebaseAuth.getInstance();
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,12 +52,25 @@ public class FragmentSignUp extends Fragment {
                     Toast.makeText(getContext(), "VERFIER VOS CHAMPS", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    user.setMat(Mat.getText().toString().trim());
-                    user.setNom(Nom.getText().toString().trim());
-                    user.setMdp(PasswordInpSignUP.getText().toString().trim());
-                    db.push().setValue(user);
-                    Toast.makeText(getContext(), "VOTRE COMPTE EST BIEN CREE", Toast.LENGTH_SHORT).show();
-                }
+                    mAuth.createUserWithEmailAndPassword(mat, mdp).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getContext(),
+                                            "creation effectué", Toast.LENGTH_LONG).show();
+                                      } else {
+                                    Toast.makeText(getContext(),
+                                            "creation a échoué! veuillez réessayer", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                Toast.makeText(getContext(),
+                                        "creation a échoué", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                    });
+                     }
             }
         });
         return v;
