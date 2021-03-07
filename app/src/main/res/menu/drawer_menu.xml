@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/connect"
-    android:icon="@drawable/ic_connect"
-    android:actionLayout="@layout/toolbar"
-    android:title="Se connecter"/>
+
+    <group
+        android:id="@+id/groupe1">
+        <item
+            android:id="@+id/connect"
+            android:icon="@drawable/ic_login"
+            android:actionLayout="@layout/toolbar"
+            android:title="Se connecter"/>
+
+            <item
+                android:id="@+id/create"
+                android:icon="@drawable/ic_add"
+                android:actionLayout="@layout/toolbar"
+                android:title="Créer un compte"/>
+    </group>
 
     <item
-        android:id="@+id/create"
-        android:icon="@drawable/ic_add"
+        android:id="@+id/deconnexion"
+        android:icon="@drawable/ic_connect"
         android:actionLayout="@layout/toolbar"
-        android:title="Créer un compte"/>
-
+        android:title="Déconnexion"/>
 </menu>

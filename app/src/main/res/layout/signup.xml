@@ -58,14 +58,14 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Entrez votre Nom :"
+                        android:text="Entrez votre mail:"
                         android:textColor="@color/black"
                         android:textSize="18dp"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:id="@+id/signUpNom"
+                        android:id="@+id/signUpMail"
                         android:padding="12dp"
                         android:background="@drawable/custom_input" />
                 </LinearLayout>

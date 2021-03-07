@@ -1,9 +1,11 @@
 package com.example.sayarti;
 
 public class User {
-    private String mat , nom , mdp;
+    private String mat , nom , mdp, idUnique;
 
-    public User(String mat, String nom, String mdp) {
+    public User(String id,String mat, String nom, String mdp)
+    {
+        this.idUnique = idUnique;
         this.mat = mat;
         this.nom = nom;
         this.mdp = mdp;
@@ -12,6 +14,15 @@ public class User {
     {
 
     }
+
+    public String getIdUnique() {
+        return idUnique;
+    }
+
+    public void setIdUnique(String idUnique) {
+        this.idUnique = idUnique;
+    }
+
     public String getMat() {
         return mat;
     }

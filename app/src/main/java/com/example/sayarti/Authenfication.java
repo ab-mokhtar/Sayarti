@@ -16,7 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -49,13 +51,20 @@ public class Authenfication extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getContext(),"Login successful",Toast.LENGTH_LONG).show();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new home()).commit();
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), "BIEN CONNECTE", Snackbar.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new home()).addToBackStack(null).commit();
 
-                } else {
-                    Toast.makeText(getContext(), "échec de la connexion, veuillez vérifier vos informations d'identification et réessayer", Toast.LENGTH_LONG).show();
+                } else
+                {
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), "ECHEC DE LA CONNEXION, VERIFIER VOS INFORMATIONS", Snackbar.LENGTH_SHORT).show();
                 }
 
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                String error = e.getMessage().toUpperCase();
+                Snackbar.make(getActivity().findViewById(android.R.id.content), error, Snackbar.LENGTH_SHORT).show();
             }
         });
     }
