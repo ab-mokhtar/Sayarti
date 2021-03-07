@@ -12,22 +12,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity {
     private CardView c1, c2, c3, c4;
 
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
-        mAuth = FirebaseAuth.getInstance();
+
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {

@@ -1,40 +1,19 @@
 package com.example.sayarti;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link home#newInstance} factory method to
+ * Use the {@link hitorique#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class home extends Fragment {
-    String user ;
-    EditText e1,e2,e3;
-    ImageView i1;
-    Button btn;
-    FusedLocationProviderClient client;
-    DatabaseReference db;
-    ImageView i2;
+public class hitorique extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,11 +24,8 @@ public class home extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public home(String user) {
-        this.user= user;
-    }
-    public home() {
-
+    public hitorique() {
+        // Required empty public constructor
     }
 
     /**
@@ -58,11 +34,11 @@ public class home extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment home.
+     * @return A new instance of fragment hitorique.
      */
     // TODO: Rename and change types and number of parameters
-    public static home newInstance(String param1, String param2) {
-        home fragment = new home();
+    public static hitorique newInstance(String param1, String param2) {
+        hitorique fragment = new hitorique();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -83,8 +59,6 @@ public class home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
-
-        return v;
+        return inflater.inflate(R.layout.fragment_hitorique, container, false);
     }
 }
