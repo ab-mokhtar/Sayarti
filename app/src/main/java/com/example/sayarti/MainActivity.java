@@ -77,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new voiture_neuve()).addToBackStack("frg").commit();
             }
         });
+        c3 = (CardView) findViewById(R.id.card_view3);
+        c3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new kiosque()).addToBackStack("frg").commit();
+            }
+        });
 
         c4 = (CardView) findViewById(R.id.card_view4);
         c4.setOnClickListener(new View.OnClickListener() {
