@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         c3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new kiosque()).addToBackStack("frg").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new MapsFragment()).addToBackStack("frg").commit();
             }
         });
 
