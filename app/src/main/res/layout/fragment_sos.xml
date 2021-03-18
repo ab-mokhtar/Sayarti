@@ -51,25 +51,34 @@
         android:layout_marginTop="150dp"
         android:padding="15dp">
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/selected"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Décrir votre panne :"
+        android:text="Choisissez votre panne :"
         android:textSize="18dp"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:id="@+id/type_panne"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/custom_input"
-        />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/type_panne"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/autre"
+            android:hint="Decrire votre panne"
+            android:padding="25dp"
+            android:maxLength="75"
+            android:background="@drawable/custom_input"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="360dp"
         android:padding="15dp">
         <TextView
             android:layout_width="match_parent"
@@ -90,15 +99,14 @@
             android:id="@+id/local"
             android:padding="12dp"
             android:editable="false"
-            android:background="@drawable/custom_input"
-            />
+            android:background="@drawable/custom_input"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="490dp"
         android:padding="15dp">
         <Button
             android:layout_width="match_parent"

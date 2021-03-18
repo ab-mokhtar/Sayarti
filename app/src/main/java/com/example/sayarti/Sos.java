@@ -20,10 +20,14 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -33,8 +37,11 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Sos extends Fragment {
@@ -44,20 +51,52 @@ public class Sos extends Fragment {
    Button btn;
    FusedLocationProviderClient client;
    DatabaseReference db;
-    ImageView i2;
+   ImageView i2;
+   Spinner spinner;
+   TextView typepanne;
+   int maxid = 0;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_sos, container, false);
         e1 = v.findViewById(R.id.local);
         e2 = v.findViewById(R.id.matricule);
-        e3= v.findViewById(R.id.type_panne);
+        e3= v.findViewById(R.id.autre);
         btn = v.findViewById(R.id.env);
         i1 = v.findViewById(R.id.btnlocal);
         i2 = v.findViewById(R.id.callsos);
         Declaration declaration;
         client = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        //spinner
+        spinner = v.findViewById(R.id.type_panne);
+        typepanne = v.findViewById(R.id.selected);
+        String [] values = {"Choisissez le type de panne","AAA","BBB","CCC","DDD","EEE","Autre"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
+        e3.setVisibility(View.INVISIBLE);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(adapterView.getItemAtPosition(i).equals("Autre"))
+                {
+                    e3.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    e3.setVisibility(View.GONE);
+                    e3.setText(adapterView.getSelectedItem().toString());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
+
         i1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,15 +117,17 @@ public class Sos extends Fragment {
             @Override
             public void onClick(View v) {
                 String mat = e2.getText().toString().trim();
-                String type_panne = e3.getText().toString().trim();
+                String type_panne = spinner.getSelectedItem().toString().trim();
+                String au = e3.getText().toString().trim();
                 String local = e1.getText().toString().trim();
-                if(mat.length()==0|| type_panne.length()==0 || local.length()==0) {
+                if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
                     Toast.makeText(getContext(), "vérifier que les champs rempli ou vérifier votre correction internet", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     declaration.setMatricule(e2.getText().toString().trim());
-                    declaration.setType_panne(e3.getText().toString().trim());
+                    declaration.setType_panne(spinner.getSelectedItem().toString().trim());
                     declaration.setLocalisation(e1.getText().toString().trim());
+                    declaration.setType_panne(e3.getText().toString().trim());
                     declaration.setEtat(false);
                     db.push().setValue(declaration);
                     Toast.makeText(getContext(), "data insert sucessfully", Toast.LENGTH_SHORT).show();
