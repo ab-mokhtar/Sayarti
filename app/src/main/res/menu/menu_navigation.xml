@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:icon="@drawable/ic_baseline_note_add_24"
+        android:id="@+id/add_note"
+        android:title="add note"/>
+    <item android:icon="@drawable/list_note"
+        android:id="@+id/list"
+        android:title="notes"
+        />
+    <item android:icon="@drawable/ic_baseline_logout_24"
+        android:id="@+id/logout"
+        android:title="logout"/>
+
+
+
+</menu>

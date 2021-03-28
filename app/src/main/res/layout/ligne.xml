@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/titreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="matricule"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/descr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:layout_margin="5dp"
+            android:textSize="15sp"
+            />
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:layout_margin="5dp"
+            android:textSize="15sp"
+            />
+
+
+
+    </LinearLayout>
+</LinearLayout>
