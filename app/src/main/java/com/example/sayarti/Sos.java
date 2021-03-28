@@ -87,7 +87,6 @@ public class Sos extends Fragment {
                 else
                 {
                     e3.setVisibility(View.GONE);
-                    e3.setText(adapterView.getSelectedItem().toString());
                 }
             }
 
