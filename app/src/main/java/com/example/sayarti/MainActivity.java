@@ -6,12 +6,19 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -19,7 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private CardView c1, c2, c3, c4;
 
     private DrawerLayout drawerLayout;
@@ -77,12 +84,36 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new voiture_neuve()).addToBackStack("frg").commit();
             }
         });
-        c3 = (CardView) findViewById(R.id.card_view3);
-        c3.setOnClickListener(new View.OnClickListener() {
+        c2 = (CardView) findViewById(R.id.card_view2);
+        c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new MapsFragment()).addToBackStack("frg").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new charge_bornes()).addToBackStack("frg").commit();
             }
+        });
+
+
+        c3 = (CardView) findViewById(R.id.card_view3);
+        c3.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View v) {
+                LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+                if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                        , Manifest.permission.ACCESS_COARSE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED)) {
+                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new MapsFragment()).addToBackStack("frg").commit();
+
+                    }else {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    }
+
+                }else{
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+                }
+                }
         });
 
         c4 = (CardView) findViewById(R.id.card_view4);
@@ -101,4 +132,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
+

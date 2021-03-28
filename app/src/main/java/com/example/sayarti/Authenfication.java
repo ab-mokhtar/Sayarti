@@ -50,7 +50,8 @@ public class Authenfication extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(),"Login successful",Toast.LENGTH_LONG).show();
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new formularie_des_notes(email)).commit();
+                    startActivity(new Intent(getContext(), notes_home.class));
+
 
                 } else {
                     Toast.makeText(getContext(), "échec de la connexion, veuillez vérifier vos informations d'identification et réessayer", Toast.LENGTH_LONG).show();

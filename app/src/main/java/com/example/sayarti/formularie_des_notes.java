@@ -1,19 +1,18 @@
 package com.example.sayarti;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,10 +24,10 @@ import java.util.Calendar;
  * Use the {@link formularie_des_notes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class formularie_des_notes extends Fragment {
+public class formularie_des_notes extends Fragment  {
     String user ;
     EditText e1,e2;
-
+    DrawerLayout d1;
     Button btn;
 
     DatabaseReference db;
@@ -94,6 +93,8 @@ public class formularie_des_notes extends Fragment {
         btn = v.findViewById(R.id.envfor);
         Calendar calendar=Calendar.getInstance();
         date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        Toolbar toolbar = v.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         Notes note = new Notes();
 
@@ -123,4 +124,6 @@ public class formularie_des_notes extends Fragment {
 
         return v;
     }
+
+
 }

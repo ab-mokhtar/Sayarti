@@ -180,7 +180,7 @@ public class Sos extends Fragment {
                                                                         @Override
                                                                         public void onLocationResult(@NonNull LocationResult locationResult) {
                                                                             Location location1 = locationResult.getLastLocation();
-                                                                            e1.setText(String.valueOf(location.getLatitude() )+','+String.valueOf(location.getLongitude() ));
+                                                                            e1.setText(String.valueOf(location1.getLatitude() )+','+String.valueOf(location1.getLongitude() ));
                                                                         }
                                                                     };
                                                                     client.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());

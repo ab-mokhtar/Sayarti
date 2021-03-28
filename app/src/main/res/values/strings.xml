@@ -9,4 +9,5 @@
     <string name="close">close</string>
     <string name="remember">Sauvgarder mes données</string>
     <string name="google_map_key">AIzaSyAxLhrLbh2iJeN8xee_kS62JQs51A2sKGI</string>
+    <string name="d_connexion">déconnexion</string>
 </resources>
