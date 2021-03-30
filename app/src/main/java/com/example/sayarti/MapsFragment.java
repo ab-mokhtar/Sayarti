@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -57,10 +59,9 @@ public class MapsFragment extends Fragment {
                 Button btnsearch = v.findViewById(R.id.search);
                 Spinner sptype = v.findViewById(R.id.sp_type);
 
-                String[] placeTypeList = {"gas_station", "gas_station", "gas_station"};
-                String[] placeNameList = {"shell", "agil", "total"};
+                String[] placeNameList = {"SHELL", "AGIL", "TOTAL"};
                 Object transferData[]=new Object[2];
-                Getnerabyplaces getnerabyplaces=new Getnerabyplaces();
+
 
 
 
@@ -68,11 +69,11 @@ public class MapsFragment extends Fragment {
                 btnsearch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-
-
+                        map.clear();
+                        markmy_location(map);
+                        Getnerabyplaces getnerabyplaces=new Getnerabyplaces();
                         int i = sptype.getSelectedItemPosition();
-                        String url = getUrl(currentlat, currentlong, placeTypeList[i]);
+                        String url = getUrl(currentlat, currentlong, placeNameList[i]);
 
 
                         transferData[0]=googleMap;
@@ -85,14 +86,38 @@ public class MapsFragment extends Fragment {
 
                     }
                 });
+                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                    @Override
+                    public View getInfoWindow(Marker marker) {
+                        return null;
+                    }
+
+                    @Override
+                    public View getInfoContents(Marker marker) {
+                        LayoutInflater layoutInflater=LayoutInflater.from(getContext());
+                        View v = getLayoutInflater().inflate(R.layout.snippet,null);
+                        TextView t1 = v.findViewById(R.id.text1);
+                        TextView t2 = v.findViewById(R.id.text22);
+                        TextView t3 = v.findViewById(R.id.text3);
+                        TextView t4 = v.findViewById(R.id.text4);
+                        LatLng l1 = marker.getPosition();
+                        t1.setText(marker.getTitle());
+                        t2.setText(marker.getSnippet());
+                        t3.setText(String.valueOf(l1.latitude));
+                        t4.setText(String.valueOf(l1.longitude));
+                        return  v;
+                    }
+                });
             }});
+
         return v;
     }
     private String getUrl(double latitude, double longitude, String nearbyPlace){
         StringBuilder googleUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googleUrl.append("location="+ latitude + "," + longitude);
         googleUrl.append("&radius=" + proxumityRadius);
-        googleUrl.append("&type=" + nearbyPlace);
+        googleUrl.append("&type=" + "gas_station");
+        googleUrl.append("&keyword="+nearbyPlace );
         googleUrl.append("&sensor=true" );
         googleUrl.append("&key=" + "AIzaSyDvOWlQo1Tp1Q-6ZVdwxLwblIWD6wQVbQ8");
         Log.d("MapsFragment", "url = "+googleUrl.toString());
@@ -139,12 +164,8 @@ public class MapsFragment extends Fragment {
                         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                             @Override
                             public void onMapReady(GoogleMap googleMap) {
-                                map = googleMap;
-                                LatLng mylocation = new LatLng(currentlat, currentlong);
-                                googleMap.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
-                                googleMap.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
-                                map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat,currentlong),15));
 
+                               markmy_location(googleMap);
 
                             }
                         });
@@ -166,6 +187,13 @@ public class MapsFragment extends Fragment {
             mapFragment.getMapAsync(callback);
         }
 
+    }
+    public void markmy_location(GoogleMap map){
+
+        LatLng mylocation = new LatLng(currentlat, currentlong);
+        map.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
+        map.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat,currentlong),13));
     }
 
 }
