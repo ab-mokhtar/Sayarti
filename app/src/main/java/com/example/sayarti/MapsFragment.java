@@ -57,8 +57,8 @@ public class MapsFragment extends Fragment {
                 Button btnsearch = v.findViewById(R.id.search);
                 Spinner sptype = v.findViewById(R.id.sp_type);
 
-                String[] placeTypeList = {"atm", "banque", "restaurant"};
-                String[] placeNameList = {"ATM", "BIAT", "Hospital"};
+                String[] placeTypeList = {"gas_station", "gas_station", "gas_station"};
+                String[] placeNameList = {"shell", "agil", "total"};
                 Object transferData[]=new Object[2];
                 Getnerabyplaces getnerabyplaces=new Getnerabyplaces();
 
@@ -94,7 +94,7 @@ public class MapsFragment extends Fragment {
         googleUrl.append("&radius=" + proxumityRadius);
         googleUrl.append("&type=" + nearbyPlace);
         googleUrl.append("&sensor=true" );
-        googleUrl.append("&key=" + "AIzaSyBZv65DPSbLu-CEusdgokmyA_k2thDDFwU");
+        googleUrl.append("&key=" + "AIzaSyDvOWlQo1Tp1Q-6ZVdwxLwblIWD6wQVbQ8");
         Log.d("MapsFragment", "url = "+googleUrl.toString());
 
         return googleUrl.toString();

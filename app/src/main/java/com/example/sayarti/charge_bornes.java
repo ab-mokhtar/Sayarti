@@ -76,7 +76,7 @@ public class charge_bornes extends Fragment {
                                 LatLng charg = new LatLng(36.877089631675446, 10.326329726756194);
                                 googleMap.addMarker(new MarkerOptions().position(charg).title("TOTAL LA MARSA").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                                 LatLng charg1 = new LatLng(36.835661583754344, 10.248468097918366);
-                                googleMap.addMarker(new MarkerOptions().position(charg1).title("Mövenpick Hotel Du Lac Tunis").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                                googleMap.addMarker(new MarkerOptions().position(charg1).title(getResources().getString(R.string.movin)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                                 LatLng charg2 = new LatLng(35.84276741622719, 10.627149326726785);
                                 googleMap.addMarker(new MarkerOptions().position(charg2).title("Mövenpick Hotel Sousse").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
                                 LatLng charg3 = new LatLng(36.95522107607615, 8.792576124902094);

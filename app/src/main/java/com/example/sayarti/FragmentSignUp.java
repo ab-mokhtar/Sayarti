@@ -57,15 +57,12 @@ public class FragmentSignUp extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getContext(),
-                                            "creation effectué", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "creation effectué", Toast.LENGTH_LONG).show();
                                       } else {
-                                    Toast.makeText(getContext(),
-                                            "creation a échoué! veuillez réessayer", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(), "creation a échoué! veuillez réessayer", Toast.LENGTH_LONG).show();
                                 }
                             } else {
-                                Toast.makeText(getContext(),
-                                        "creation a échoué", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), "creation a échoué", Toast.LENGTH_LONG).show();
                             }
 
                         }

@@ -50,7 +50,7 @@ public class Getnerabyplaces extends AsyncTask<Object, String, String> {
             LatLng latLng = new LatLng(latitude,longitude);
             mMap.addMarker(new MarkerOptions().position(latLng).title(nameOfPlace +" : "+vicinity));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
 
         }
