@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -107,7 +108,8 @@ public class formularie_des_notes extends Fragment  {
 
 
                 if(mat.length()==0|| notes.length()==0 ) {
-                    Toast.makeText(getContext(), "vérifier que les champs rempli ou vérifier votre correction internet", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), "vérifier que les champs rempli ou vérifier votre correction internet", Snackbar.LENGTH_LONG).show();
+
                 }
                 else{
 
@@ -115,7 +117,7 @@ public class formularie_des_notes extends Fragment  {
                     note.setNote(e2.getText().toString().trim());
                     note.setDate(date);
                     db.push().setValue(note);
-                    Toast.makeText(getContext(), "data insert sucessfully", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), "LES DONNEES SONT BIEN AJOUTEES", Snackbar.LENGTH_LONG).show();
                 }
             }
         });

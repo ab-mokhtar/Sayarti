@@ -41,6 +41,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -75,7 +76,7 @@ public class Sos extends Fragment {
         //spinner
         spinner = v.findViewById(R.id.type_panne);
         typepanne = v.findViewById(R.id.selected);
-        String [] values = {"Choisissez le type de panne","AAA","BBB","CCC","DDD","EEE","Autre"};
+        String [] values = {"Choisissez le type de panne","Batterie","Pneumatique","Essence","Accident","Incendie","Autre"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
@@ -113,6 +114,7 @@ public class Sos extends Fragment {
 
             }
         });
+        i2.setEnabled(false);
         declaration = new Declaration();
         db = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/").getReference().child("declarations");
         btn.setOnClickListener(new View.OnClickListener() {
@@ -123,16 +125,22 @@ public class Sos extends Fragment {
                 String au = e3.getText().toString().trim();
                 String local = e1.getText().toString().trim();
                 if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
-                    Toast.makeText(getContext(), "vérifier que les champs rempli ou vérifier votre correction internet", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), "vérifier que les champs rempli ou vérifier votre correction internet", Snackbar.LENGTH_LONG).show();
                 }
-                else{
+                else
+                {
                     declaration.setMatricule(e2.getText().toString().trim());
                     declaration.setType_panne(spinner.getSelectedItem().toString().trim());
                     declaration.setLocalisation(e1.getText().toString().trim());
                     declaration.setType_panne(e3.getText().toString().trim());
                     declaration.setEtat(false);
                     db.push().setValue(declaration);
-                    Toast.makeText(getContext(), "data insert sucessfully", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(getView(), "LES DONNEES SONT BIEN ENVOYEES", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(getView(), "Vous pouvez passer l'appelle maintenant", Snackbar.LENGTH_LONG).show();
+                    i2.setEnabled(true);
+                    e1.getText().clear();
+                    e2.getText().clear();
+                    e3.getText().clear();
                 }
             }
         });
@@ -156,7 +164,7 @@ public class Sos extends Fragment {
             getCurretLocation();
         }
         else{
-            Toast.makeText(getActivity(),"Permission denied",Toast.LENGTH_SHORT).show();
+            Snackbar.make(getView(), "Permission refusée", Snackbar.LENGTH_LONG).show();
         }
     }
 

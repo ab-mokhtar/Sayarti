@@ -23,17 +23,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@mipmap/route_background">
+                    android:background="@mipmap/route_background"
+                    android:orientation="vertical">
 
                     <GridLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="576dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="25dp"
+                        android:layout_width="318dp"
+                        android:layout_height="478dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="70dp"
                         android:columnCount="2"
-                        android:padding="50dp"
-                        android:rowCount="3">
+                        android:rowCount="4">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_view1"
@@ -139,7 +138,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view4"
+                            android:id="@+id/card_view0"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_row="1"
@@ -241,7 +240,31 @@
 
                         </androidx.cardview.widget.CardView>
                     </GridLayout>
+
+                    <GridLayout
+                        android:layout_width="318dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_view4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="fill"
+                            android:layout_margin="8dp"
+                            app:cardBackgroundColor="@color/trans"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="8dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/afriqueassistance" />
+                        </androidx.cardview.widget.CardView>
+                    </GridLayout>
+
                 </LinearLayout>
+
                 <com.google.android.gms.ads.AdView
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView"

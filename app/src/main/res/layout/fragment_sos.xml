@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,20 +13,18 @@
     android:background="@mipmap/route_background">
 
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardSOS"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         card_view:cardCornerRadius="10dp"
-        android:padding="20dp"
         card_view:cardBackgroundColor="@color/trans">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="20dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,24 +46,26 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
-        android:text="Choisissez votre panne :"
+        android:text="Type de panne :"
         android:textSize="18dp"/>
+
         <Spinner
+            android:id="@+id/type_panne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/type_panne"
-            android:layout_marginTop="10dp"
-            android:padding="25dp"/>
+            android:paddingVertical="30dp"
+            android:paddingLeft="7dp"
+            android:layout_marginTop="10dp" />
 
         <EditText
+            android:id="@+id/autre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:id="@+id/autre"
+            android:background="@drawable/custom_input"
             android:hint="Decrire votre panne"
-            android:padding="25dp"
             android:maxLength="75"
-            android:background="@drawable/custom_input"/>
+            android:paddingVertical="50dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -91,29 +91,22 @@
             android:background="@drawable/custom_input"/>
 
         <Button
+            android:id="@+id/env"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Envoyer"
+            android:paddingVertical="20dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/env"/>
+            android:text="Envoyer" />
+
         <ImageView
+            android:id="@+id/callsos"
             android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:src="@drawable/call"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
             android:layout_marginTop="10dp"
             android:background="@color/yellow"
             android:contextClickable="true"
-            android:id="@+id/callsos"/>
-        <TextView
-            android:id="@+id/mywidget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:layout_marginTop="20dp"
-            android:padding="30dp"
-            android:textColor="@color/white"
-            android:text="NB: Vérifier et envoyer le formulaire avant de passer l'appelle"
-            android:textSize="18dp" />
+            android:src="@drawable/call" />
     </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

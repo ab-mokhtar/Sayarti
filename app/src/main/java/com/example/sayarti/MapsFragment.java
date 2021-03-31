@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
@@ -79,11 +80,8 @@ public class MapsFragment extends Fragment {
                         transferData[0]=googleMap;
                         transferData[1]=url;
                         getnerabyplaces.execute(transferData);
-                        Toast.makeText(getActivity()," search for : "+placeNameList[i],Toast.LENGTH_SHORT).show();
-
-
-
-
+                        //Toast.makeText(getActivity()," search for : "+placeNameList[i],Toast.LENGTH_SHORT).show();
+                        Snackbar.make(getView(),"RECHERCHER "+placeNameList[i], Snackbar.LENGTH_LONG).show();
                     }
                 });
                 map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
