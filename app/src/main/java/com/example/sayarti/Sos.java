@@ -58,7 +58,6 @@ public class Sos extends Fragment {
    DatabaseReference db;
    ImageView i2;
    Spinner spinner;
-   TextView typepanne;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -75,7 +74,6 @@ public class Sos extends Fragment {
 
         //spinner
         spinner = v.findViewById(R.id.type_panne);
-        typepanne = v.findViewById(R.id.selected);
         String [] values = {"Choisissez le type de panne","Batterie","Pneumatique","Essence","Accident","Incendie","Autre"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -115,6 +113,7 @@ public class Sos extends Fragment {
             }
         });
         i2.setEnabled(false);
+
         declaration = new Declaration();
         db = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/").getReference().child("declarations");
         btn.setOnClickListener(new View.OnClickListener() {
@@ -130,12 +129,18 @@ public class Sos extends Fragment {
                 else
                 {
                     declaration.setMatricule(e2.getText().toString().trim());
-                    declaration.setType_panne(spinner.getSelectedItem().toString().trim());
+                    if(spinner.getSelectedItem().equals("Autre"))
+                    {
+                        declaration.setType_panne(e3.getText().toString().trim());
+                    }
+                    else
+                    {
+                        declaration.setType_panne(spinner.getSelectedItem().toString().trim());
+                    }
                     declaration.setLocalisation(e1.getText().toString().trim());
-                    declaration.setType_panne(e3.getText().toString().trim());
                     declaration.setEtat(false);
                     db.push().setValue(declaration);
-                    Snackbar.make(getView(), "LES DONNEES SONT BIEN ENVOYEES", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(getView(), "LES DONNEES SONT BIEN ENVOYEES", Snackbar.LENGTH_SHORT).show();
                     Snackbar.make(getView(), "Vous pouvez passer l'appelle maintenant", Snackbar.LENGTH_LONG).show();
                     i2.setEnabled(true);
                     e1.getText().clear();

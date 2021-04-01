@@ -94,7 +94,7 @@ public class liste_notes extends Fragment {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Sélection Item");
-                builder.setMessage("Hôspital: "+list.get(position).get("Nom")+" Adresse: "+" "+list.get(position).get("lieu")+" nombre de lit occupé: "+list.get(position).get("nblit")+" Tel:"+list.get(position).get("phone"));
+                builder.setMessage(list.get(position).get("note")+"\n"+list.get(position).get("date"));
                 builder.setCancelable(true);
                 builder.setPositiveButton("ok", null).show();
 

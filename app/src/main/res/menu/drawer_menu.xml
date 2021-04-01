@@ -15,10 +15,4 @@
                 android:actionLayout="@layout/toolbar"
                 android:title="Créer un compte"/>
     </group>
-
-    <item
-        android:id="@+id/deconnexion"
-        android:icon="@drawable/ic_connect"
-        android:actionLayout="@layout/toolbar"
-        android:title="Déconnexion"/>
 </menu>
