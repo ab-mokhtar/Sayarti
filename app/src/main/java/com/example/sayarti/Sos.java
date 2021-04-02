@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.media.audiofx.BassBoost;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,14 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -42,11 +35,10 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
 
 public class Sos extends Fragment {
@@ -55,9 +47,14 @@ public class Sos extends Fragment {
    ImageView i1;
    Button btn;
    FusedLocationProviderClient client;
-   DatabaseReference db;
    ImageView i2;
    Spinner spinner;
+
+    private static final String server_name = "192.168.1.25";
+    private static final String database = "decla";
+    private static final String DB_URL = "jdbc:mysql://" + server_name +  "/" + database;
+    private static final String USER = "root";
+    private static final String PASS = "";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -69,7 +66,6 @@ public class Sos extends Fragment {
         btn = v.findViewById(R.id.env);
         i1 = v.findViewById(R.id.btnlocal);
         i2 = v.findViewById(R.id.callsos);
-        Declaration declaration;
         client = LocationServices.getFusedLocationProviderClient(getActivity());
 
         //spinner
@@ -79,6 +75,7 @@ public class Sos extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
         e3.setVisibility(View.INVISIBLE);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -114,8 +111,7 @@ public class Sos extends Fragment {
         });
         i2.setEnabled(false);
 
-        declaration = new Declaration();
-        db = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/").getReference().child("declarations");
+        //declaration = new Declaration();
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,30 +119,23 @@ public class Sos extends Fragment {
                 String type_panne = spinner.getSelectedItem().toString().trim();
                 String au = e3.getText().toString().trim();
                 String local = e1.getText().toString().trim();
+
                 if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
                     Snackbar.make(getView(), "vérifier que les champs rempli ou vérifier votre correction internet", Snackbar.LENGTH_LONG).show();
                 }
                 else
                 {
-                    declaration.setMatricule(e2.getText().toString().trim());
-                    if(spinner.getSelectedItem().equals("Autre"))
-                    {
-                        declaration.setType_panne(e3.getText().toString().trim());
-                    }
-                    else
-                    {
-                        declaration.setType_panne(spinner.getSelectedItem().toString().trim());
-                    }
-                    declaration.setLocalisation(e1.getText().toString().trim());
-                    declaration.setEtat(false);
-                    db.push().setValue(declaration);
-                    Snackbar.make(getView(), "LES DONNEES SONT BIEN ENVOYEES", Snackbar.LENGTH_SHORT).show();
-                    Snackbar.make(getView(), "Vous pouvez passer l'appelle maintenant", Snackbar.LENGTH_LONG).show();
-                    i2.setEnabled(true);
-                    e1.getText().clear();
-                    e2.getText().clear();
-                    e3.getText().clear();
+                    Send send = new Send(mat, type_panne, local,au);
+                    send.setMatricule(mat);
+                    send.setTypePa(type_panne);
+                    send.setLoc(local);
+                    send.setAutre(au);
+                    send.execute("");
                 }
+                i2.setEnabled(true);
+                e1.getText().clear();
+                e2.getText().clear();
+                e3.getText().clear();
             }
         });
 
@@ -174,7 +163,7 @@ public class Sos extends Fragment {
     }
 
     @SuppressLint("MissingPermission")
-    private void getCurretLocation() {
+    public void getCurretLocation() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
 
@@ -206,5 +195,89 @@ public class Sos extends Fragment {
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
+    }
+    public class Send extends AsyncTask<String,String,String>
+    {
+        private String msg ="";
+        private int etat = 0;
+        private String matricule,typePa,loc,autre;
+
+        public Send(String matricule, String typePa, String loc,String autre) {
+            this.matricule = matricule;
+            this.typePa = typePa;
+            this.loc = loc;
+            this.autre = autre;
+        }
+
+
+        @Override
+        public String doInBackground(String... strings) {
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                if(conn == null)
+                {
+                    msg = "erreur de la connection";
+                }
+                else
+                {
+                    if(spinner.getSelectedItem().equals("Autre"))
+                    {
+                        String query = "INSERT INTO `declaration` (`matricule`, `type_panne`,`localisation`,`etat`) VALUES('"+matricule+"', '"+autre+"','"+loc+"','"+etat+"')";
+                        Statement statement = conn.createStatement();
+                        statement.executeUpdate(query);
+                        msg ="insertion avec succes";
+                    }
+                    else
+                    {
+                        String query = "INSERT INTO `declaration` (`matricule`, `type_panne`,`localisation`,`etat`) VALUES('"+matricule+"', '"+typePa+"','"+loc+"','"+etat+"')";
+                        Statement statement = conn.createStatement();
+                        statement.executeUpdate(query);
+                        msg ="insertion avec succes";
+                    }
+                }
+                conn.close();
+            }
+            catch (Exception e)
+            {
+                msg =e.getMessage();
+                e.printStackTrace();
+            }
+            Snackbar.make(getView(), msg, Snackbar.LENGTH_SHORT).show();
+            return msg;
+        }
+
+        public String getMatricule() {
+            return matricule;
+        }
+
+        public void setMatricule(String matricule) {
+            this.matricule = matricule;
+        }
+
+        public String getTypePa() {
+            return typePa;
+        }
+
+        public void setTypePa(String typePa) {
+            this.typePa = typePa;
+        }
+
+        public String getLoc() {
+            return loc;
+        }
+
+        public void setLoc(String loc) {
+            this.loc = loc;
+        }
+
+        public String getAutre() {
+            return autre;
+        }
+
+        public void setAutre(String autre) {
+            this.autre = autre;
+        }
     }
 }
