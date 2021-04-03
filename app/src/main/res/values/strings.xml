@@ -1,14 +1,10 @@
 <resources>
     <string name="app_name">Sayarti</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="input">Recherche par : marque, modèle, catégorie ...</string>
     <string name="generator">This is the first sentence<br />This is the second scentence<br />This is the third sentence</string>
     <string name="in">Voit toutes la liste</string>
-    <string name="open">open</string>
-    <string name="close">close</string>
     <string name="remember">Sauvgarder mes données</string>
-    <string name="movin"><h1> TEST </h1><br> <h2>email : test@gùalk.vcom</h2> </br><li>email : test@gùalk.vcom</li></string>
     <string name="checkbox">checkbox</string>
     <string name="mail">email</string>
     <string name="pass">password</string>

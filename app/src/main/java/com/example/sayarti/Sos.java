@@ -1,5 +1,4 @@
 package com.example.sayarti;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -37,21 +36,24 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Statement;
-
+import java.text.DateFormat;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 public class Sos extends Fragment {
 
-   EditText e1,e2,e3;
-   ImageView i1;
-   Button btn;
-   FusedLocationProviderClient client;
-   ImageView i2;
-   Spinner spinner;
+    EditText e1,e2,e3;
+    ImageView i1;
+    Button btn;
+    FusedLocationProviderClient client;
+    ImageView i2;
+    Spinner spinner;
 
-    private static final String server_name = "192.168.1.25";
-    private static final String database = "decla";
+    private static final String server_name = "192.168.1.16";
+    private static final String database = "affrica";
     private static final String DB_URL = "jdbc:mysql://" + server_name +  "/" + database;
     private static final String USER = "root";
     private static final String PASS = "";
@@ -148,7 +150,7 @@ public class Sos extends Fragment {
             }
         });
 
-    return v;
+        return v;
     }
 
     @Override
@@ -168,30 +170,30 @@ public class Sos extends Fragment {
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
 
         {client.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Location> task) {
-                                                                Location location = task.getResult();
-                                                                if (location!= null){
-                                                                    e1.setText(String.valueOf(location.getLatitude() )+','+String.valueOf(location.getLongitude() ));
-                                                                }
-                                                                else
-                                                                {
-                                                                    LocationRequest locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                                                                            .setInterval(10000)
-                                                                            .setFastestInterval(1000)
-                                                                            .setNumUpdates(1);
-                                                                    LocationCallback locationCallback = new LocationCallback() {
-                                                                        @Override
-                                                                        public void onLocationResult(@NonNull LocationResult locationResult) {
-                                                                            Location location1 = locationResult.getLastLocation();
-                                                                            e1.setText(String.valueOf(location1.getLatitude() )+','+String.valueOf(location1.getLongitude() ));
-                                                                        }
-                                                                    };
-                                                                    client.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
-                                                                }
-                                                            }
-                                                            });
-                                                        }else {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                if (location!= null){
+                    e1.setText(String.valueOf(location.getLatitude() )+','+String.valueOf(location.getLongitude() ));
+                }
+                else
+                {
+                    LocationRequest locationRequest = new LocationRequest().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                            .setInterval(10000)
+                            .setFastestInterval(1000)
+                            .setNumUpdates(1);
+                    LocationCallback locationCallback = new LocationCallback() {
+                        @Override
+                        public void onLocationResult(@NonNull LocationResult locationResult) {
+                            Location location1 = locationResult.getLastLocation();
+                            e1.setText(String.valueOf(location1.getLatitude() )+','+String.valueOf(location1.getLongitude() ));
+                        }
+                    };
+                    client.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
+                }
+            }
+        });
+        }else {
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
 
@@ -201,12 +203,16 @@ public class Sos extends Fragment {
         private String msg ="";
         private int etat = 0;
         private String matricule,typePa,loc,autre;
+        private String date ;
+        private  String agent="";
 
         public Send(String matricule, String typePa, String loc,String autre) {
             this.matricule = matricule;
             this.typePa = typePa;
             this.loc = loc;
             this.autre = autre;
+            Calendar calendar=Calendar.getInstance();
+            this.date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         }
 
 
@@ -224,14 +230,14 @@ public class Sos extends Fragment {
                 {
                     if(spinner.getSelectedItem().equals("Autre"))
                     {
-                        String query = "INSERT INTO `declaration` (`matricule`, `type_panne`,`localisation`,`etat`) VALUES('"+matricule+"', '"+autre+"','"+loc+"','"+etat+"')";
+                        String query = "INSERT INTO `declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+autre+"','"+loc+"','"+date+"','"+etat+"','"+agent+"')";
                         Statement statement = conn.createStatement();
                         statement.executeUpdate(query);
                         msg ="insertion avec succes";
                     }
                     else
                     {
-                        String query = "INSERT INTO `declaration` (`matricule`, `type_panne`,`localisation`,`etat`) VALUES('"+matricule+"', '"+typePa+"','"+loc+"','"+etat+"')";
+                        String query = "INSERT INTO `declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+typePa+"','"+loc+"','"+date+"','"+etat+"','"+agent+"')";
                         Statement statement = conn.createStatement();
                         statement.executeUpdate(query);
                         msg ="insertion avec succes";
