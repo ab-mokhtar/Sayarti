@@ -30,11 +30,11 @@ public class charge_bornes extends Fragment {
     SupportMapFragment supportMapFragment;
     GoogleMap map;
     double latitude, longitude;
-    private int proxumityRadius = 10000;
+    private final int proxumityRadius = 10000;
 
     double currentlat = 0, currentlong = 0;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
          * Manipulates the map once available.

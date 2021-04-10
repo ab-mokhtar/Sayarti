@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class notes_home extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -24,7 +23,7 @@ public class notes_home extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getUid();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag, new formularie_des_notes(user)).addToBackStack("frg").commit();
     }
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedfragment  = null;

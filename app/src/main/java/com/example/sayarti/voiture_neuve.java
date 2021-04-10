@@ -17,16 +17,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class voiture_neuve extends Fragment {
-    private CardView Lcard;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public voiture_neuve() {
         // Required empty public constructor
@@ -54,8 +49,9 @@ public class voiture_neuve extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -64,8 +60,8 @@ public class voiture_neuve extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_bienvenu, container, false);
-        Lcard = (CardView) v.findViewById(R.id.logoCard);
-        Lcard.setOnClickListener(new View.OnClickListener() {
+        CardView lcard = (CardView) v.findViewById(R.id.logoCard);
+        lcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.sayarti.tn/")));

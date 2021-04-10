@@ -1,7 +1,5 @@
 package com.example.sayarti;
 
-import java.util.Date;
-
 public class Notes {
     String matricule;
     String note;

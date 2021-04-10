@@ -7,8 +7,6 @@ import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,10 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -35,15 +31,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.IOException;
-import java.util.List;
-
 public class MapsFragment extends Fragment {
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     GoogleMap map;
     double latitude, longitude;
-    private int proxumityRadius = 10000;
 
     double currentlat = 0, currentlong = 0;
     @Override
@@ -60,8 +52,8 @@ public class MapsFragment extends Fragment {
                 Button btnsearch = v.findViewById(R.id.search);
                 Spinner sptype = v.findViewById(R.id.sp_type);
 
-                String[] placeNameList = {"SHELL", "AGIL", "TOTAL"};
-                Object transferData[]=new Object[2];
+                String[] placeNameList = {"SHELL", "AGIL", "TOTAL", "OLA", "STAROIL"};
+                Object[] transferData =new Object[2];
 
 
 
@@ -113,6 +105,7 @@ public class MapsFragment extends Fragment {
     private String getUrl(double latitude, double longitude, String nearbyPlace){
         StringBuilder googleUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googleUrl.append("location="+ latitude + "," + longitude);
+        int proxumityRadius = 10000;
         googleUrl.append("&radius=" + proxumityRadius);
         googleUrl.append("&type=" + "gas_station");
         googleUrl.append("&keyword="+nearbyPlace );
@@ -126,7 +119,7 @@ public class MapsFragment extends Fragment {
 
 
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
          * Manipulates the map once available.

@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Getnerabyplaces extends AsyncTask<Object, String, String> {
-    private String googleplaceData,url;
+    private String googleplaceData;
     private GoogleMap mMap;
     @Override
     protected String doInBackground(Object... objects) {
         mMap = (GoogleMap)objects[0];
-        url = (String)objects[1];
+        String url = (String) objects[1];
         DownloadUrl downloadUrl= new DownloadUrl();
         try {
             googleplaceData = downloadUrl.ReadUrl(url);

@@ -36,10 +36,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -52,7 +50,7 @@ public class Sos extends Fragment {
     ImageView i2;
     Spinner spinner;
 
-    private static final String server_name = "192.168.1.16";
+    private static final String server_name = "192.168.1.26";
     private static final String database = "affrica";
     private static final String DB_URL = "jdbc:mysql://" + server_name +  "/" + database;
     private static final String USER = "root";
@@ -174,7 +172,7 @@ public class Sos extends Fragment {
             public void onComplete(@NonNull Task<Location> task) {
                 Location location = task.getResult();
                 if (location!= null){
-                    e1.setText(String.valueOf(location.getLatitude() )+','+String.valueOf(location.getLongitude() ));
+                    e1.setText(String.valueOf(location.getLatitude() )+','+ location.getLongitude());
                 }
                 else
                 {
@@ -186,7 +184,7 @@ public class Sos extends Fragment {
                         @Override
                         public void onLocationResult(@NonNull LocationResult locationResult) {
                             Location location1 = locationResult.getLastLocation();
-                            e1.setText(String.valueOf(location1.getLatitude() )+','+String.valueOf(location1.getLongitude() ));
+                            e1.setText(String.valueOf(location1.getLatitude() )+','+ location1.getLongitude());
                         }
                     };
                     client.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
@@ -200,11 +198,8 @@ public class Sos extends Fragment {
     }
     public class Send extends AsyncTask<String,String,String>
     {
-        private String msg ="";
-        private int etat = 0;
         private String matricule,typePa,loc,autre;
-        private String date ;
-        private  String agent="";
+        private final String date ;
 
         public Send(String matricule, String typePa, String loc,String autre) {
             this.matricule = matricule;
@@ -219,6 +214,7 @@ public class Sos extends Fragment {
         @Override
         public String doInBackground(String... strings) {
 
+            String msg = "";
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -228,16 +224,18 @@ public class Sos extends Fragment {
                 }
                 else
                 {
+                    String agent = "";
+                    int etat = 0;
                     if(spinner.getSelectedItem().equals("Autre"))
                     {
-                        String query = "INSERT INTO `declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+autre+"','"+loc+"','"+date+"','"+etat+"','"+agent+"')";
+                        String query = "INSERT INTO `declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+autre+"','"+loc+"','"+date+"','"+ etat +"','"+ agent +"')";
                         Statement statement = conn.createStatement();
                         statement.executeUpdate(query);
                         msg ="insertion avec succes";
                     }
                     else
                     {
-                        String query = "INSERT INTO `declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+typePa+"','"+loc+"','"+date+"','"+etat+"','"+agent+"')";
+                        String query = "INSERT INTO `declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+typePa+"','"+loc+"','"+date+"','"+ etat +"','"+ agent +"')";
                         Statement statement = conn.createStatement();
                         statement.executeUpdate(query);
                         msg ="insertion avec succes";

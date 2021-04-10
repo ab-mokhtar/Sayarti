@@ -2,7 +2,6 @@ package com.example.sayarti;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -16,12 +15,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -32,8 +29,6 @@ import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity  {
-    private CardView c1, c2, c3, c4;
-    private AdView mAdView;
     private DrawerLayout drawerLayout;
 
 
@@ -49,7 +44,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        mAdView = findViewById(R.id.adView);
+        AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -94,14 +89,14 @@ public class MainActivity extends AppCompatActivity  {
                 });
 
 
-        c1 = (CardView) findViewById(R.id.card_view1);
+        CardView c1 = (CardView) findViewById(R.id.card_view1);
         c1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new voiture_neuve()).addToBackStack("frg").commit();
             }
         });
-        c2 = (CardView) findViewById(R.id.card_view2);
+        CardView c2 = (CardView) findViewById(R.id.card_view2);
         c2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +105,7 @@ public class MainActivity extends AppCompatActivity  {
         });
 
 
-        c3 = (CardView) findViewById(R.id.card_view3);
+        CardView c3 = (CardView) findViewById(R.id.card_view3);
         c3.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
@@ -133,11 +128,18 @@ public class MainActivity extends AppCompatActivity  {
                 }
         });
 
-        c4 = (CardView) findViewById(R.id.card_view4);
+        CardView c4 = (CardView) findViewById(R.id.card_view4);
         c4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Sos()).addToBackStack("frg").commit();
+            }
+        });
+        CardView c5 = (CardView) findViewById(R.id.card_view0);
+        c5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new entretien()).addToBackStack("frg").commit();
             }
         });
     }
