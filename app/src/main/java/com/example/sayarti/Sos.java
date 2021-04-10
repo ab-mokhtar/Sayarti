@@ -31,6 +31,12 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,14 +49,19 @@ import java.util.Calendar;
 
 public class Sos extends Fragment {
 
-    EditText e1,e2,e3;
+    SupportMapFragment supportMapFragment;
+    GoogleMap map;
+
+    double currentlat , currentlong ;
+    String Mylocalisation;
+    EditText e2,e3;
     ImageView i1;
     Button btn;
     FusedLocationProviderClient client;
     ImageView i2;
     Spinner spinner;
 
-    private static final String server_name = "192.168.1.26";
+    private static final String server_name = "192.168.1.20";
     private static final String database = "affrica";
     private static final String DB_URL = "jdbc:mysql://" + server_name +  "/" + database;
     private static final String USER = "root";
@@ -60,11 +71,9 @@ public class Sos extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_sos, container, false);
-        e1 = v.findViewById(R.id.local);
         e2 = v.findViewById(R.id.matricule);
         e3= v.findViewById(R.id.autre);
         btn = v.findViewById(R.id.env);
-        i1 = v.findViewById(R.id.btnlocal);
         i2 = v.findViewById(R.id.callsos);
         client = LocationServices.getFusedLocationProviderClient(getActivity());
 
@@ -95,20 +104,7 @@ public class Sos extends Fragment {
             }
         });
 
-        i1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(getActivity()
-                        , Manifest.permission.ACCESS_COARSE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    getCurretLocation();
-                }else{
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-                }
-
-            }
-        });
+        getCurretLocation();
         i2.setEnabled(false);
 
         //declaration = new Declaration();
@@ -118,7 +114,7 @@ public class Sos extends Fragment {
                 String mat = e2.getText().toString().trim();
                 String type_panne = spinner.getSelectedItem().toString().trim();
                 String au = e3.getText().toString().trim();
-                String local = e1.getText().toString().trim();
+                String local = Mylocalisation;
 
                 if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
                     Snackbar.make(getView(), "vérifier que les champs rempli ou vérifier votre correction internet", Snackbar.LENGTH_LONG).show();
@@ -133,7 +129,6 @@ public class Sos extends Fragment {
                     send.execute("");
                 }
                 i2.setEnabled(true);
-                e1.getText().clear();
                 e2.getText().clear();
                 e3.getText().clear();
             }
@@ -147,6 +142,7 @@ public class Sos extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         return v;
     }
@@ -171,8 +167,20 @@ public class Sos extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
                 Location location = task.getResult();
+                supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_sos);
                 if (location!= null){
-                    e1.setText(String.valueOf(location.getLatitude() )+','+ location.getLongitude());
+                    Mylocalisation=String.valueOf(location.getLatitude() )+','+ location.getLongitude();
+
+                    supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(GoogleMap googleMap) {
+                            LatLng mylocation = new LatLng(location.getLatitude(), location.getLongitude());
+                            googleMap.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()),13));
+
+                        }
+                    });
                 }
                 else
                 {
@@ -184,7 +192,18 @@ public class Sos extends Fragment {
                         @Override
                         public void onLocationResult(@NonNull LocationResult locationResult) {
                             Location location1 = locationResult.getLastLocation();
-                            e1.setText(String.valueOf(location1.getLatitude() )+','+ location1.getLongitude());
+                            Mylocalisation=String.valueOf(location1.getLatitude() )+','+ location1.getLongitude();
+                            supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                                @Override
+                                public void onMapReady(GoogleMap googleMap) {
+                                    LatLng mylocation = new LatLng(location1.getLatitude(), location1.getLongitude());
+                                    googleMap.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
+                                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
+                                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location1.getLatitude(), location1.getLongitude()),13));
+
+                                }
+                            });
+
                         }
                     };
                     client.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());

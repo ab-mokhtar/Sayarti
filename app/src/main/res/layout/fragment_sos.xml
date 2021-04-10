@@ -74,21 +74,14 @@
             android:layout_marginTop="10dp"
             android:text="Localisation :"
             android:textSize="18dp"/>
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:src="@drawable/location"
-            android:id="@+id/btnlocal"/>
-        <EditText
+
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map_sos"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:id="@+id/local"
-            android:padding="12dp"
-            android:editable="false"
-            android:background="@drawable/custom_input"/>
+            android:layout_height="150dp"
+            />
 
         <Button
             android:id="@+id/env"
