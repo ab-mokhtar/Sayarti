@@ -40,12 +40,6 @@ public class formularie_des_notes extends Fragment  {
     private static final String ARG_PARAM2 = "param2";
 
     public formularie_des_notes(String user) {
-        int pos;
-        while (user.indexOf(".")!=-1){
-             pos=user.indexOf(".");
-            String ch= user.substring(0,pos)+user.substring(pos+1);
-            user=ch;
-        }
 
         this.user= user;
     }
