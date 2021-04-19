@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -13,7 +14,6 @@
 
 
         <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardSOS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,15 +55,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:text="Ecrir votre note:"
+                    android:text="Ecrire votre note:"
                     android:textSize="18dp"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:id="@+id/notes"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/custom_input"
-                    />
+                    android:background="@drawable/custom_input" />
             </LinearLayout>
 
             <LinearLayout
@@ -72,12 +71,31 @@
                 android:orientation="vertical"
                 android:layout_marginTop="300dp"
                 android:padding="15dp">
+               <ImageView
+                   android:id="@+id/calen"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_calendar"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="350dp"
+                android:padding="15dp">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="370dp"
+                android:padding="15dp">
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Envoyer"
+                    android:text="Ajouter une note"
                     android:id="@+id/envfor"/>
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

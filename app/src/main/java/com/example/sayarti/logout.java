@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -68,6 +69,7 @@ public class logout extends Fragment {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
+                LoginManager.getInstance().logOut();
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
 
