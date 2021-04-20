@@ -53,5 +53,7 @@ dependencies {
     implementation project(path: ':mysql-connector-java-3.0.17-ga-bin')
     implementation 'com.facebook.android:facebook-login:[8.1)'
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+    implementation 'com.google.code.gson:gson:2.8.6'
+
 }
 

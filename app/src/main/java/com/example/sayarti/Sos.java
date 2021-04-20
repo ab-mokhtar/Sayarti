@@ -61,7 +61,7 @@ public class Sos extends Fragment {
     ImageView i2;
     Spinner spinner;
 
-    private static final String server_name = "192.168.1.25";
+    private static final String server_name = "192.168.1.20";
     private static final String database = "affrica";
     private static final String DB_URL = "jdbc:mysql://" + server_name +  "/" + database;
     private static final String USER = "root";

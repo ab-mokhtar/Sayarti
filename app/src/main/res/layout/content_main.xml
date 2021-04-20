@@ -140,7 +140,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="bornes de charge " />
+                                    android:text="Bornes de recharge " />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -175,7 +175,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="Kiosque" />
+                                    android:text="Station de Kiosque" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -240,7 +240,7 @@
                                     android:layout_width="100dp"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/money" />
+                                    android:src="@drawable/location" />
 
                                 <TextView
                                     android:layout_width="wrap_content"

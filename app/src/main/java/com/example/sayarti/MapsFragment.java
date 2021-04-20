@@ -76,28 +76,7 @@ public class MapsFragment extends Fragment {
                         Snackbar.make(getView(),"RECHERCHER "+placeNameList[i], Snackbar.LENGTH_LONG).show();
                     }
                 });
-                map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-                    @Override
-                    public View getInfoWindow(Marker marker) {
-                        return null;
-                    }
 
-                    @Override
-                    public View getInfoContents(Marker marker) {
-                        LayoutInflater layoutInflater=LayoutInflater.from(getContext());
-                        View v = getLayoutInflater().inflate(R.layout.snippet,null);
-                        TextView t1 = v.findViewById(R.id.text1);
-                        TextView t2 = v.findViewById(R.id.text22);
-                        TextView t3 = v.findViewById(R.id.text3);
-                        TextView t4 = v.findViewById(R.id.text4);
-                        LatLng l1 = marker.getPosition();
-                        t1.setText(marker.getTitle());
-                        t2.setText(marker.getSnippet());
-                        t3.setText(String.valueOf(l1.latitude));
-                        t4.setText(String.valueOf(l1.longitude));
-                        return  v;
-                    }
-                });
             }});
 
         return v;
