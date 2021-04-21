@@ -1,5 +1,6 @@
 package com.example.sayarti;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,7 +24,15 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
@@ -31,15 +40,29 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 
 public class Authenfication extends Fragment {
     private FirebaseAuth mAuth;
-    private static final String TAG = "Sayarti";
     private CallbackManager callbackManager;
-    private LoginButton loginButton;
+    private LoginButton mFacebookLoginButton;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    private SignInButton googlesignInButton;
+    private GoogleApiClient mGoogleApiClient; // for google sign in
+    private CallbackManager mFacebookCallbackManager; // for facebook log in
+
+    private final String TAG = "AuthenticationFragment";
+
+    // for google sign in
+    private final String WEB_CLIENT_ID = "719953434368-rfs2vaejcps6pb5e833usd6qrus5gubh.apps.googleusercontent.com";
+    private final int GOOGLE_SIGN_IN_REQUEST_CODE = 0;
+
+    // for facebook log in
+    private final int FACEBOOK_LOG_IN_REQUEST_CODE = 64206;
 
 
     private EditText edittxtEmail, edittxtPwd;
@@ -47,38 +70,47 @@ public class Authenfication extends Fragment {
     private SharedPreferences mPer;
     private SharedPreferences.Editor mEdit;
 
+
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            switch (id) {
+                case R.id.google_btn:
+                    signInWithGoogleSignIn();
+                    break;
+            }
+        }
+    };
+    public Authenfication() {
+        // Required empty public constructor
+    }
+
+    public static Authenfication newInstance() {
+        Authenfication fragment = new Authenfication();
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        initFBAuthentication();
+        initFBGoogleSignIn();
+        initFBAuthState();
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.authentification_frag, container,false);
         //facebook auth
-        loginButton = v.findViewById(R.id.login_button);
+        mFacebookLoginButton = (LoginButton) v.findViewById(R.id.fb_btn);
+        initFBFacebookLogIn();
 
-        mAuth = FirebaseAuth.getInstance();
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callbackManager = CallbackManager.Factory.create();
-                loginButton.setPermissions("email","public_profile");
-                loginButton.setFragment(Authenfication.this);
-                loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        handleFacebookAccessToken(loginResult.getAccessToken());
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Snackbar.make(getView(), "Annuler", Snackbar.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onError(FacebookException error) {
-                        Snackbar.make(getView(), "erreur "+error.getMessage(), Snackbar.LENGTH_LONG).show();
-                    }
-                });
-            }
-        });
+        //GOOGLE AUTH
+        googlesignInButton = (SignInButton) v.findViewById(R.id.google_btn);
+        //initFBGoogleSignIn();
+        googlesignInButton.setOnClickListener(mOnClickListener);
 
 
         edittxtEmail = v.findViewById(R.id.authenMAT);
@@ -130,32 +162,162 @@ public class Authenfication extends Fragment {
         return v;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
 
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        mAuth.addAuthStateListener(mAuthStateListener);
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        if (mAuthStateListener != null) {
+//            mAuth.removeAuthStateListener(mAuthStateListener);
+//        }
+//    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GOOGLE_SIGN_IN_REQUEST_CODE) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+            } else {
+                Snackbar.make(getView(), "Erreur", Snackbar.LENGTH_LONG).show();
+            }
+        } else if (requestCode == FACEBOOK_LOG_IN_REQUEST_CODE) {
+            mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
+
+    private void initFBAuthentication() {
+        mAuth = FirebaseAuth.getInstance();
+    }
+
+    private void initFBAuthState() {
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                String message;
+                if (firebaseUser != null) {
+                    message = "onAuthStateChanged signed in : " + firebaseUser.getUid();
+                } else {
+                    message = "onAuthStateChanged signed out";
+                }
+                Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+            }
+        };
+    }
+
+    // [START auth_with_google]
+    private void initFBGoogleSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(WEB_CLIENT_ID)
+                .requestEmail()
+                .build();
+
+        Context context = getContext();
+        mGoogleApiClient = new GoogleApiClient.Builder(context)
+                .enableAutoManage(getActivity(), new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                        Snackbar.make(getView(), connectionResult.getErrorMessage(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                }).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+    }
+
+    private void signInWithGoogleSignIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, GOOGLE_SIGN_IN_REQUEST_CODE);
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(Authenfication.this.getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        String message;
+                        if (task.isSuccessful()) {
+                            startActivity(new Intent(getContext(), notes_home.class));
+                            message = "Bienvenu "+task.getResult().getUser().getDisplayName();
+                        } else {
+                            message = "Erreur de se connecté";
+                        }
+                        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Snackbar.make(getView(), e.getMessage(), Snackbar.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+        });
+    }
+    // [END auth_with_google]
+
+    // [START auth_with_facebook]
+    private void initFBFacebookLogIn() {
+        mFacebookCallbackManager = CallbackManager.Factory.create();
+        mFacebookLoginButton.setFragment(this);
+        mFacebookLoginButton.setReadPermissions("email", "public_profile");
+        mFacebookLoginButton.registerCallback(mFacebookCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Snackbar.make(getView(), "Connecté", Snackbar.LENGTH_LONG).show();
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Snackbar.make(getView(), "Annuler", Snackbar.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Snackbar.make(getView(), "error : " + error.getMessage(), Snackbar.LENGTH_LONG).show();
+
+            }
+
+        });
+    }
+
     private void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(Authenfication.this.getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        String message;
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = mAuth.getCurrentUser();
                             startActivity(new Intent(getContext(), notes_home.class));
+                            message = "Bienvenu "+task.getResult().getUser().getDisplayName();
+                        } else {
+                            message = "Erreur de se connecté";
                         }
-                        else
-                        {
-                            // If sign in fails, display a message to the user.
-                            Snackbar.make(getView(), "erreur "+task.getException().getMessage(), Snackbar.LENGTH_LONG).show();
-                        }
-
+                        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
                     }
                 });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private void userLogin(){

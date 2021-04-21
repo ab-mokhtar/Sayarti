@@ -88,14 +88,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/cardview_dark_background"
-                        android:text="Connecter" />
+                        android:text="Connecter"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="310dp"
+                    android:padding="20dp">
 
                     <com.facebook.login.widget.LoginButton
-                        android:id="@+id/login_button"
+                        android:id="@+id/fb_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="15dp" />
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.gms.common.SignInButton
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="12dp"
+                        android:id="@+id/google_btn"/>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </FrameLayout>
