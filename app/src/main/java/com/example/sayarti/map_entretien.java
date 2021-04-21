@@ -161,19 +161,20 @@ public class map_entretien extends Fragment {
 
             data= (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
             if(data.size()>0){
-          //  Toast.makeText(getContext(),"taille fel sharedpref : "+data.size(),Toast.LENGTH_SHORT).show();
             for (int i=0;i<data.size();i++){
-                if (data.get(i).getMarque().toString().equals(marques) ){
+                if (data.get(i).getMarque().equals( marques )){
                     data2.add(data.get(i));
+
                    }
+
             }
             for (int i=0;i<data2.size();i++){
-                LatLng location = new LatLng(data.get(i).getLati(), data.get(i).getLongi());
+                LatLng location = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(location);
                 // markerOptions.title(nameOfPlace);
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                markerOptions.snippet(data.get(i).getName());
+                markerOptions.snippet(data2.get(i).getName());
                 googleMap.addMarker(markerOptions);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                 googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
