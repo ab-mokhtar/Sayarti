@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,6 +16,9 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -34,6 +38,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -50,7 +55,7 @@ public class Authenfication extends Fragment {
     private CallbackManager callbackManager;
     private LoginButton mFacebookLoginButton;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-
+    private DrawerLayout drawerLayout;
     private SignInButton googlesignInButton;
     private GoogleApiClient mGoogleApiClient; // for google sign in
     private CallbackManager mFacebookCallbackManager; // for facebook log in
@@ -103,6 +108,8 @@ public class Authenfication extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.authentification_frag, container,false);
+
+
         //facebook auth
         mFacebookLoginButton = (LoginButton) v.findViewById(R.id.fb_btn);
         initFBFacebookLogIn();
@@ -176,7 +183,13 @@ public class Authenfication extends Fragment {
 //            mAuth.removeAuthStateListener(mAuthStateListener);
 //        }
 //    }
+@Override
+public void onPause() {
+    super.onPause();
 
+    mGoogleApiClient.stopAutoManage(getActivity());
+    mGoogleApiClient.disconnect();
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

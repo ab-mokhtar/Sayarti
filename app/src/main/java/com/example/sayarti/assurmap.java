@@ -2,28 +2,20 @@ package com.example.sayarti;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -39,18 +31,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-
-public class map_entretien extends Fragment {
+public class assurmap extends Fragment {
     private static  final String BASE_URL = "http://192.168.1.20/android/getdata.php";
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
@@ -61,9 +50,7 @@ public class map_entretien extends Fragment {
     private ArrayList<posi> data=  new ArrayList<posi>();
     private ArrayList<posi> data2=  new ArrayList<posi>();
     DatabaseReference db;
-    public map_entretien(String marque) {
-        this.marques = marque;
-    }
+
     private void getProducts (){
 
 
@@ -109,6 +96,11 @@ public class map_entretien extends Fragment {
 
 
         Volley.newRequestQueue(getContext()).add(stringRequest);
+    }
+
+
+    public assurmap(String marques) {
+        this.marques = marques;
     }
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
@@ -160,45 +152,45 @@ public class map_entretien extends Fragment {
 
             data= (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
             if(data.size()>0){
-            for (int i=0;i<data.size();i++){
-                if (data.get(i).getMarque().equals( marques )){
-                    data2.add(data.get(i));
+                for (int i=0;i<data.size();i++){
+                    if (data.get(i).getMarque().equals( marques )){
+                        data2.add(data.get(i));
 
-                   }
-
-            }
-            for (int i=0;i<data2.size();i++){
-                LatLng location = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(location);
-                // markerOptions.title(nameOfPlace);
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                markerOptions.snippet(data2.get(i).getName());
-                googleMap.addMarker(markerOptions);
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-                googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-                    @Override
-                    public View getInfoWindow(Marker marker) {
-                        return null;
                     }
 
-                    @Override
-                    public View getInfoContents(Marker marker) {
-                        LayoutInflater layoutInflater=LayoutInflater.from(getContext());
-                        View v = getLayoutInflater().inflate(R.layout.snippet,null);
-                        TextView t1 = v.findViewById(R.id.text1);
-                        TextView t2 = v.findViewById(R.id.text22);
-                        TextView t3 = v.findViewById(R.id.text3);
-                        TextView t4 = v.findViewById(R.id.text4);
-                        LatLng l1 = marker.getPosition();
-                        t2.setText(marker.getSnippet());
-                        t3.setText(String.valueOf(l1.latitude));
-                        t4.setText(String.valueOf(l1.longitude));
-                        return  v;
-                    }
-                });
+                }
+                for (int i=0;i<data2.size();i++){
+                    LatLng location = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(location);
+                    // markerOptions.title(nameOfPlace);
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    markerOptions.snippet(data2.get(i).getName());
+                    googleMap.addMarker(markerOptions);
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                    googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
+                        }
 
-            }
+                        @Override
+                        public View getInfoContents(Marker marker) {
+                            LayoutInflater layoutInflater=LayoutInflater.from(getContext());
+                            View v = getLayoutInflater().inflate(R.layout.snippet,null);
+                            TextView t1 = v.findViewById(R.id.text1);
+                            TextView t2 = v.findViewById(R.id.text22);
+                            TextView t3 = v.findViewById(R.id.text3);
+                            TextView t4 = v.findViewById(R.id.text4);
+                            LatLng l1 = marker.getPosition();
+                            t2.setText(marker.getSnippet());
+                            t3.setText(String.valueOf(l1.latitude));
+                            t4.setText(String.valueOf(l1.longitude));
+                            return  v;
+                        }
+                    });
+
+                }
             }
 
         }
@@ -209,11 +201,7 @@ public class map_entretien extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        getProducts();
-        return inflater.inflate(R.layout.fragment_map_entretien, container, false);
-
-
-
+        return inflater.inflate(R.layout.fragment_assurmap, container, false);
     }
 
     @Override
@@ -232,6 +220,4 @@ public class map_entretien extends Fragment {
         map.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat,currentlong),13));
     }
-
-
 }

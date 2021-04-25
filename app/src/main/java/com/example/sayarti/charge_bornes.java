@@ -29,10 +29,12 @@ public class charge_bornes extends Fragment {
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     GoogleMap map;
+
     double latitude, longitude;
     private final int proxumityRadius = 10000;
 
     double currentlat = 0, currentlong = 0;
+
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 

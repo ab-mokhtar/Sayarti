@@ -82,6 +82,21 @@ public class MainActivity extends AppCompatActivity  {
                             case R.id.create :
                                 getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new FragmentSignUp()).addToBackStack(null).commit();
                                 break;
+                            case R.id.voit_neuv :
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new voiture_neuve()).addToBackStack(null).commit();
+                                break;
+                            case R.id.entretien :
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new entretien()).addToBackStack(null).commit();
+                                break;
+                            case R.id.kiosque :
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new MapsFragment()).addToBackStack(null).commit();
+                                break;
+                            case R.id.borne_charge :
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new entretien()).addToBackStack(null).commit();
+                                break;
+                            case R.id.assur :
+                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Assurance()).addToBackStack(null).commit();
+                                break;
                         }
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
@@ -140,6 +155,28 @@ public class MainActivity extends AppCompatActivity  {
                         == PackageManager.PERMISSION_GRANTED)) {
                     if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Sos()).addToBackStack("frg").commit();
+
+                    }else {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    }
+
+                }else{
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+                }
+            }
+        });
+        CardView c6 = (CardView) findViewById(R.id.card_view5);
+        c6.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View v) {
+                LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+                if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                        , Manifest.permission.ACCESS_COARSE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED)) {
+                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Assurance()).addToBackStack("frg").commit();
 
                     }else {
                         startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

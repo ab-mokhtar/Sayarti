@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/groupe1">
-        <item
-            android:id="@+id/connect"
-            android:icon="@drawable/ic_login"
-            android:actionLayout="@layout/toolbar"
-            android:title="Se connecter"/>
 
-            <item
-                android:id="@+id/create"
-                android:icon="@drawable/ic_add"
-                android:actionLayout="@layout/toolbar"
-                android:title="Créer un compte"/>
-    </group>
     <group
         android:id="@+id/groupe2">
         <item
@@ -43,6 +30,11 @@
 
             android:actionLayout="@layout/toolbar"
             android:title="Assurance Auto"/>
+        <item
+            android:id="@+id/profil"
+
+            android:actionLayout="@layout/toolbar"
+            android:title="Profil"/>
 
     </group>
 </menu>
