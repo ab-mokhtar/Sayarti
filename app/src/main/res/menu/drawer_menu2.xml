@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <group
-        android:id="@+id/groupe2">
+    <group>
         <item
             android:id="@+id/voit_neuv"
 

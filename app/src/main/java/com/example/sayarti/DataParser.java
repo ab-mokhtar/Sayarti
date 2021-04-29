@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class DataParser {
     private HashMap<String,String> getSinglePlace(JSONObject googlePlaceJSON){
@@ -14,9 +15,9 @@ public class DataParser {
         HashMap<String,String> googlrPlaceMap= new HashMap<>();
         String NameOfPlace = "-NA-";
         String vicinity = "-NA-";
-        String latitude = "";
-        String longitude = "";
-        String reference ="";
+        String latitude;
+        String longitude;
+        String reference;
         try {
             if(!googlePlaceJSON.isNull("name")) {
                  NameOfPlace = googlePlaceJSON.getString("name");
@@ -40,7 +41,7 @@ public class DataParser {
     private List<HashMap<String,String>> getAllPlaces(JSONArray jsonArray){
         List<HashMap<String,String>> nearbyPlacelist = new ArrayList<>();
         int counter = jsonArray.length();
-        HashMap<String,String> NearbyPlaceMap= null;
+        HashMap<String,String> NearbyPlaceMap;
         for(int i=0; i<counter;i++){
             try {
                 NearbyPlaceMap =getSinglePlace( (JSONObject) jsonArray.get(i));
@@ -62,6 +63,6 @@ public class DataParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return getAllPlaces(jsonArray);
+        return getAllPlaces(Objects.requireNonNull(jsonArray));
     }
 }

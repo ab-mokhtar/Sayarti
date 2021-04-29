@@ -14,7 +14,6 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardSOS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -75,16 +74,10 @@
                    android:id="@+id/calen"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:src="@drawable/ic_calendar"/>
+                   android:src="@drawable/ic_calendar"
+                   android:contentDescription="TODO" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="350dp"
-                android:padding="15dp">
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

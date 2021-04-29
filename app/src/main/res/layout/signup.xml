@@ -13,16 +13,15 @@
         android:padding="20dp"
    >
         <FrameLayout
-            android:id="@+id/authen_frag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:src="@drawable/logo"/>
+                android:src="@drawable/logo"
+                android:contentDescription="TODO" />
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardSOS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="180dp"

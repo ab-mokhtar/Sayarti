@@ -3,10 +3,15 @@ package com.example.sayarti;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,11 +24,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.Objects;
 
 public class charge_bornes extends Fragment {
     FusedLocationProviderClient client;
@@ -49,8 +56,8 @@ public class charge_bornes extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            client = LocationServices.getFusedLocationProviderClient(getActivity());
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
+            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -61,35 +68,29 @@ public class charge_bornes extends Fragment {
                 return;
             }
             Task<Location> task = client.getLastLocation();
-            task.addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null){
-                        currentlat=location.getLatitude();
-                        currentlong=location.getLongitude();
-                        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            task.addOnSuccessListener(location -> {
+                if (location != null){
+                    currentlat=location.getLatitude();
+                    currentlong=location.getLongitude();
+                    supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-                        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                            @Override
-                            public void onMapReady(GoogleMap googleMap) {
-                                map = googleMap;
-                                LatLng mylocation = new LatLng(currentlat, currentlong);
-                                googleMap.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
-                                LatLng charg = new LatLng(36.877089631675446, 10.326329726756194);
-                                googleMap.addMarker(new MarkerOptions().position(charg).title("TOTAL LA MARSA").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                                LatLng charg1 = new LatLng(36.835661583754344, 10.248468097918366);
-                                googleMap.addMarker(new MarkerOptions().position(charg1).title("Mövenpick Lac").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                                LatLng charg2 = new LatLng(35.84276741622719, 10.627149326726785);
-                                googleMap.addMarker(new MarkerOptions().position(charg2).title("Mövenpick Hotel Sousse").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                                LatLng charg3 = new LatLng(36.95522107607615, 8.792576124902094);
-                                googleMap.addMarker(new MarkerOptions().position(charg3).title("LA CIGALE TABARKA HÔTEL").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-                                googleMap.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
-                                map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat,currentlong),10));
+                    Objects.requireNonNull(supportMapFragment).getMapAsync(googleMap1 -> {
+                        map = googleMap1;
+                        LatLng mylocation = new LatLng(currentlat, currentlong);
+                        googleMap1.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
+                        LatLng charg = new LatLng(36.877089631675446, 10.326329726756194);
+                        googleMap1.addMarker(new MarkerOptions().position(charg).title("TOTAL LA MARSA").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
+                        LatLng charg1 = new LatLng(36.835661583754344, 10.248468097918366);
+                        googleMap1.addMarker(new MarkerOptions().position(charg1).title("Mövenpick Lac").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
+                        LatLng charg2 = new LatLng(35.84276741622719, 10.627149326726785);
+                        googleMap1.addMarker(new MarkerOptions().position(charg2).title("Mövenpick Hotel Sousse").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
+                        LatLng charg3 = new LatLng(36.95522107607615, 8.792576124902094);
+                        googleMap1.addMarker(new MarkerOptions().position(charg3).title("LA CIGALE TABARKA HÔTEL").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
+                        googleMap1.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat, currentlong), 10));
 
 
-                            }
-                        });
-                    }
+                    });
                 }
             });
 
@@ -112,5 +113,13 @@ public class charge_bornes extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+    }
+    private BitmapDescriptor bitmapDescriptordescriptor (Context context, int vector){
+        Drawable vectorDrawable = ContextCompat.getDrawable(context,vector);
+        Objects.requireNonNull(vectorDrawable).setBounds(0,0,vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap=Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas=new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }

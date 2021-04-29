@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -24,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,34 +78,31 @@ public class liste_notes extends Fragment {
         String user = FirebaseAuth.getInstance().getUid();
         final ArrayList<HashMap<String,String>> list= new ArrayList();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/");
-        DatabaseReference myRef = database.getReference(user);
+        DatabaseReference myRef = database.getReference(Objects.requireNonNull(user));
         final TextView test= RootView.findViewById(R.id.test);
         String[]from={"matricule","note","date"};
         int[] to= { R.id.titreview, R.id.descr,R.id.Date};
         //LogAdapter logAdapter = new LogAdapter (this, Log, LogImg);
         final ListView list1 = RootView.findViewById(R.id.ListeView1);
-        final SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(),list,R.layout.ligne, from, to);
+        final SimpleAdapter adapter = new SimpleAdapter(Objects.requireNonNull(getActivity()).getBaseContext(),list,R.layout.ligne, from, to);
         list1.setAdapter(adapter);
-        list1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Sélection Item");
-                builder.setMessage(list.get(position).get("note")+"\n"+list.get(position).get("date"));
-                builder.setCancelable(true);
-                builder.setPositiveButton("ok", null).show();
+        list1.setOnItemLongClickListener((parent, view, position, id) -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+            builder.setTitle("Sélection Item");
+            builder.setMessage(list.get(position).get("note")+"\n"+list.get(position).get("date"));
+            builder.setCancelable(true);
+            builder.setPositiveButton("ok", null).show();
 
-                return true;
-            }
+            return true;
         });
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                HashMap<String,String>Log= new HashMap<String,String>();
-                String matricule = snapshot.child("matricule").getValue().toString();
-                String note = snapshot.child("note").getValue().toString();
-                String date = snapshot.child("date").getValue().toString();
+                HashMap<String,String>Log= new HashMap<>();
+                String matricule = Objects.requireNonNull(snapshot.child("matricule").getValue()).toString();
+                String note = Objects.requireNonNull(snapshot.child("note").getValue()).toString();
+                String date = Objects.requireNonNull(snapshot.child("date").getValue()).toString();
 
                 Log.put("matricule", matricule);
                 Log.put("note", note);

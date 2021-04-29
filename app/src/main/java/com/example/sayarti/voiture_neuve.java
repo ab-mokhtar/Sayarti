@@ -60,13 +60,8 @@ public class voiture_neuve extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_bienvenu, container, false);
-        CardView lcard = (CardView) v.findViewById(R.id.logoCard);
-        lcard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.sayarti.tn/")));
-            }
-        });
+        CardView lcard = v.findViewById(R.id.logoCard);
+        lcard.setOnClickListener(v1 -> startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.sayarti.tn/"))));
         return v;
     }
 

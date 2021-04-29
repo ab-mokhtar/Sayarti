@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:id="@+id/testfrag">
 <ScrollView
@@ -26,19 +25,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/alfa"
-            android:id="@+id/alfa"/>
+            android:id="@+id/alfa"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/audi"
-            android:id="@+id/audi"/>
+            android:id="@+id/audi"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/baic1"
-            android:id="@+id/baic"/>
+            android:id="@+id/baic"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -50,19 +52,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/bmw"
-            android:id="@+id/bmw"/>
+            android:id="@+id/bmw"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/changan"
-            android:id="@+id/changan"/>
+            android:id="@+id/changan"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/chery"
-            android:id="@+id/chery"/>
+            android:id="@+id/chery"
+            android:contentDescription="TODO" />
 
 
     </LinearLayout>
@@ -75,19 +80,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/chevrolet"
-            android:id="@+id/chevrolet"/>
+            android:id="@+id/chevrolet"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/citreon"
-            android:id="@+id/citroen"/>
+            android:id="@+id/citroen"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/dacia"
-            android:id="@+id/dacia"/>
+            android:id="@+id/dacia"
+            android:contentDescription="TODO" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,19 +106,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/dfsk"
-            android:id="@+id/dfsk"/>
+            android:id="@+id/dfsk"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/dongfeng"
-            android:id="@+id/dongfeng"/>
+            android:id="@+id/dongfeng"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/ds"
-            android:id="@+id/ds"/>
+            android:id="@+id/ds"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -122,19 +133,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/fiat"
-            android:id="@+id/fiat"/>
+            android:id="@+id/fiat"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/foday"
-            android:id="@+id/foday"/>
+            android:id="@+id/foday"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/ford"
-            android:id="@+id/ford"/>
+            android:id="@+id/ford"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -146,19 +160,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/foton"
-            android:id="@+id/foton"/>
+            android:id="@+id/foton"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/geely"
-            android:id="@+id/geely"/>
+            android:id="@+id/geely"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/great"
-            android:id="@+id/great"/>
+            android:id="@+id/great"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -170,19 +187,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/haval"
-            android:id="@+id/haval"/>
+            android:id="@+id/haval"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/honda"
-            android:id="@+id/honda"/>
+            android:id="@+id/honda"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/hyundai"
-            android:id="@+id/hyundai"/>
+            android:id="@+id/hyundai"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -194,19 +214,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/isuzu"
-            android:id="@+id/isuzu"/>
+            android:id="@+id/isuzu"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/jaguar"
-            android:id="@+id/jaguar"/>
+            android:id="@+id/jaguar"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/jeep"
-            android:id="@+id/jeep"/>
+            android:id="@+id/jeep"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -218,19 +241,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/kia"
-            android:id="@+id/kia"/>
+            android:id="@+id/kia"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/lada"
-            android:id="@+id/lada"/>
+            android:id="@+id/lada"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/landrover"
-            android:id="@+id/landrover"/>
+            android:id="@+id/landrover"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -242,19 +268,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/mahindra"
-            android:id="@+id/mahindra"/>
+            android:id="@+id/mahindra"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/mazda"
-            android:id="@+id/mazda"/>
+            android:id="@+id/mazda"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/mercedes"
-            android:id="@+id/mercedes"/>
+            android:id="@+id/mercedes"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -266,19 +295,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/mini"
-            android:id="@+id/mini"/>
+            android:id="@+id/mini"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/mitshi"
-            android:id="@+id/mitshi"/>
+            android:id="@+id/mitshi"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/mg"
-            android:id="@+id/mg"/>
+            android:id="@+id/mg"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -290,19 +322,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/nissan"
-            android:id="@+id/nissan"/>
+            android:id="@+id/nissan"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/opel"
-            android:id="@+id/opel"/>
+            android:id="@+id/opel"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/peugeot"
-            android:id="@+id/peugeot"/>
+            android:id="@+id/peugeot"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -314,19 +349,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/porshe"
-            android:id="@+id/porshe"/>
+            android:id="@+id/porshe"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/renault"
-            android:id="@+id/renault"/>
+            android:id="@+id/renault"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/seat"
-            android:id="@+id/seat"/>
+            android:id="@+id/seat"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -338,19 +376,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/skoda"
-            android:id="@+id/skoda"/>
+            android:id="@+id/skoda"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/sangyoung"
-            android:id="@+id/sangyoung"/>
+            android:id="@+id/sangyoung"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/suzuki"
-            android:id="@+id/suzuki"/>
+            android:id="@+id/suzuki"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
     <LinearLayout
@@ -362,20 +403,24 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/tata"
-            android:id="@+id/tata"/>
+            android:id="@+id/tata"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/toyota"
-            android:id="@+id/toyota"/>
+            android:id="@+id/toyota"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/volkswagen"
             android:id="@+id/volkswagen"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:contentDescription="TODO"
+            android:focusable="true" />
 
     </LinearLayout>
     <LinearLayout
@@ -387,19 +432,22 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/volvo"
-            android:id="@+id/volvo"/>
+            android:id="@+id/volvo"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/wallys"
-            android:id="@+id/wallys"/>
+            android:id="@+id/wallys"
+            android:contentDescription="TODO" />
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="1"
             android:src="@mipmap/zxauto"
-            android:id="@+id/zxauto"/>
+            android:id="@+id/zxauto"
+            android:contentDescription="TODO" />
 
     </LinearLayout>
 </LinearLayout></ScrollView></FrameLayout>

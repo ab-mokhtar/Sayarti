@@ -10,23 +10,119 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+
     >
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="120dp"
-        android:src="@mipmap/bh"
-        android:id="@+id/bh"/>
+        android:src="@drawable/bh_assurance"
+        android:id="@+id/bh"
+        android:contentDescription="TODO" />
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="120dp"
-        android:src="@mipmap/comar"
-        android:id="@+id/comar"/>
-
-
+        android:src="@drawable/comar"
+        android:id="@+id/comar"
+        android:contentDescription="TODO" />
 
 </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:src="@drawable/ami"
+                android:contentDescription="TODO" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:src="@drawable/attijari"
+                android:contentDescription="TODO" />
+
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:src="@drawable/lloyed"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:src="@drawable/gat_logo"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:src="@drawable/star"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:src="@drawable/hayett"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:src="@drawable/salim"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:src="@drawable/zitouna"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                   android:layout_width="wrap_content"
+
+                    android:layout_height="120dp"
+                    android:src="@drawable/mae"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:src="@drawable/biat"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+        </LinearLayout>
     </ScrollView></FrameLayout>

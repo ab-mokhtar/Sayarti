@@ -30,7 +30,6 @@ public class PrefConfig {
 
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<posi>>() {}.getType();
-        List<posi> list = gson.fromJson(jsonString, type);
-        return list;
+        return gson.fromJson(jsonString, type);
     }
 }

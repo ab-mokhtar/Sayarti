@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,10 +23,6 @@ public class entretien extends Fragment  {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public entretien() {
         // Required empty public constructor
@@ -54,8 +50,9 @@ public class entretien extends Fragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -66,347 +63,197 @@ public class entretien extends Fragment  {
         View v = inflater.inflate(R.layout.fragment_entretien, container, false);
 
 
-        v.findViewById(R.id.alfa).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "alfa";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
-
-
+        v.findViewById(R.id.alfa).setOnClickListener(v148 -> {
+            String marque = "alfa";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.audi).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "audi";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
-
-
+        v.findViewById(R.id.audi).setOnClickListener(v147 -> {
+            String marque = "audi";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.baic).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "baic";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
-
-
+        v.findViewById(R.id.baic).setOnClickListener(v146 -> {
+            String marque = "baic";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.bmw).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "bmw";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.bmw).setOnClickListener(v145 -> {
+            String marque = "bmw";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.changan).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "changan";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.changan).setOnClickListener(v144 -> {
+            String marque = "changan";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.chery).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "chery";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.chery).setOnClickListener(v143 -> {
+            String marque = "chery";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.chevrolet).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "chevrolet";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.chevrolet).setOnClickListener(v142 -> {
+            String marque = "chevrolet";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.citroen).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "citroen";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.citroen).setOnClickListener(v141 -> {
+            String marque = "citroen";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.dacia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "dacia";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.dacia).setOnClickListener(v140 -> {
+            String marque = "dacia";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.dfsk).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "dfsk";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.dfsk).setOnClickListener(v139 -> {
+            String marque = "dfsk";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.dongfeng).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "dongfeng";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.dongfeng).setOnClickListener(v138 -> {
+            String marque = "dongfeng";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.ds).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "ds";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.ds).setOnClickListener(v137 -> {
+            String marque = "ds";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.fiat).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "fiat";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.fiat).setOnClickListener(v136 -> {
+            String marque = "fiat";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.foday).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "foday";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.foday).setOnClickListener(v135 -> {
+            String marque = "foday";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.ford).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "ford";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.ford).setOnClickListener(v134 -> {
+            String marque = "ford";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.foton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "foton";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.foton).setOnClickListener(v133 -> {
+            String marque = "foton";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.geely).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "geely";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.geely).setOnClickListener(v132 -> {
+            String marque = "geely";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.great).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "great wall";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.great).setOnClickListener(v131 -> {
+            String marque = "great wall";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.haval).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "haval";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.haval).setOnClickListener(v130 -> {
+            String marque = "haval";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.honda).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "honda";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.honda).setOnClickListener(v129 -> {
+            String marque = "honda";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.hyundai).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "hyundai";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.hyundai).setOnClickListener(v128 -> {
+            String marque = "hyundai";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.isuzu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "isuzu";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.isuzu).setOnClickListener(v127 -> {
+            String marque = "isuzu";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.jaguar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "jaguar";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.jaguar).setOnClickListener(v126 -> {
+            String marque = "jaguar";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.jeep).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "jeep";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.jeep).setOnClickListener(v125 -> {
+            String marque = "jeep";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.kia).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "kia";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.kia).setOnClickListener(v124 -> {
+            String marque = "kia";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.lada).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "lada";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.lada).setOnClickListener(v123 -> {
+            String marque = "lada";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.landrover).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "land rover";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.landrover).setOnClickListener(v122 -> {
+            String marque = "land rover";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.mahindra).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "mahindra";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.mahindra).setOnClickListener(v121 -> {
+            String marque = "mahindra";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.mazda).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "mazda";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.mazda).setOnClickListener(v120 -> {
+            String marque = "mazda";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.mercedes).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "mercedes";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.mercedes).setOnClickListener(v119 -> {
+            String marque = "mercedes";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.mini).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "mini";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.mini).setOnClickListener(v118 -> {
+            String marque = "mini";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.mitshi).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "mitsubishi";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.mitshi).setOnClickListener(v117 -> {
+            String marque = "mitsubishi";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.mg).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "mg";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.mg).setOnClickListener(v116 -> {
+            String marque = "mg";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.nissan).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "nissan";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.nissan).setOnClickListener(v115 -> {
+            String marque = "nissan";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.opel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "opel";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.opel).setOnClickListener(v114 -> {
+            String marque = "opel";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.peugeot).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "peugeot";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.peugeot).setOnClickListener(v113 -> {
+            String marque = "peugeot";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.porshe).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "porshe";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.porshe).setOnClickListener(v112 -> {
+            String marque = "porshe";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.renault).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "renault";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.renault).setOnClickListener(v111 -> {
+            String marque = "renault";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.seat).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "seat";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.seat).setOnClickListener(v110 -> {
+            String marque = "seat";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.skoda).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "skoda";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.skoda).setOnClickListener(v19 -> {
+            String marque = "skoda";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.sangyoung).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "ssangyoung";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.sangyoung).setOnClickListener(v18 -> {
+            String marque = "ssangyoung";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.suzuki).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "suzuki";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.suzuki).setOnClickListener(v17 -> {
+            String marque = "suzuki";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.tata).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "tata";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.tata).setOnClickListener(v16 -> {
+            String marque = "tata";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.toyota).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "toyota";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.toyota).setOnClickListener(v15 -> {
+            String marque = "toyota";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.volkswagen).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "volkswagen";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.volkswagen).setOnClickListener(v14 -> {
+            String marque = "volkswagen";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.volvo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "volvo";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.volvo).setOnClickListener(v13 -> {
+            String marque = "volvo";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.wallys).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "wallys";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.wallys).setOnClickListener(v12 -> {
+            String marque = "wallys";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
-        v.findViewById(R.id.zxauto).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String marque = "zxauto";
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
-            }
+        v.findViewById(R.id.zxauto).setOnClickListener(v1 -> {
+            String marque = "zxauto";
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.testfrag, new map_entretien(marque)).addToBackStack("frg").commit();
         });
         return v;
     }

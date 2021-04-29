@@ -1,6 +1,5 @@
 package com.example.sayarti;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,21 +9,18 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -38,10 +34,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
+        MobileAds.initialize(this, initializationStatus -> {
         });
 
         AdView mAdView = findViewById(R.id.adView);
@@ -64,134 +57,154 @@ public class MainActivity extends AppCompatActivity  {
 
 
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        drawerLayout.closeDrawers();
+                menuItem -> {
+                    // set item as selected to persist highlight
+                    menuItem.setChecked(true);
+                    // close drawer when item is tapped
+                    drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-                        switch (menuItem.getItemId())
-                        {
-                            case R.id.connect :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Authenfication()).addToBackStack(null).commit();
-                                break;
-                            case R.id.create :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new FragmentSignUp()).addToBackStack(null).commit();
-                                break;
-                            case R.id.voit_neuv :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new voiture_neuve()).addToBackStack(null).commit();
-                                break;
-                            case R.id.entretien :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new entretien()).addToBackStack(null).commit();
-                                break;
-                            case R.id.kiosque :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new MapsFragment()).addToBackStack(null).commit();
-                                break;
-                            case R.id.borne_charge :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new entretien()).addToBackStack(null).commit();
-                                break;
-                            case R.id.assur :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Assurance()).addToBackStack(null).commit();
-                                break;
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        return true;
+                    // Add code here to update the UI based on the item selected
+                    // For example, swap UI fragments here
+                    switch (menuItem.getItemId())
+                    {
+                        case R.id.connect :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Authenfication()).addToBackStack(null).commit();
+                            break;
+                        case R.id.create :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new FragmentSignUp()).addToBackStack(null).commit();
+                            break;
+                        case R.id.voit_neuv :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new voiture_neuve()).addToBackStack(null).commit();
+                            break;
+                        case R.id.entretien :
+                        case R.id.borne_charge :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new entretien()).addToBackStack(null).commit();
+                            break;
+                        case R.id.kiosque :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Kiosque()).addToBackStack(null).commit();
+                            break;
+                        case R.id.assur :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Assurance()).addToBackStack(null).commit();
+                            break;
                     }
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
                 });
 
 
-        CardView c1 = (CardView) findViewById(R.id.card_view1);
-        c1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new voiture_neuve()).addToBackStack("frg").commit();
-            }
-        });
-        CardView c2 = (CardView) findViewById(R.id.card_view2);
-        c2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new charge_bornes()).addToBackStack("frg").commit();
-            }
-        });
+        CardView c1 = findViewById(R.id.card_view1);
+        c1.setOnClickListener(v -> getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new voiture_neuve()).addToBackStack("frg").commit());
+        CardView c2 = findViewById(R.id.card_view2);
+        c2.setOnClickListener(v -> {
+            LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+            if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                    , Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new charge_bornes()).addToBackStack("frg").commit();
 
+                }else {
+                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
 
-        CardView c3 = (CardView) findViewById(R.id.card_view3);
-        c3.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("NewApi")
-            @Override
-            public void onClick(View v) {
-                LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
-                if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
-                        , Manifest.permission.ACCESS_COARSE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED)) {
-                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new MapsFragment()).addToBackStack("frg").commit();
-
-                    }else {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                     }
-
-                }else{
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-                }
-                }
-        });
-
-        CardView c4 = (CardView) findViewById(R.id.card_view4);
-        c4.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("NewApi")
-            @Override
-            public void onClick(View v) {
-                LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
-                if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
-                        , Manifest.permission.ACCESS_COARSE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED)) {
-                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Sos()).addToBackStack("frg").commit();
-
-                    }else {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    }
-
-                }else{
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                 }
             }
         });
-        CardView c6 = (CardView) findViewById(R.id.card_view5);
-        c6.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("NewApi")
-            @Override
-            public void onClick(View v) {
-                LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
-                if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
-                        , Manifest.permission.ACCESS_COARSE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED)) {
-                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Assurance()).addToBackStack("frg").commit();
 
-                    }else {
-                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+        CardView c3 = findViewById(R.id.card_view3);
+        c3.setOnClickListener(v -> {
+            LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+            if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                    , Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Kiosque()).addToBackStack("frg").commit();
+
+                }else {
+                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                     }
+                }
+            }
+            });
 
-                }else{
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+        CardView c4 = findViewById(R.id.card_view4);
+        c4.setOnClickListener(v -> {
+            LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+            if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                    , Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Sos()).addToBackStack("frg").commit();
+
+                }else {
+                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+                    }
                 }
             }
         });
-        CardView c5 = (CardView) findViewById(R.id.card_view0);
-        c5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new entretien()).addToBackStack("frg").commit();
+        CardView c6 = findViewById(R.id.card_view5);
+        c6.setOnClickListener(v -> {
+            LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+            if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                    , Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Assurance()).addToBackStack("frg").commit();
+
+                }else {
+                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+                    }
+                }
+            }
+        });
+        CardView c5 = findViewById(R.id.card_view0);
+        c5.setOnClickListener(v -> {
+            LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+            if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                    , Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new entretien()).addToBackStack("frg").commit();
+
+                }else {
+                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+                    }
+                }
             }
         });
     }

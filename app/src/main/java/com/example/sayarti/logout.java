@@ -65,14 +65,11 @@ public class logout extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         View v = inflater.inflate(R.layout.fragment_logout, container, false);
         Button btn = v.findViewById(R.id.logoutbtn);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                LoginManager.getInstance().logOut();
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
-            }
+        btn.setOnClickListener(v1 -> {
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
         });
         return v;
     }

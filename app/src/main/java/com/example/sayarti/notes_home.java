@@ -41,41 +41,36 @@ public class notes_home extends AppCompatActivity {
 
 
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        drawerLayout.closeDrawers();
+                menuItem -> {
+                    // set item as selected to persist highlight
+                    menuItem.setChecked(true);
+                    // close drawer when item is tapped
+                    drawerLayout.closeDrawers();
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-                        switch (menuItem.getItemId())
-                        {
+                    // Add code here to update the UI based on the item selected
+                    // For example, swap UI fragments here
+                    switch (menuItem.getItemId())
+                    {
 
-                            case R.id.voit_neuv :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.contt,new voiture_neuve()).addToBackStack(null).commit();
-                                break;
-                            case R.id.entretien :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.contt,new entretien()).addToBackStack(null).commit();
-                                break;
-                            case R.id.kiosque :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.contt,new MapsFragment()).addToBackStack(null).commit();
-                                break;
-                            case R.id.borne_charge :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.contt,new entretien()).addToBackStack(null).commit();
-                                break;
-                            case R.id.assur :
-                                getSupportFragmentManager().beginTransaction().replace(R.id.contt,new Assurance()).addToBackStack(null).commit();
-                                break;
-                            case R.id.profil :
-                                startActivity(new Intent(getApplicationContext(), notes_home.class));
-                                break;
-                        }
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        return true;
+                        case R.id.voit_neuv :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contt,new voiture_neuve()).addToBackStack(null).commit();
+                            break;
+                        case R.id.entretien :
+                        case R.id.borne_charge :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contt,new entretien()).addToBackStack(null).commit();
+                            break;
+                        case R.id.kiosque :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contt,new Kiosque()).addToBackStack(null).commit();
+                            break;
+                        case R.id.assur :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contt,new Assurance()).addToBackStack(null).commit();
+                            break;
+                        case R.id.profil :
+                            startActivity(new Intent(getApplicationContext(), notes_home.class));
+                            break;
                     }
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
                 });
 
     }

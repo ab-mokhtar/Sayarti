@@ -2,28 +2,25 @@ package com.example.sayarti;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -32,34 +29,32 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class map_entretien extends Fragment {
-    private static  final String BASE_URL = "http://192.168.1.20/android/getdata.php";
+    private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata1.php";
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
-    private String marques;
+    private final String marques;
     private Double latit,longit;
-    private String nameplace,marque;
     double currentlat = 0, currentlong = 0;
-    private ArrayList<posi> data=  new ArrayList<posi>();
-    private ArrayList<posi> data2=  new ArrayList<posi>();
+    private ArrayList<posi> data= new ArrayList<>();
+    private final ArrayList<posi> data2= new ArrayList<>();
     DatabaseReference db;
     public map_entretien(String marque) {
         this.marques = marque;
@@ -68,50 +63,44 @@ public class map_entretien extends Fragment {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, BASE_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                response -> {
 
 
-                        try {
+                    try {
 
-                            JSONArray array = new JSONArray(response);
-                            for (int i = 0; i<array.length(); i++){
+                        JSONArray array = new JSONArray(response);
+                        for (int i = 0; i<array.length(); i++){
 
-                                JSONObject object = array.getJSONObject(i);
+                            JSONObject object = array.getJSONObject(i);
 
-                                Double lat = object.getDouble("lat");
-                                Double longi = object.getDouble("longi");
-                                String tel = object.getString("tel");
-                                String name = object.getString("name");
-                                String marque = object.getString("marque");
-                                latit= lat;
-                                longit = longi;
-                                nameplace = name;
-                                posi p =new posi(lat,longi,name,marque,tel);
-                                data.add(p);
+                            Double lat = object.getDouble("lat");
+                            Double longi = object.getDouble("longi");
+                            String tel = object.getString("tel");
+                            String name = object.getString("name");
+                            String marque = object.getString("marque");
+                            posi p =new posi(lat,longi,name,marque,tel);
+                            data.add(p);
 
-
-                            }
-                            PrefConfig.writeListInPref(getApplicationContext(), data);
-
-
-                        }catch (Exception e){
 
                         }
+                        PrefConfig.writeListInPref(getApplicationContext(), data);
 
 
-
-
+                    }catch (Exception ignored){
 
                     }
+
+
+
+
+
                 }, null);
 
 
-        Volley.newRequestQueue(getContext()).add(stringRequest);
+        Volley.newRequestQueue(Objects.requireNonNull(getContext())).add(stringRequest);
     }
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
          * Manipulates the map once available.
@@ -124,8 +113,8 @@ public class map_entretien extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            client = LocationServices.getFusedLocationProviderClient(getActivity());
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
+            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -136,23 +125,21 @@ public class map_entretien extends Fragment {
                 return;
             }
             Task<Location> task = client.getLastLocation();
-            task.addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null){
-                        currentlat=location.getLatitude();
-                        currentlong=location.getLongitude();
-                        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            task.addOnSuccessListener(location -> {
+                if (location != null){
+                    currentlat=location.getLatitude();
+                    currentlong=location.getLongitude();
+                    supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-                        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                            @Override
-                            public void onMapReady(GoogleMap googleMap) {
+                    Objects.requireNonNull(supportMapFragment).getMapAsync(googleMap1 -> {
 
-                                markmy_location(googleMap);
+                        //markmy_location(googleMap);
+                        LatLng mylocation = new LatLng(currentlat, currentlong);
+                        googleMap1.addMarker(new MarkerOptions().position(mylocation).title("self"));
+                        googleMap1.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
+                        googleMap1.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat, currentlong), 10));
 
-                            }
-                        });
-                    }
+                    });
                 }
             });
 
@@ -168,14 +155,20 @@ public class map_entretien extends Fragment {
 
             }
             for (int i=0;i<data2.size();i++){
+               String   name=data2.get(i).getName();
+                String tel=data2.get(i).getTel();
+                String marque=data2.get(i).getMarque();
                 LatLng location = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(location);
+                String info = name+"/"+tel+"/"+marque;
+                markerOptions.title(info);
+
                 // markerOptions.title(nameOfPlace);
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                markerOptions.snippet(data2.get(i).getName());
+                markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.marker_entretien));
                 googleMap.addMarker(markerOptions);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+
                 googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                     @Override
                     public View getInfoWindow(Marker marker) {
@@ -184,16 +177,28 @@ public class map_entretien extends Fragment {
 
                     @Override
                     public View getInfoContents(Marker marker) {
+
                         LayoutInflater layoutInflater=LayoutInflater.from(getContext());
                         View v = getLayoutInflater().inflate(R.layout.snippet,null);
                         TextView t1 = v.findViewById(R.id.text1);
                         TextView t2 = v.findViewById(R.id.text22);
                         TextView t3 = v.findViewById(R.id.text3);
-                        TextView t4 = v.findViewById(R.id.text4);
-                        LatLng l1 = marker.getPosition();
-                        t2.setText(marker.getSnippet());
-                        t3.setText(String.valueOf(l1.latitude));
-                        t4.setText(String.valueOf(l1.longitude));
+                        String info=marker.getTitle();
+                        if(info.contains("/")){
+                        String name =info.substring(0,info.indexOf("/"));
+                        info =  info.substring(info.indexOf("/")+1);
+                        String tel = info.substring(0,info.indexOf("/"));
+                        info =  info.substring(info.indexOf("/")+1);
+                        t1.setText(name);
+                        t2.setText(tel);
+                        t3.setText(info);}
+                        else
+                        {
+                            t1.setText("rak houni");
+
+
+                        }
+
                         return  v;
                     }
                 });
@@ -228,9 +233,17 @@ public class map_entretien extends Fragment {
     public void markmy_location(GoogleMap map){
 
         LatLng mylocation = new LatLng(currentlat, currentlong);
-        map.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
+        map.addMarker(new MarkerOptions().position(mylocation).title("Vous etes ici"));
         map.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat,currentlong),13));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat,currentlong),10));
+    }
+    private BitmapDescriptor bitmapDescriptordescriptor (Context context, int vector){
+        Drawable vectorDrawable = ContextCompat.getDrawable(context,vector);
+        Objects.requireNonNull(vectorDrawable).setBounds(0,0,vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap=Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),vectorDrawable.getIntrinsicHeight(),Bitmap.Config.ARGB_8888);
+        Canvas canvas=new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
 

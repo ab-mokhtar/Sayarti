@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,6 @@
 
 
     <FrameLayout
-        android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include
@@ -51,7 +51,9 @@
                             app:cardBackgroundColor="@color/trans"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="8dp"
-                            android:clickable="true">
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -60,17 +62,17 @@
                                 android:orientation="vertical">
 
                                 <ImageView
-                                    android:id="@+id/VoiNeuvIMG"
                                     android:layout_width="100dp"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/car" />
+                                    android:src="@drawable/car"
+                                    android:contentDescription="@string/todo" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="Voiture Neuves" />
+                                    android:text="@string/voiture_neuves" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
@@ -86,7 +88,9 @@
                             app:cardBackgroundColor="@color/trans"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="8dp"
-                            android:clickable="true">
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -98,13 +102,14 @@
                                     android:layout_width="100dp"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/sos" />
+                                    android:src="@drawable/sos"
+                                    android:contentDescription="@string/todo" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="Entretien" />
+                                    android:text="@string/entretien" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -122,7 +127,9 @@
                             app:cardBackgroundColor="@color/trans"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="8dp"
-                            android:clickable="true">
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -134,13 +141,14 @@
                                     android:layout_width="100dp"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/elec_station" />
+                                    android:src="@drawable/elec_station"
+                                    android:contentDescription="@string/todo" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="Bornes de recharge " />
+                                    android:text="@string/bornes_de_recharge" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -157,7 +165,9 @@
                             app:cardBackgroundColor="@color/trans"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="8dp"
-                            android:clickable="true">
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -169,13 +179,14 @@
                                     android:layout_width="100dp"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/gaz_station" />
+                                    android:src="@drawable/gaz_station"
+                                    android:contentDescription="@string/todo" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="Station de Kiosque" />
+                                    android:text="@string/station_de_kiosque" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -193,7 +204,9 @@
                             app:cardBackgroundColor="@color/trans"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="8dp"
-                            android:clickable="true">
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -205,18 +218,18 @@
                                     android:layout_width="100dp"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/key" />
+                                    android:src="@drawable/key"
+                                    android:contentDescription="@string/todo" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="Assurance Auto" />
+                                    android:text="@string/assurance_auto" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view6"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_row="2"
@@ -228,7 +241,9 @@
                             app:cardBackgroundColor="@color/trans"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="8dp"
-                            android:clickable="true">
+                            android:clickable="true"
+                            android:focusable="true"
+                            tools:targetApi="lollipop">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -240,13 +255,14 @@
                                     android:layout_width="100dp"
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
-                                    android:src="@drawable/location" />
+                                    android:src="@drawable/location"
+                                    android:contentDescription="TODO" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="Location Auto" />
+                                    android:text="@string/location_auto" />
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
@@ -270,7 +286,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/afriqueassistance" />
+                                android:src="@drawable/afriqueassistance"
+                                android:contentDescription="TODO" />
                         </androidx.cardview.widget.CardView>
 
                     </GridLayout>

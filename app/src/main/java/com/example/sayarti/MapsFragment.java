@@ -13,10 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -25,17 +21,22 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 public class MapsFragment extends Fragment {
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     GoogleMap map;
+    private final String kiosque;
     double latitude, longitude;
+
+    public MapsFragment(String kiosque) {
+        this.kiosque = kiosque;
+    }
 
     double currentlat = 0, currentlong = 0;
     @Override
@@ -45,49 +46,24 @@ public class MapsFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_maps, container, false);
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                map = googleMap;
-                Button btnsearch = v.findViewById(R.id.search);
-                Spinner sptype = v.findViewById(R.id.sp_type);
-
-                String[] placeNameList = {"SHELL", "AGIL", "TOTAL", "OLA", "STAROIL"};
-                Object[] transferData =new Object[2];
+        Objects.requireNonNull(supportMapFragment).getMapAsync(googleMap -> {
 
 
 
 
-                sptype.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, placeNameList));
-                btnsearch.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        map.clear();
-                        markmy_location(map);
-                        Getnerabyplaces getnerabyplaces=new Getnerabyplaces();
-                        int i = sptype.getSelectedItemPosition();
-                        String url = getUrl(currentlat, currentlong, placeNameList[i]);
 
 
-                        transferData[0]=googleMap;
-                        transferData[1]=url;
-                        getnerabyplaces.execute(transferData);
-                        //Toast.makeText(getActivity()," search for : "+placeNameList[i],Toast.LENGTH_SHORT).show();
-                        Snackbar.make(getView(),"RECHERCHER "+placeNameList[i], Snackbar.LENGTH_LONG).show();
-                    }
-                });
-
-            }});
+        });
 
         return v;
     }
     private String getUrl(double latitude, double longitude, String nearbyPlace){
         StringBuilder googleUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        googleUrl.append("location="+ latitude + "," + longitude);
+        googleUrl.append("location=").append(latitude).append(",").append(longitude);
         int proxumityRadius = 10000;
-        googleUrl.append("&radius=" + proxumityRadius);
+        googleUrl.append("&radius=").append(proxumityRadius);
         googleUrl.append("&type=" + "gas_station");
-        googleUrl.append("&keyword="+nearbyPlace );
+        googleUrl.append("&keyword=").append(nearbyPlace);
         googleUrl.append("&sensor=true" );
         googleUrl.append("&key=" + "AIzaSyDvOWlQo1Tp1Q-6ZVdwxLwblIWD6wQVbQ8");
         Log.d("MapsFragment", "url = "+googleUrl.toString());
@@ -111,8 +87,8 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            client = LocationServices.getFusedLocationProviderClient(getActivity());
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
+            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -123,30 +99,36 @@ public class MapsFragment extends Fragment {
                 return;
             }
             Task<Location> task = client.getLastLocation();
-            task.addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null){
-                        currentlat=location.getLatitude();
-                        currentlong=location.getLongitude();
-                        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            task.addOnSuccessListener(location -> {
+                if (location != null){
+                    currentlat=location.getLatitude();
+                    currentlong=location.getLongitude();
+                    supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-                        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                            @Override
-                            public void onMapReady(GoogleMap googleMap) {
+                    Objects.requireNonNull(supportMapFragment).getMapAsync(googleMap1 -> {
 
-                               markmy_location(googleMap);
+                        markmy_location(googleMap1);
+                        map = googleMap1;
+                        Object[] transferData = new Object[2];
 
-                            }
-                        });
-                    }
+                        Getnerabyplaces getnerabyplaces = new Getnerabyplaces(getContext());
+
+                        String url = getUrl(currentlat, currentlong, kiosque);
+
+
+                        transferData[0] = googleMap1;
+                        transferData[1] = url;
+                        getnerabyplaces.execute(transferData);
+                        //Toast.makeText(getActivity()," search for : "+placeNameList[i],Toast.LENGTH_SHORT).show();
+                        Snackbar.make(Objects.requireNonNull(getView()), "RECHERCHER " + kiosque, Snackbar.LENGTH_LONG).show();
+
+
+                    });
                 }
             });
 
         }
     };
-
-    @Nullable
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

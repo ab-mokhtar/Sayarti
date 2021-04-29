@@ -1,8 +1,11 @@
 package com.example.sayarti;
 
 public class posi {
-    private Double lati,longi;
-    private String name,marque,tel;
+    private final Double lati;
+    private final Double longi;
+    private final String name;
+    private final String marque;
+    private final String tel;
 
     public Double getLati() {
         return lati;

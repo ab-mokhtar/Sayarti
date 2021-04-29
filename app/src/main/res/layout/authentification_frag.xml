@@ -21,16 +21,15 @@
         android:padding="20dp"
        >
         <FrameLayout
-            android:id="@+id/authen_frag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:src="@drawable/logo"/>
+                android:src="@drawable/logo"
+                android:contentDescription="@string/todo" />
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardSOS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="180dp"
@@ -45,7 +44,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Entrez votre email :"
+                        android:text="@string/entrez_votre_email"
                         android:textColor="@color/black"
                         android:textSize="18dp"/>
                     <EditText
@@ -66,7 +65,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Entrez votre mot de passe :"
+                        android:text="@string/entrez_votre_mot_de_passe"
                         android:textColor="@color/black"
                         android:textSize="18dp"/>
                     <EditText
@@ -97,7 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/cardview_dark_background"
-                        android:text="Connecter"/>
+                        android:text="@string/connecter"/>
                 </LinearLayout>
 
                 <LinearLayout
