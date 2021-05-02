@@ -23,7 +23,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -41,14 +49,13 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Sos extends Fragment {
 
     SupportMapFragment supportMapFragment;
-    GoogleMap map;
-
-    double currentlat , currentlong ;
     String Mylocalisation;
     EditText e2,e3;
     ImageView i1;
@@ -57,11 +64,6 @@ public class Sos extends Fragment {
     ImageView i2;
     Spinner spinner;
 
-    private static final String server_name = "dev.goodlinks.tn/sayarti-apps/mysql.php?server=goodlinkiastage.mysql.db&db=goodlinkiastage";
-    private static final String database = "goodlinkiastage";
-    private static final String DB_URL = "jdbc:mysql://dev.goodlinks.tn/sayarti-apps/mysql.php?server=goodlinkiastage.mysql.db&db=goodlinkiastage" ;
-    private static final String USER = "goodlinkiastage";
-    private static final String PASS = "FUP2JT5qbYdz";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -109,18 +111,67 @@ public class Sos extends Fragment {
             String type_panne = spinner.getSelectedItem().toString().trim();
             String au = e3.getText().toString().trim();
             String local = Mylocalisation;
+            Calendar calendar=Calendar.getInstance();
+            String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 
             if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
                 Snackbar.make(Objects.requireNonNull(getView()), "vérifier que les champs rempli ou vérifier votre correction internet", Snackbar.LENGTH_LONG).show();
             }
             else
             {
-                Send send = new Send(mat, type_panne, local,au);
-                send.setMatricule(mat);
-                send.setTypePa(type_panne);
-                send.setLoc(local);
-                send.setAutre(au);
-                send.execute("");
+
+                StringRequest request = new StringRequest(Request.Method.POST, "http://dev.goodlinks.tn/sayarti-apps/insert.php",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                if(response.equalsIgnoreCase("Data Inserted")){
+                                    Snackbar.make(Objects.requireNonNull(getView()), "Data Inserted", Snackbar.LENGTH_LONG).show();
+
+                                }
+                                else{
+                                    Snackbar.make(Objects.requireNonNull(getView()), response, Snackbar.LENGTH_LONG).show();
+
+
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Snackbar.make(Objects.requireNonNull(getView()), error.getMessage(), Snackbar.LENGTH_LONG).show();
+
+                    }
+                }
+
+                ){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+
+                        Map<String,String> params = new HashMap<String,String>();
+
+                        params.put("matricule",mat);
+                        if (type_panne=="Autre"){
+                            params.put("type_panne",au);
+                        }
+                        else{
+                            params.put("type_panne",type_panne);
+                        }
+
+                        params.put("localisation",local);
+                        params.put("date",date);
+
+
+
+                        return params;
+                    }
+                };
+
+
+                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                requestQueue.add(request);
+
             }
             i2.setEnabled(true);
             e2.getText().clear();
@@ -196,92 +247,10 @@ public class Sos extends Fragment {
         }
 
     }
-    public class Send extends AsyncTask<String,String,String>
-    {
-        private String matricule,typePa,loc,autre;
-        private final String date ;
-
-        public Send(String matricule, String typePa, String loc,String autre) {
-            this.matricule = matricule;
-            this.typePa = typePa;
-            this.loc = loc;
-            this.autre = autre;
-            Calendar calendar=Calendar.getInstance();
-            this.date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        }
 
 
-        @Override
-        public String doInBackground(String... strings) {
 
-            String msg;
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                if(conn == null)
-                {
-                    msg = "erreur de la connection";
-                }
-                else
-                {
-                    String agent = "";
-                    int etat = 0;
-                    if(spinner.getSelectedItem().equals("Autre"))
-                    {
-                        String query = "INSERT INTO `sayarti_declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+autre+"','"+loc+"','"+date+"','"+ etat +"','"+ agent +"')";
-                        Statement statement = conn.createStatement();
-                        statement.executeUpdate(query);
-                        msg ="insertion avec succes";
-                    }
-                    else
-                    {
-                        String query = "INSERT INTO `sayarti_declarations` (`matricule`, `type_panne`,`localisation`,`date`,`etat`,`agent`) VALUES('"+matricule+"', '"+typePa+"','"+loc+"','"+date+"','"+ etat +"','"+ agent +"')";
-                        Statement statement = conn.createStatement();
-                        statement.executeUpdate(query);
-                        msg ="insertion avec succes";
-                    }
-                }
-                Objects.requireNonNull(conn).close();
-            }
-            catch (Exception e)
-            {
-                msg =e.getMessage();
-                e.printStackTrace();
-            }
-            Snackbar.make(Objects.requireNonNull(getView()), Objects.requireNonNull(msg), Snackbar.LENGTH_SHORT).show();
-            return msg;
-        }
 
-        public String getMatricule() {
-            return matricule;
-        }
 
-        public void setMatricule(String matricule) {
-            this.matricule = matricule;
-        }
 
-        public String getTypePa() {
-            return typePa;
-        }
-
-        public void setTypePa(String typePa) {
-            this.typePa = typePa;
-        }
-
-        public String getLoc() {
-            return loc;
-        }
-
-        public void setLoc(String loc) {
-            this.loc = loc;
-        }
-
-        public String getAutre() {
-            return autre;
-        }
-
-        public void setAutre(String autre) {
-            this.autre = autre;
-        }
-    }
 }

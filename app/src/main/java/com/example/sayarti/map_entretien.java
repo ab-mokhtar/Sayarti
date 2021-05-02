@@ -47,7 +47,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class map_entretien extends Fragment {
-    private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata1.php";
+    private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata.php";
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     private final String marques;
@@ -194,7 +194,7 @@ public class map_entretien extends Fragment {
                         t3.setText(info);}
                         else
                         {
-                            t1.setText("rak houni");
+                            t1.setText("My Location");
 
 
                         }

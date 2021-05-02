@@ -45,7 +45,7 @@ import java.util.Objects;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class assurmap extends Fragment {
-    private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata1.php";
+    private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata.php";
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     private final String marques;
@@ -152,12 +152,16 @@ public class assurmap extends Fragment {
 
                 }
                 for (int i=0;i<data2.size();i++){
+                    String   name=data2.get(i).getName();
+                    String tel=data2.get(i).getTel();
+                    String marque=data2.get(i).getMarque();
                     LatLng location = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(location);
+                    String info = name+"/"+tel+"/"+marque;
+                    markerOptions.title(info);
                     // markerOptions.title(nameOfPlace);
                     markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.marker_assur));
-                    markerOptions.snippet(data2.get(i).getName());
                     googleMap.addMarker(markerOptions);
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                     googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
@@ -173,10 +177,21 @@ public class assurmap extends Fragment {
                             TextView t1 = v.findViewById(R.id.text1);
                             TextView t2 = v.findViewById(R.id.text22);
                             TextView t3 = v.findViewById(R.id.text3);
-                            LatLng l1 = marker.getPosition();
-                            t2.setText(marker.getSnippet());
-                            t3.setText(String.valueOf(l1.latitude));
+                            String info=marker.getTitle();
+                            if(info.contains("/")){
+                                String name =info.substring(0,info.indexOf("/"));
+                                info =  info.substring(info.indexOf("/")+1);
+                                String tel = info.substring(0,info.indexOf("/"));
+                                info =  info.substring(info.indexOf("/")+1);
+                                t1.setText(name);
+                                t2.setText(tel);
+                                t3.setText(info);}
+                            else
+                            {
+                                t1.setText("My Location");
 
+
+                            }
                             return  v;
                         }
                     });
