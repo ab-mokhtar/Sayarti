@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -27,15 +28,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class charge_bornes extends Fragment {
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     GoogleMap map;
+    private ArrayList<posi> data= new ArrayList<>();
+    private final ArrayList<posi> data2= new ArrayList<>();
 
     double latitude, longitude;
     private final int proxumityRadius = 10000;
@@ -78,15 +83,62 @@ public class charge_bornes extends Fragment {
                         map = googleMap1;
                         LatLng mylocation = new LatLng(currentlat, currentlong);
                         googleMap1.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
-                        LatLng charg = new LatLng(36.877089631675446, 10.326329726756194);
-                        googleMap1.addMarker(new MarkerOptions().position(charg).title("TOTAL LA MARSA").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
-                        LatLng charg1 = new LatLng(36.835661583754344, 10.248468097918366);
-                        googleMap1.addMarker(new MarkerOptions().position(charg1).title("Mövenpick Lac").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
-                        LatLng charg2 = new LatLng(35.84276741622719, 10.627149326726785);
-                        googleMap1.addMarker(new MarkerOptions().position(charg2).title("Mövenpick Hotel Sousse").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
-                        LatLng charg3 = new LatLng(36.95522107607615, 8.792576124902094);
-                        googleMap1.addMarker(new MarkerOptions().position(charg3).title("LA CIGALE TABARKA HÔTEL").icon(bitmapDescriptordescriptor(getContext(), R.drawable.imarkerelec)));
-                        googleMap1.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
+                        data= (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
+                        if(data.size()>0){
+                            for (int i=0;i<data.size();i++){
+                                if (data.get(i).getType().equals( "charge_elec" )){
+                                    data2.add(data.get(i));
+
+                                }
+
+                            }
+                            for (int i=0;i<data2.size();i++){
+                                String   name=data2.get(i).getName();
+                                String tel=data2.get(i).getTel();
+                                String marque=data2.get(i).getMarque();
+                                LatLng location1 = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
+                                MarkerOptions markerOptions = new MarkerOptions();
+                                markerOptions.position(location1);
+                                String info = name+"/"+tel+"/"+marque;
+                                markerOptions.title(info);
+                                // markerOptions.title(nameOfPlace);
+                                markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.marker_assur));
+                                googleMap.addMarker(markerOptions);
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLng(location1));
+                                googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                                    @Override
+                                    public View getInfoWindow(Marker marker) {
+                                        return null;
+                                    }
+
+                                    @Override
+                                    public View getInfoContents(Marker marker) {
+                                        LayoutInflater layoutInflater=LayoutInflater.from(getContext());
+                                        View v = getLayoutInflater().inflate(R.layout.snippet,null);
+                                        TextView t1 = v.findViewById(R.id.text1);
+                                        TextView t2 = v.findViewById(R.id.text22);
+                                        TextView t3 = v.findViewById(R.id.text3);
+                                        String info=marker.getTitle();
+                                        if(info.contains("/")){
+                                            String name =info.substring(0,info.indexOf("/"));
+                                            info =  info.substring(info.indexOf("/")+1);
+                                            String tel = info.substring(0,info.indexOf("/"));
+                                            info =  info.substring(info.indexOf("/")+1);
+                                            t1.setText(name);
+                                            t2.setText(tel);
+                                            t3.setText(info);}
+                                        else
+                                        {
+                                            t1.setText("My Location");
+
+
+                                        }
+                                        return  v;
+                                    }
+                                });
+
+                            }
+                        } googleMap1.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentlat, currentlong), 10));
 
 

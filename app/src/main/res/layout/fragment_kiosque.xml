@@ -20,7 +20,7 @@
           <ImageView
               android:layout_width="150dp"
               android:layout_height="150dp"
-              android:src="@drawable/shell"
+              android:src="@drawable/logo_shell"
               android:id="@+id/SHELL"
               android:contentDescription="TODO" />
 
@@ -40,14 +40,14 @@
           <ImageView
               android:layout_width="150dp"
               android:layout_height="150dp"
-              android:src="@drawable/total"
+              android:src="@drawable/logo_total"
               android:id="@+id/TOTAL"
               android:contentDescription="TODO" />
 
           <ImageView
               android:layout_width="150dp"
               android:layout_height="150dp"
-              android:src="@drawable/ola"
+              android:src="@drawable/logo_olaenergy"
               android:id="@+id/OLA"
               android:contentDescription="TODO" />
 
@@ -57,7 +57,7 @@
               android:id="@+id/STAROIL"
               android:layout_width="match_parent"
               android:layout_height="150dp"
-              android:src="@drawable/staroil"
+              android:src="@drawable/logo_staroil"
               android:layout_gravity="center"
               android:contentDescription="TODO" />
 

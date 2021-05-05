@@ -63,11 +63,30 @@ public class Getnerabyplaces extends AsyncTask<Object, String, String> {
             LatLng latLng = new LatLng(latitude,longitude);
             markerOptions.position(latLng);
            // markerOptions.title(nameOfPlace);
-            markerOptions.icon(bitmapDescriptordescriptor(mContext,R.drawable.makerkiosque));
+           if (nameOfPlace.toLowerCase().indexOf("shell")>-1){
+                markerOptions.icon(bitmapDescriptordescriptor(mContext, R.drawable.mark_shell));
+
+            }else if (nameOfPlace.toLowerCase().indexOf("agil")>-1) {
+                markerOptions.icon(bitmapDescriptordescriptor(mContext, R.drawable.mark_agil));
+
+
+            }
+            else if (nameOfPlace.toLowerCase().indexOf("total")>-1||nameOfPlace.toLowerCase().indexOf("طوطال")>-1) {
+                markerOptions.icon(bitmapDescriptordescriptor(mContext,R.drawable.mark_total));
+
+
+            }
+            else if (nameOfPlace.toLowerCase().indexOf("ola")>-1||nameOfPlace.toLowerCase().indexOf("oilibya")>-1) {
+                markerOptions.icon(bitmapDescriptordescriptor(mContext, R.drawable.mark_ola));
+
+
+            }else {
+               markerOptions.icon(bitmapDescriptordescriptor(mContext, R.drawable.makerkiosque));
+
+           }
+
             markerOptions.title(nameOfPlace);
             mMap.addMarker(markerOptions);
-
-
 
         }
     }

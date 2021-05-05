@@ -45,60 +45,15 @@ import java.util.Objects;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class assurmap extends Fragment {
-    private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata.php";
+
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     private final String marques;
-    private Double latit,longit;
-    private String nameplace,marque;
     double currentlat = 0, currentlong = 0;
     private ArrayList<posi> data= new ArrayList<>();
     private final ArrayList<posi> data2= new ArrayList<>();
     DatabaseReference db;
 
-    private void getProducts (){
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, BASE_URL,
-                response -> {
-
-
-                    try {
-
-                        JSONArray array = new JSONArray(response);
-                        for (int i = 0; i<array.length(); i++){
-
-                            JSONObject object = array.getJSONObject(i);
-
-                            Double lat = object.getDouble("lat");
-                            Double longi = object.getDouble("longi");
-                            String tel = object.getString("tel");
-                            String name = object.getString("name");
-                            String marque = object.getString("marque");
-                            latit= lat;
-                            longit = longi;
-                            nameplace = name;
-                            posi p =new posi(lat,longi,name,marque,tel);
-                            data.add(p);
-
-
-                        }
-                        PrefConfig.writeListInPref(getApplicationContext(), data);
-
-
-                    }catch (Exception ignored){
-
-                    }
-
-
-
-
-
-                }, null);
-
-
-        Volley.newRequestQueue(Objects.requireNonNull(getContext())).add(stringRequest);
-    }
 
 
     public assurmap(String marques) {

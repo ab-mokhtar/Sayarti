@@ -69,7 +69,7 @@ public class Kiosque extends Fragment {
         shell.setOnClickListener(v15 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("SHELL")).addToBackStack(null).commit());
         agil.setOnClickListener(v14 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("AGIL")).addToBackStack(null).commit());
         total.setOnClickListener(v13 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("TOTAL")).addToBackStack(null).commit());
-        ola.setOnClickListener(v12 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("ola energy")).addToBackStack(null).commit());
+        ola.setOnClickListener(v12 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("ola")).addToBackStack(null).commit());
         staroil.setOnClickListener(v1 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("STAROIL")).addToBackStack(null).commit());
         return v;
     }

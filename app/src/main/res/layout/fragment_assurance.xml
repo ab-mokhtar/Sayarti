@@ -22,14 +22,16 @@
     >
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:src="@drawable/bh_assurance"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/assurance_bh"
         android:id="@+id/bh"
         android:contentDescription="TODO" />
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:src="@drawable/comar"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/assurance_comar"
         android:id="@+id/comar"
         android:contentDescription="TODO" />
 
@@ -42,13 +44,17 @@
             >
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:src="@drawable/ami"
-                android:contentDescription="TODO" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/assurance_ami"
+                android:contentDescription="TODO"
+                android:id="@+id/ami"/>
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:src="@drawable/attijari"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/attijari"
+                android:src="@drawable/assurance_attijari"
                 android:contentDescription="TODO" />
 
         </LinearLayout>
@@ -60,31 +66,17 @@
                 >
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:src="@drawable/lloyed"
-                    android:contentDescription="TODO" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/assurance_lloyd"
+                    android:contentDescription="TODO"
+                    android:id="@+id/lloyd"/>
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:src="@drawable/gat_logo"
-                    android:contentDescription="TODO" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:src="@drawable/star"
-                    android:contentDescription="TODO" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:src="@drawable/hayett"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/gat"
+                    android:src="@drawable/assurance_gat"
                     android:contentDescription="TODO" />
 
             </LinearLayout>
@@ -96,13 +88,39 @@
                 >
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:src="@drawable/salim"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/star"
+                    android:src="@drawable/assurance_star"
                     android:contentDescription="TODO" />
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:src="@drawable/zitouna"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/hayet"
+                    android:src="@drawable/assurance_hayet"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/attakafulia"
+                    android:src="@drawable/assurance_attakafulia"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/zitouna"
+                    android:src="@drawable/assurance_zitouna"
                     android:contentDescription="TODO" />
 
             </LinearLayout>
@@ -114,13 +132,61 @@
                 <ImageView
                    android:layout_width="wrap_content"
 
-                    android:layout_height="120dp"
-                    android:src="@drawable/mae"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/mae"
+                    android:src="@drawable/assurance_mae"
                     android:contentDescription="TODO" />
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:src="@drawable/biat"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/biat"
+                    android:src="@drawable/assurance_biat"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/astree"
+                    android:src="@drawable/assurance_astree"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/carte"
+                    android:src="@drawable/assurance_carte"
+                    android:contentDescription="TODO" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/maghrebia"
+                    android:src="@drawable/assurance_maghrebia"
+                    android:contentDescription="TODO" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/ctama"
+                    android:src="@drawable/assurance_ctama"
                     android:contentDescription="TODO" />
 
             </LinearLayout>

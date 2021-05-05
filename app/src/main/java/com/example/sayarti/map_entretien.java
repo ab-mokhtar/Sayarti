@@ -47,58 +47,17 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class map_entretien extends Fragment {
-    private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata.php";
+
     FusedLocationProviderClient client;
     SupportMapFragment supportMapFragment;
     private final String marques;
-    private Double latit,longit;
     double currentlat = 0, currentlong = 0;
     private ArrayList<posi> data= new ArrayList<>();
     private final ArrayList<posi> data2= new ArrayList<>();
-    DatabaseReference db;
     public map_entretien(String marque) {
         this.marques = marque;
     }
-    private void getProducts (){
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, BASE_URL,
-                response -> {
-
-
-                    try {
-
-                        JSONArray array = new JSONArray(response);
-                        for (int i = 0; i<array.length(); i++){
-
-                            JSONObject object = array.getJSONObject(i);
-
-                            Double lat = object.getDouble("lat");
-                            Double longi = object.getDouble("longi");
-                            String tel = object.getString("tel");
-                            String name = object.getString("name");
-                            String marque = object.getString("marque");
-                            posi p =new posi(lat,longi,name,marque,tel);
-                            data.add(p);
-
-
-                        }
-                        PrefConfig.writeListInPref(getApplicationContext(), data);
-
-
-                    }catch (Exception ignored){
-
-                    }
-
-
-
-
-
-                }, null);
-
-
-        Volley.newRequestQueue(Objects.requireNonNull(getContext())).add(stringRequest);
-    }
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -214,7 +173,6 @@ public class map_entretien extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        getProducts();
         return inflater.inflate(R.layout.fragment_map_entretien, container, false);
 
 

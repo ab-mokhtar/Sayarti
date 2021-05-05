@@ -6,6 +6,7 @@ public class posi {
     private final String name;
     private final String marque;
     private final String tel;
+    private final String type;
 
     public Double getLati() {
         return lati;
@@ -27,12 +28,17 @@ public class posi {
         return tel;
     }
 
-    public posi(Double lati, Double longi, String name, String marque, String tel) {
+    public String getType() {
+        return type;
+    }
+
+    public posi(Double lati, Double longi, String name, String marque, String tel, String type) {
         this.lati = lati;
         this.longi = longi;
         this.name = name;
         this.marque = marque;
         this.tel = tel;
+        this.type=type;
     }
 
     @Override
