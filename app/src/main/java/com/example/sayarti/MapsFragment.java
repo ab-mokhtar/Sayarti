@@ -2,6 +2,7 @@ package com.example.sayarti;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -32,7 +33,7 @@ public class MapsFragment extends Fragment {
     SupportMapFragment supportMapFragment;
     GoogleMap map;
     private final String kiosque;
-    double latitude, longitude;
+    double longitude;
 
     public MapsFragment(String kiosque) {
         this.kiosque = kiosque;

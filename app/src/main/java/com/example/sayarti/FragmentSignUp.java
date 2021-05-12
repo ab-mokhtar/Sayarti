@@ -15,14 +15,12 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.Objects;
 
 
 public class FragmentSignUp extends Fragment {
     private FirebaseAuth mAuth;
-    DatabaseReference db;
     private EditText Email,mdp1,mdp2;
 
     @Nullable

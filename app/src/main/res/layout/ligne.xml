@@ -12,7 +12,7 @@
             android:id="@+id/titreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="matricule"
+            android:text="@string/matricule"
             android:layout_margin="5dp"
             android:textSize="20sp"
             />
@@ -20,7 +20,7 @@
             android:id="@+id/descr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Note"
+            android:text="@string/note"
             android:layout_margin="5dp"
             android:textSize="15sp"
             />
@@ -28,7 +28,7 @@
             android:id="@+id/Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/date"
             android:layout_margin="5dp"
             android:textSize="15sp"
             />

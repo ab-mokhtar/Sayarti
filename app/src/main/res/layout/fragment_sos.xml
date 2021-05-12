@@ -7,7 +7,7 @@
     android:fillViewport="true">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
     android:gravity="center"
@@ -28,25 +28,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Entrez votre matricule :"
+            android:text="@string/entrez_votre_matricule"
             android:textColor="@color/black"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:id="@+id/matricule"
-            android:hint="exp:120Tun1559"
+            android:hint="@string/exp_120tun1559"
             android:padding="12dp"
-            android:background="@drawable/custom_input" />
+            android:background="@drawable/custom_input"
+            android:autofillHints=""
+            android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
-        android:text="Type de panne :"
-        android:textSize="18dp"/>
+        android:text="@string/type_de_panne"
+        android:textSize="18sp"/>
 
         <Spinner
             android:id="@+id/type_panne"
@@ -61,17 +63,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_input"
-            android:hint="Decrire votre panne"
+            android:hint="@string/decrire_votre_panne"
             android:maxLength="75"
-            android:paddingVertical="50dp" />
+            android:paddingVertical="50dp"
+            android:autofillHints=""
+            android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
-            android:text="Localisation :"
-            android:textSize="18dp"/>
+            android:text="@string/localisation"
+            android:textSize="18sp"/>
 
 
         <fragment
@@ -87,7 +91,7 @@
             android:layout_height="wrap_content"
             android:paddingVertical="20dp"
             android:layout_marginTop="10dp"
-            android:text="Envoyer" />
+            android:text="@string/envoyer" />
 
         <ImageView
             android:id="@+id/callsos"
@@ -98,7 +102,7 @@
             android:background="@color/yellow"
             android:contextClickable="true"
             android:src="@drawable/call"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             tools:targetApi="m" />
     </LinearLayout>
     </androidx.cardview.widget.CardView>

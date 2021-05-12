@@ -14,7 +14,6 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.facebook.AccessToken;
@@ -40,13 +39,9 @@ import java.util.Objects;
 
 public class Authenfication extends Fragment {
     private FirebaseAuth mAuth;
-    private CallbackManager callbackManager;
     private LoginButton mFacebookLoginButton;
-    private DrawerLayout drawerLayout;
     private GoogleApiClient mGoogleApiClient; // for google sign in
     private CallbackManager mFacebookCallbackManager; // for facebook log in
-
-    private final String TAG = "AuthenticationFragment";
 
     private final int GOOGLE_SIGN_IN_REQUEST_CODE = 0;
 
@@ -65,10 +60,6 @@ public class Authenfication extends Fragment {
     };
     public Authenfication() {
         // Required empty public constructor
-    }
-
-    public static Authenfication newInstance() {
-        return new Authenfication();
     }
 
     @Override
@@ -110,7 +101,7 @@ public class Authenfication extends Fragment {
             if (mCheck.isChecked())
             {
                 mEdit.putString(getString(R.string.checkbox),"True");
-                mEdit.commit();
+                mEdit.apply();
 
                 //sauvgarder le nom
                 String name = edittxtEmail.getText().toString();

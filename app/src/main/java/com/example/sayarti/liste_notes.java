@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -25,50 +24,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link liste_notes#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class liste_notes extends Fragment {
-    private FirebaseAuth mAuth;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class liste_notes extends Fragment {
+
 
     public liste_notes() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment liste_notes.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static liste_notes newInstance(String param1, String param2) {
-        liste_notes fragment = new liste_notes();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            // TODO: Rename and change types of parameters
-            String mParam1 = getArguments().getString(ARG_PARAM1);
-            String mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +42,6 @@ public class liste_notes extends Fragment {
         final ArrayList<HashMap<String,String>> list= new ArrayList();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/");
         DatabaseReference myRef = database.getReference(Objects.requireNonNull(user));
-        final TextView test= RootView.findViewById(R.id.test);
         String[]from={"matricule","note","date"};
         int[] to= { R.id.titreview, R.id.descr,R.id.Date};
         //LogAdapter logAdapter = new LogAdapter (this, Log, LogImg);

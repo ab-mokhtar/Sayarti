@@ -20,9 +20,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,15 +32,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class map_entretien extends Fragment {
@@ -52,7 +43,6 @@ public class map_entretien extends Fragment {
     SupportMapFragment supportMapFragment;
     private final String marques;
     double currentlat = 0, currentlong = 0;
-    private ArrayList<posi> data= new ArrayList<>();
     private final ArrayList<posi> data2= new ArrayList<>();
     public map_entretien(String marque) {
         this.marques = marque;
@@ -103,10 +93,9 @@ public class map_entretien extends Fragment {
             });
 
 
-
-            data= (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
+            ArrayList<posi> data = (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
             if(data.size()>0){
-            for (int i=0;i<data.size();i++){
+            for (int i = 0; i< data.size(); i++){
                 if (data.get(i).getMarque().equals( marques )){
                     data2.add(data.get(i));
 
@@ -135,7 +124,7 @@ public class map_entretien extends Fragment {
                     }
 
                     @Override
-                    public View getInfoContents(Marker marker) {
+                    public View getInfoContents( Marker marker) {
 
                         LayoutInflater layoutInflater=LayoutInflater.from(getContext());
                         View v = getLayoutInflater().inflate(R.layout.snippet,null);
@@ -143,6 +132,7 @@ public class map_entretien extends Fragment {
                         TextView t2 = v.findViewById(R.id.text22);
                         TextView t3 = v.findViewById(R.id.text3);
                         String info=marker.getTitle();
+                        assert info != null;
                         if(info.contains("/")){
                         String name =info.substring(0,info.indexOf("/"));
                         info =  info.substring(info.indexOf("/")+1);
@@ -153,7 +143,7 @@ public class map_entretien extends Fragment {
                         t3.setText(info);}
                         else
                         {
-                            t1.setText("My Location");
+                            t1.setText(R.string.my_location);
 
 
                         }

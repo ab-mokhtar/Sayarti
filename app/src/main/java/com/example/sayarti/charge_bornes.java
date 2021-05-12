@@ -2,6 +2,7 @@ package com.example.sayarti;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -42,9 +43,6 @@ public class charge_bornes extends Fragment {
     private ArrayList<posi> data= new ArrayList<>();
     private final ArrayList<posi> data2= new ArrayList<>();
 
-    double latitude, longitude;
-    private final int proxumityRadius = 10000;
-
     double currentlat = 0, currentlong = 0;
 
 
@@ -60,7 +58,7 @@ public class charge_bornes extends Fragment {
          * user has installed Google Play services and returned to the app.
          */
         @Override
-        public void onMapReady(GoogleMap googleMap) {
+        public void onMapReady( GoogleMap googleMap) {
             client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
             if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
@@ -102,23 +100,24 @@ public class charge_bornes extends Fragment {
                                 String info = name+"/"+tel+"/"+marque;
                                 markerOptions.title(info);
                                 // markerOptions.title(nameOfPlace);
-                                markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.marker_assur));
+                                markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.imarkerelec));
                                 googleMap.addMarker(markerOptions);
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(location1));
                                 googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                                     @Override
-                                    public View getInfoWindow(Marker marker) {
+                                    public View getInfoWindow( Marker marker) {
                                         return null;
                                     }
 
                                     @Override
-                                    public View getInfoContents(Marker marker) {
+                                    public View getInfoContents( Marker marker) {
                                         LayoutInflater layoutInflater=LayoutInflater.from(getContext());
                                         View v = getLayoutInflater().inflate(R.layout.snippet,null);
                                         TextView t1 = v.findViewById(R.id.text1);
                                         TextView t2 = v.findViewById(R.id.text22);
                                         TextView t3 = v.findViewById(R.id.text3);
                                         String info=marker.getTitle();
+                                        assert info != null;
                                         if(info.contains("/")){
                                             String name =info.substring(0,info.indexOf("/"));
                                             info =  info.substring(info.indexOf("/")+1);
@@ -129,7 +128,7 @@ public class charge_bornes extends Fragment {
                                             t3.setText(info);}
                                         else
                                         {
-                                            t1.setText("My Location");
+                                            t1.setText(R.string.my_location);
 
 
                                         }

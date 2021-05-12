@@ -23,11 +23,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -52,7 +49,6 @@ public class Sos extends Fragment {
     SupportMapFragment supportMapFragment;
     String Mylocalisation;
     EditText e2,e3;
-    ImageView i1;
     Button btn;
     FusedLocationProviderClient client;
     ImageView i2;
@@ -115,38 +111,28 @@ public class Sos extends Fragment {
             {
 
                 StringRequest request = new StringRequest(Request.Method.POST, "http://dev.goodlinks.tn/sayarti-apps/insert.php",
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
+                        response -> {
 
-                                if(response.equalsIgnoreCase("Data Inserted")){
-                                    Snackbar.make(Objects.requireNonNull(getView()), "Data Inserted", Snackbar.LENGTH_LONG).show();
-
-                                }
-                                else{
-                                    Snackbar.make(Objects.requireNonNull(getView()), response, Snackbar.LENGTH_LONG).show();
-
-
-                                }
+                            if(response.equalsIgnoreCase("Data Inserted")){
+                                Snackbar.make(Objects.requireNonNull(getView()), "Data Inserted", Snackbar.LENGTH_LONG).show();
 
                             }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                            else{
+                                Snackbar.make(Objects.requireNonNull(getView()), response, Snackbar.LENGTH_LONG).show();
 
-                        Snackbar.make(Objects.requireNonNull(getView()), error.getMessage(), Snackbar.LENGTH_LONG).show();
 
-                    }
-                }
+                            }
+
+                        }, error -> Snackbar.make(Objects.requireNonNull(getView()), Objects.requireNonNull(error.getMessage()), Snackbar.LENGTH_LONG).show()
 
                 ){
                     @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
+                    protected Map<String, String> getParams() {
 
-                        Map<String,String> params = new HashMap<String,String>();
+                        Map<String,String> params = new HashMap<>();
 
                         params.put("matricule",mat);
-                        if (type_panne=="Autre"){
+                        if (type_panne.equals("Autre")){
                             params.put("type_panne",au);
                         }
                         else{
@@ -163,7 +149,7 @@ public class Sos extends Fragment {
                 };
 
 
-                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
                 requestQueue.add(request);
 
             }

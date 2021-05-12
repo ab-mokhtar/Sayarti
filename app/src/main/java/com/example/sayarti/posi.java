@@ -1,5 +1,8 @@
 package com.example.sayarti;
 
+
+
+
 public class posi {
     private final Double lati;
     private final Double longi;
@@ -40,6 +43,8 @@ public class posi {
         this.tel = tel;
         this.type=type;
     }
+
+
 
     @Override
     public String toString() {

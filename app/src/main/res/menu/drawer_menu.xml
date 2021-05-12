@@ -6,41 +6,41 @@
             android:id="@+id/connect"
             android:icon="@drawable/ic_login"
             android:actionLayout="@layout/toolbar"
-            android:title="Se connecter"/>
+            android:title="@string/se_connecter"/>
 
             <item
                 android:id="@+id/create"
                 android:icon="@drawable/ic_add"
                 android:actionLayout="@layout/toolbar"
-                android:title="Créer un compte"/>
+                android:title="@string/cr_er_un_compte"/>
     </group>
     <group>
         <item
             android:id="@+id/voit_neuv"
 
             android:actionLayout="@layout/toolbar"
-            android:title="Se Voitures neuves"/>
+            android:title="@string/se_voitures_neuves"/>
 
         <item
             android:id="@+id/entretien"
 
             android:actionLayout="@layout/toolbar"
-            android:title="Entretien"/>
+            android:title="@string/entretien"/>
         <item
             android:id="@+id/kiosque"
 
             android:actionLayout="@layout/toolbar"
-            android:title="Station de kiosque"/>
+            android:title="@string/station_de_kiosque"/>
         <item
             android:id="@+id/borne_charge"
 
             android:actionLayout="@layout/toolbar"
-            android:title="Bornes de recharge"/>
+            android:title="@string/bornes_de_recharge"/>
         <item
             android:id="@+id/assur"
 
             android:actionLayout="@layout/toolbar"
-            android:title="Assurance Auto"/>
+            android:title="@string/assurance_auto"/>
 
     </group>
 </menu>

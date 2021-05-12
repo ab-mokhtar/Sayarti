@@ -8,25 +8,22 @@
     android:background="@mipmap/route_background">
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
         <include
             layout="@layout/toolbar"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/container_frag">
+                android:id="@+id/container_frag"><ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
 
                     android:orientation="vertical">
 
@@ -256,7 +253,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center_horizontal"
                                     android:src="@drawable/location"
-                                    android:contentDescription="TODO" />
+                                    android:contentDescription="@string/todo" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -287,22 +284,20 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/afriqueassistance"
-                                android:contentDescription="TODO" />
+                                android:contentDescription="@string/todo" />
                         </androidx.cardview.widget.CardView>
 
                     </GridLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"/>
-                </LinearLayout>
+                </LinearLayout></ScrollView>
 
                 <com.google.android.gms.ads.AdView
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/adView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
                     ads:adSize="BANNER"
                     android:layout_gravity="bottom"
                     ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
@@ -313,6 +308,3 @@
 
         </LinearLayout>
 
-
-    </FrameLayout>
-</LinearLayout>

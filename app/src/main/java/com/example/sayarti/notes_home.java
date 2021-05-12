@@ -16,7 +16,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class notes_home extends AppCompatActivity {
-    private FirebaseAuth mAuth;
     private String user;
     private DrawerLayout drawerLayout;
 

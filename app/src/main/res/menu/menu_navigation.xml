@@ -3,14 +3,14 @@
 
     <item android:icon="@drawable/ic_baseline_note_add_24"
         android:id="@+id/add_note"
-        android:title="add note"/>
+        android:title="@string/add_note"/>
     <item android:icon="@drawable/list_note"
         android:id="@+id/list"
-        android:title="notes"
+        android:title="@string/notes"
         />
     <item android:icon="@drawable/ic_baseline_logout_24"
         android:id="@+id/logout"
-        android:title="logout"/>
+        android:title="@string/logout"/>
 
 
 

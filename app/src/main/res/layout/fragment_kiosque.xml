@@ -22,14 +22,14 @@
               android:layout_height="150dp"
               android:src="@drawable/logo_shell"
               android:id="@+id/SHELL"
-              android:contentDescription="TODO" />
+              android:contentDescription="@string/todo" />
 
           <ImageView
               android:id="@+id/AGIL"
               android:layout_width="150dp"
               android:layout_height="150dp"
               android:src="@drawable/logo_agil"
-              android:contentDescription="TODO" />
+              android:contentDescription="@string/todo" />
 
       </LinearLayout>
       <LinearLayout
@@ -42,14 +42,14 @@
               android:layout_height="150dp"
               android:src="@drawable/logo_total"
               android:id="@+id/TOTAL"
-              android:contentDescription="TODO" />
+              android:contentDescription="@string/todo" />
 
           <ImageView
               android:layout_width="150dp"
               android:layout_height="150dp"
               android:src="@drawable/logo_olaenergy"
               android:id="@+id/OLA"
-              android:contentDescription="TODO" />
+              android:contentDescription="@string/todo" />
 
       </LinearLayout>
 
@@ -59,7 +59,7 @@
               android:layout_height="150dp"
               android:src="@drawable/logo_staroil"
               android:layout_gravity="center"
-              android:contentDescription="TODO" />
+              android:contentDescription="@string/todo" />
 
 
 

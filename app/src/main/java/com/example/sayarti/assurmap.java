@@ -2,11 +2,13 @@ package com.example.sayarti;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -19,9 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,15 +33,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class assurmap extends Fragment {
 
@@ -50,10 +43,7 @@ public class assurmap extends Fragment {
     SupportMapFragment supportMapFragment;
     private final String marques;
     double currentlat = 0, currentlong = 0;
-    private ArrayList<posi> data= new ArrayList<>();
     private final ArrayList<posi> data2= new ArrayList<>();
-    DatabaseReference db;
-
 
 
     public assurmap(String marques) {
@@ -96,10 +86,9 @@ public class assurmap extends Fragment {
             });
 
 
-
-            data= (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
+            ArrayList<posi> data = (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
             if(data.size()>0){
-                for (int i=0;i<data.size();i++){
+                for (int i = 0; i< data.size(); i++){
                     if (data.get(i).getMarque().equals( marques )){
                         data2.add(data.get(i));
 
@@ -121,18 +110,20 @@ public class assurmap extends Fragment {
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                     googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                         @Override
-                        public View getInfoWindow(Marker marker) {
+                        public View getInfoWindow( Marker marker) {
                             return null;
                         }
 
+                        @SuppressLint("SetTextI18n")
                         @Override
-                        public View getInfoContents(Marker marker) {
+                        public View getInfoContents( Marker marker) {
                             LayoutInflater layoutInflater=LayoutInflater.from(getContext());
                             View v = getLayoutInflater().inflate(R.layout.snippet,null);
                             TextView t1 = v.findViewById(R.id.text1);
                             TextView t2 = v.findViewById(R.id.text22);
                             TextView t3 = v.findViewById(R.id.text3);
                             String info=marker.getTitle();
+                            assert info != null;
                             if(info.contains("/")){
                                 String name =info.substring(0,info.indexOf("/"));
                                 info =  info.substring(info.indexOf("/")+1);
@@ -143,7 +134,7 @@ public class assurmap extends Fragment {
                                 t3.setText(info);}
                             else
                             {
-                                t1.setText("My Location");
+                                t1.setText(R.string.my_location);
 
 
                             }

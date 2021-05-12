@@ -12,7 +12,6 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -24,15 +23,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link formularie_des_notes#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class formularie_des_notes extends Fragment  {
     String user ;
     EditText e1,e2;
-    DrawerLayout d1;
     Button btn;
     ImageView cal;
     private FirebaseAuth mAuth;
@@ -40,10 +34,6 @@ public class formularie_des_notes extends Fragment  {
 
     String date;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     public formularie_des_notes(String user) {
 
@@ -53,33 +43,8 @@ public class formularie_des_notes extends Fragment  {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment formularie_des_notes.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static formularie_des_notes newInstance(String param1, String param2) {
-        formularie_des_notes fragment = new formularie_des_notes();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            // TODO: Rename and change types of parameters
-            String mParam1 = getArguments().getString(ARG_PARAM1);
-            String mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

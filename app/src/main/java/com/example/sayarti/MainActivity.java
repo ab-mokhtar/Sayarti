@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,20 +31,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class MainActivity extends AppCompatActivity  {
     private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata.php";
     private DrawerLayout drawerLayout;
-    private Double latit,longit;
-    private String nameplace;
-    private ArrayList<posi> data= new ArrayList<>();
+    private final ArrayList<posi> data= new ArrayList<>();
 
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,9 +123,7 @@ public class MainActivity extends AppCompatActivity  {
 
             }else{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-                    }
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                 }
             }
         });
@@ -150,9 +145,7 @@ public class MainActivity extends AppCompatActivity  {
 
             }else{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-                    }
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                 }
             }
             });
@@ -173,9 +166,7 @@ public class MainActivity extends AppCompatActivity  {
 
             }else{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-                    }
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                 }
             }
         });
@@ -195,9 +186,7 @@ public class MainActivity extends AppCompatActivity  {
 
             }else{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-                    }
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                 }
             }
         });
@@ -217,9 +206,7 @@ public class MainActivity extends AppCompatActivity  {
 
             }else{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
-                    }
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
                 }
             }
         });
@@ -252,9 +239,6 @@ public class MainActivity extends AppCompatActivity  {
                             String name = object.getString("name");
                             String marque = object.getString("marque");
                             String type = object.getString("type");
-                            latit= lat;
-                            longit = longi;
-                            nameplace = name;
                             posi p =new posi(lat,longi,name,marque,tel,type);
                             data.add(p);
 
@@ -274,7 +258,7 @@ public class MainActivity extends AppCompatActivity  {
                 }, null);
 
 
-        Volley.newRequestQueue(Objects.requireNonNull(MainActivity.this)).add(stringRequest);
+        Volley.newRequestQueue(MainActivity.this).add(stringRequest);
     }
 
 
