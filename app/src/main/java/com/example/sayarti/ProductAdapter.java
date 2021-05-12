@@ -45,9 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.boite.setText(product.getBoite());
         holder.puissance_ch.setText(product.getPuissance_ch());
         holder.trans.setText(product.getTrans());
-        Glide.with(mCtx)
-                .load(product.getPath())
-                .into(holder.imageView);
+        Glide.with(mCtx).load(product.getPath()).into(holder.imageView);
     }
 
     @Override

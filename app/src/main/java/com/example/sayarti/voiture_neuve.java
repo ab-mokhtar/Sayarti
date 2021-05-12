@@ -1,5 +1,6 @@
 package com.example.sayarti;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -61,7 +62,6 @@ public class voiture_neuve extends Fragment {
 
         input = v.findViewById(R.id.inp);
         Button recher = v.findViewById(R.id.rech);
-        erreur = v.findViewById(R.id.err);
 
         //getting the recyclerview from xml
         recyclerView = v.findViewById(R.id.recylcerView);
@@ -84,9 +84,6 @@ public class voiture_neuve extends Fragment {
                     productList.clear();
                     postProducts();
                 }
-
-
-
             }
         });
         return v;
@@ -117,14 +114,14 @@ public class voiture_neuve extends Fragment {
 
                                 //adding the product to product list
                                 productList.add(new Product(
-                                        product.getString("post_title"),
-                                        product.getString("sale_price"),
-                                        product.getString("type_de_carburant"),
-                                        product.getString("engine"),
-                                        product.getString("puissance_ch_din"),
-                                        product.getString("boite"),
+                                        product.getString("post_title").toUpperCase(),
+                                        product.getString("sale_price").toUpperCase(),
+                                        product.getString("type_de_carburant").toUpperCase(),
+                                        product.getString("engine").toUpperCase(),
+                                        product.getString("puissance_ch_din").toUpperCase(),
+                                        product.getString("boite").toUpperCase(),
                                         product.getString("path"),
-                                        product.getString("trans")
+                                        product.getString("trans").toUpperCase()
 
                                 ));
                             }
@@ -182,14 +179,14 @@ public class voiture_neuve extends Fragment {
                             JSONObject product = array.getJSONObject(i);
                             //adding the product to product list
                             productList.add(new Product(
-                                    product.getString("post_title"),
-                                    product.getString("sale_price"),
-                                    product.getString("type_de_carburant"),
-                                    product.getString("body"),
-                                    product.getString("engine"),
-                                    product.getString("boite"),
+                                    product.getString("post_title").toUpperCase(),
+                                    product.getString("sale_price").toUpperCase(),
+                                    product.getString("type_de_carburant").toUpperCase(),
+                                    product.getString("engine").toUpperCase(),
+                                    product.getString("puissance_ch_din").toUpperCase(),
+                                    product.getString("boite").toUpperCase(),
                                     product.getString("path"),
-                                    product.getString("trans")
+                                    product.getString("trans").toUpperCase()
                             ));
                         }
                         //creating adapter object and setting it to recyclerview
