@@ -210,6 +210,27 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         });
+
+        CardView c7 = findViewById(R.id.card_view7);
+        c7.setOnClickListener(v -> {
+            LocationManager locationManager = (LocationManager) getApplication().getSystemService(Context.LOCATION_SERVICE);
+            if ((ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(MainActivity.this
+                    , Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED)) {
+                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Visite_technique()).addToBackStack("frg").commit();
+
+                }else {
+                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},100);
+                }
+            }
+        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
