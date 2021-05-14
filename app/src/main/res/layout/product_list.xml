@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
         <TextView
             android:id="@+id/nomVoiture"
             android:layout_width="wrap_content"
@@ -52,7 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp" />
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/yellow"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp" />
+                android:layout_marginStart="5dp"
+                android:textColor="@color/yellow"/>
             </LinearLayout>
 
             <LinearLayout
@@ -116,7 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp" />
+            android:layout_marginStart="5dp"
+            android:textColor="@color/yellow"/>
             </LinearLayout>
 
             <LinearLayout
@@ -145,7 +146,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp" />
+                android:layout_marginStart="5dp"
+                android:textColor="@color/yellow"/>
             </LinearLayout>
 
             <LinearLayout
@@ -174,47 +176,50 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp" />
+            android:layout_marginStart="5dp"
+            android:textColor="@color/yellow"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="25dp"
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/trans"/>
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/transmission"
+                    android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp"
-                    android:src="@drawable/trans"/>
+                    android:layout_marginStart="5dp" />
             <TextView
-
+                android:id="@+id/Trans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/transmission"
-                android:textColor="@color/black"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp" />
-        <TextView
-            android:id="@+id/Trans"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp" />
-            </LinearLayout>
-            <TextView
-                android:id="@+id/line"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/yellow"/>
+        </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="@string/line"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp" />
+                android:orientation="vertical"
+                android:layout_marginTop="10dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/black" />
+        </LinearLayout>
+
     </LinearLayout>
     </LinearLayout>
 </LinearLayout>
