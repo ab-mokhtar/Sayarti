@@ -5,11 +5,12 @@
     <string name="in">Voir toutes la liste</string>
     <string name="remember">Sauvgarder mes données</string>
     <string name="checkbox">checkbox</string>
-    <string name="mail">email</string>
+    <string name="mail">EMAIL</string>
     <string name="pass">password</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="facebook_app_id">1121743038251252</string>
-    <string name="fb_login_protocol_scheme">fb1121743038251252</string>
+    <string name="facebook_app_id">866028170666491</string>
+    <string name="fb_login_protocol_scheme">fb866028170666491</string>
+
 
     <string name="voiture_neuves">Voiture Neuves</string>
 
@@ -62,5 +63,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="line"><hr /></string>
     <string name="ville">Ville:</string>
+    <string name="user">NOM</string>
+    <string name="deco">Déconnexion</string>
+    <string name="profile">Profile</string>
 
 </resources>

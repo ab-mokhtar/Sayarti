@@ -8,9 +8,9 @@
         android:id="@+id/list"
         android:title="@string/notes"
         />
-    <item android:icon="@drawable/ic_baseline_logout_24"
+    <item android:icon="@drawable/ic_user"
         android:id="@+id/logout"
-        android:title="@string/logout"/>
+        android:title="@string/profile"/>
 
 
 
