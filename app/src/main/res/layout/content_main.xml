@@ -6,6 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/route_background">
+    <include
+        layout="@layout/toolbar"/>
+
 
 
     <FrameLayout
@@ -13,8 +16,6 @@
         android:layout_height="match_parent"
         android:id="@+id/container_frag">
 
-        <include
-            layout="@layout/toolbar"/>
 
 
 
@@ -30,7 +31,7 @@
                         android:layout_width="318dp"
                         android:layout_height="350dp"
                         android:layout_gravity="top|center"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="10dp"
                         android:columnCount="2"
                         android:rowCount="4">
 
