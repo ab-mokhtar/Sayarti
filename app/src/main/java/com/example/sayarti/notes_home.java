@@ -14,10 +14,13 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 public class notes_home extends AppCompatActivity {
-    private String user;
+    private String user, userName,userEmail;
     private DrawerLayout drawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,12 @@ public class notes_home extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         user = FirebaseAuth.getInstance().getUid();
+
+        userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+
+
         getSupportFragmentManager().beginTransaction().replace(R.id.frag, new formularie_des_notes(user)).addToBackStack("frg").commit();
         ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
@@ -55,8 +64,10 @@ public class notes_home extends AppCompatActivity {
                             getSupportFragmentManager().beginTransaction().replace(R.id.contt,new voiture_neuve()).addToBackStack(null).commit();
                             break;
                         case R.id.entretien :
-                        case R.id.borne_charge :
                             getSupportFragmentManager().beginTransaction().replace(R.id.contt,new entretien()).addToBackStack(null).commit();
+                            break;
+                        case R.id.borne_charge :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contt,new charge_bornes()).addToBackStack(null).commit();
                             break;
                         case R.id.kiosque :
                             getSupportFragmentManager().beginTransaction().replace(R.id.contt,new Kiosque()).addToBackStack(null).commit();
@@ -86,10 +97,8 @@ public class notes_home extends AppCompatActivity {
                     selectedfragment = new liste_notes();
                     break;
                 case R.id.logout:
-                    selectedfragment = new logout();
+                    selectedfragment = new logout(userName,userEmail);
                     break;
-
-
 
             }
             assert selectedfragment != null;
@@ -98,4 +107,4 @@ public class notes_home extends AppCompatActivity {
         }
 
     };
-    }
+}

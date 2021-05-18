@@ -9,18 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 
 public class logout extends Fragment {
     private FirebaseAuth mAuth;
+    private String userName, userEmail;
+    ImageView photo;
 
 
-    public logout() {
+    public logout(String userName, String userEmail) {
         // Required empty public constructor
+        this.userName = userName;
+        this.userEmail = userEmail;
     }
 
 
@@ -31,6 +39,15 @@ public class logout extends Fragment {
         // Inflate the layout for this fragment
         mAuth = FirebaseAuth.getInstance();
         View v = inflater.inflate(R.layout.fragment_logout, container, false);
+
+        TextView mail = v.findViewById(R.id.mail);
+        TextView nom = v.findViewById(R.id.username);
+        photo = v.findViewById(R.id.profilimg);
+        nom.setText(userName);
+        mail.setText(userEmail);
+        FirebaseUser u = mAuth.getCurrentUser();
+        image(u);
+
         //Button btn = v.findViewById(R.id.logoutbtn);
         LinearLayout log = v.findViewById(R.id.logoutbtn);
         log.setOnClickListener(v1 -> {
@@ -40,5 +57,21 @@ public class logout extends Fragment {
             startActivity(intent);
         });
         return v;
+    }
+
+    private void image(FirebaseUser user)
+    {
+        if(user != null)
+        {
+            if(user.getPhotoUrl() != null)
+            {
+                String photourl = user.getPhotoUrl() + "?type=large";
+                Picasso.get().load(photourl).into(photo);
+            }
+            else
+            {
+                photo.setImageResource(R.drawable.ic_user);
+            }
+        }
     }
 }
