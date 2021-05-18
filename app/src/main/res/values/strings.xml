@@ -66,5 +66,6 @@
     <string name="user">NOM</string>
     <string name="deco">Déconnexion</string>
     <string name="profile">Profile</string>
+    <string name="dateAndTime">Date et temps:</string>
 
 </resources>
