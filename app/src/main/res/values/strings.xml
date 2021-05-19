@@ -12,20 +12,20 @@
     <string name="fb_login_protocol_scheme">fb866028170666491</string>
 
 
-    <string name="voiture_neuves">Voiture Neuves</string>
+    <string name="voiture_neuves">Voitures Neuves</string>
 
-    <string name="station_de_kiosque">Station de Kiosque</string>
+    <string name="station_de_kiosque">Kiosques à essence</string>
 
-    <string name="location_auto">A.T.T.T</string>
+
 
     <string name="my_location">My Location</string>
     <string name="se_connecter">Se connecter</string>
     <string name="cr_er_un_compte">Créer un compte</string>
-    <string name="se_voitures_neuves">Se Voitures neuves</string>
+    <string name="se_voitures_neuves">Voitures neuves</string>
 
     <string name="bornes_de_recharge">Bornes de recharge</string>
     <string name="assurance_auto">Assurance Auto</string>
-    <string name="entretien">Entretien</string>
+    <string name="entretien">Entretien Autos</string>
 
     <string name="profil">Profil</string>
 
@@ -67,5 +67,7 @@
     <string name="deco">Déconnexion</string>
     <string name="profile">Profile</string>
     <string name="dateAndTime">Date et temps:</string>
+    <string name="dt">dt</string>
+    <string name="visite_technique">Visite technique</string>
 
 </resources>

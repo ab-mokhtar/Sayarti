@@ -50,7 +50,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" DT"
+                    android:text="@string/dt"
                     android:textColor="@color/black"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"

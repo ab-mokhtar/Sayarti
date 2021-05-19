@@ -21,7 +21,8 @@ import com.squareup.picasso.Picasso;
 
 public class logout extends Fragment {
     private FirebaseAuth mAuth;
-    private String userName, userEmail;
+    private final String userName;
+    private final String userEmail;
     ImageView photo;
 
 

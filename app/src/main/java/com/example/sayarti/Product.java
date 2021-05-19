@@ -57,7 +57,7 @@ public class Product {
         if (x>0){
         int y = ch.indexOf("wp-content");
         String ch1 = "https://www.sayarti.tn//";
-        String res =ch1 + ch.substring(y,ch.length());
+        String res =ch1 + ch.substring(y);
         this.path = res;}
         else{
             this.path=path;

@@ -19,12 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.internal.WebDialog;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -45,8 +42,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Objects;
 
-import static android.content.ContentValues.TAG;
-
 public class Authenfication extends Fragment {
         private FirebaseAuth mAuth;
         private LoginButton mFacebookLoginButton;
@@ -54,7 +49,7 @@ public class Authenfication extends Fragment {
         private CallbackManager mFacebookCallbackManager; // for facebook log in
 
         private final int GOOGLE_SIGN_IN_REQUEST_CODE = 0;
-        private TextView mail,username;
+    private TextView username;
 
 
         private EditText edittxtEmail, edittxtPwd;
@@ -90,7 +85,7 @@ public class Authenfication extends Fragment {
             //facebook auth
             mFacebookLoginButton = v.findViewById(R.id.fb_btn);
             initFBFacebookLogIn();
-            mail = v.findViewById(R.id.mail);
+            TextView mail = v.findViewById(R.id.mail);
 
             //GOOGLE AUTH
             SignInButton googlesignInButton = v.findViewById(R.id.google_btn);

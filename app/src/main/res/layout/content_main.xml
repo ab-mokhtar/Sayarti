@@ -261,7 +261,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:text="@string/location_auto" />
+                                    android:text="@string/visite_technique" />
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
@@ -270,7 +270,9 @@
                     <GridLayout
                         android:layout_width="318dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center">
+                        android:layout_gravity="center"
+
+                        >
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_view4"
@@ -278,14 +280,17 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="fill"
                             android:layout_margin="8dp"
-                            app:cardBackgroundColor="@color/trans"
+                            app:cardBackgroundColor="@color/white"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp">
+                            app:cardElevation="8dp"
+
+                            >
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/afriqueassistance"
+                                android:layout_marginBottom="10dp"
                                 android:contentDescription="@string/todo" />
                         </androidx.cardview.widget.CardView>
 
