@@ -5,6 +5,16 @@ public class Notes {
     String note;
     String date;
 
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
+    String uId;
+
     public Notes() {
     }
 

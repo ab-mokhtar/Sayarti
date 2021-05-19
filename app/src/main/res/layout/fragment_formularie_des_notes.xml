@@ -68,54 +68,31 @@
                     android:inputType="text" />
             </LinearLayout>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="300dp"
                 android:padding="15dp">
-                <TextView
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/dateAndTime"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"/>
-               <ImageView
-                   android:id="@+id/calen"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:src="@drawable/ic_calendar"
-                   android:contentDescription="@string/todo" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="380dp"
-                android:padding="15dp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/date_time"
-                    android:enabled="false"
-                    android:padding="12dp"
-                    android:background="@drawable/custom_input"
-                    android:autofillHints=""
-                    android:inputType="text" />
+                    android:text="@string/ajouter_une_note"
+                    android:id="@+id/envfor"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="470dp"
+                android:layout_marginTop="360dp"
                 android:padding="15dp">
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/ajouter_une_note"
-                    android:id="@+id/envfor"/>
+                    android:text="@string/ajouter_evnt"
+                    android:id="@+id/event"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

@@ -69,5 +69,6 @@
     <string name="dateAndTime">Date et temps:</string>
     <string name="dt">dt</string>
     <string name="visite_technique">Visite technique</string>
+    <string name="ajouter_evnt">Ajouter un événement</string>
 
 </resources>
