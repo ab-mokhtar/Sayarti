@@ -139,7 +139,7 @@ public class liste_notes extends Fragment {
         c.setOnClickListener(v -> {
             if(adapter.getCount()==0)
             {
-                Snackbar.make(Objects.requireNonNull(getView()), "Rien à supprimer !", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(Objects.requireNonNull(getView()), "Rien à supprimer !", Snackbar.LENGTH_SHORT).show();
 
             }
             else
@@ -191,8 +191,7 @@ public class liste_notes extends Fragment {
                         break;
                     case 1:
                         //delete
-                            String name = list.get(position).get("note");
-                            DeleteItem(name);
+                            DeleteItem(Arraykey.get(position));
                             adapter.notifyDataSetChanged();
 
                         break;
@@ -209,7 +208,7 @@ public class liste_notes extends Fragment {
 
     }
 
-    private void DeleteItem(String name)
+    private void DeleteItem(String childkey)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
         builder.setTitle("Supprimer Item");
@@ -217,18 +216,15 @@ public class liste_notes extends Fragment {
         builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Query query = myRef.orderByChild("note").equalTo(name);
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                myRef.child(childkey).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                            snapshot1.getRef().removeValue();
-                        }
-                        Snackbar.make(Objects.requireNonNull(getView()), "La note est supprimer", Snackbar.LENGTH_LONG).show();
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        myRef.child(childkey).removeValue();
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
@@ -238,7 +234,7 @@ public class liste_notes extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_SHORT).show();
             }
         });
         AlertDialog alertDialog = builder.create();
@@ -260,7 +256,7 @@ public class liste_notes extends Fragment {
                         for(DataSnapshot snapshot1 : snapshot.getChildren()){
                             snapshot1.getRef().removeValue();
                         }
-                        Snackbar.make(Objects.requireNonNull(getView()), "Les notes ont supprimé", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(Objects.requireNonNull(getView()), "Les notes ont supprimé", Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -296,7 +292,6 @@ public class liste_notes extends Fragment {
 
                 EditText upMat = view.findViewById(R.id.edit_mat);
                 EditText upNote= view.findViewById(R.id.edit_note);
-            //Snackbar.make(Objects.requireNonNull(getView()),upMat.getText().toString()+" "+ upNote.getText().toString(), Snackbar.LENGTH_LONG).show();
 
                 HashMap hashMap = new HashMap();
                 hashMap.put("note",upNote.getText().toString());
@@ -305,7 +300,7 @@ public class liste_notes extends Fragment {
                 myRef.child(childKey).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
                     @Override
                     public void onSuccess(Object o) {
-                        Snackbar.make(Objects.requireNonNull(getView()), "La note est bien modifier", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(Objects.requireNonNull(getView()), "La note a été modifiée", Snackbar.LENGTH_SHORT).show();
                     }
                 });
 
