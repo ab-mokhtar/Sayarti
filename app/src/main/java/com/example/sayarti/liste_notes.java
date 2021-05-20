@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -24,6 +25,7 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +49,8 @@ public class liste_notes extends Fragment {
 
     DatabaseReference myRef;
 
-
+    //public String key ;
+    public ArrayList<String> Arraykey = new ArrayList();
 
 
     public liste_notes() {
@@ -61,6 +64,9 @@ public class liste_notes extends Fragment {
         // Inflate the layout for this fragment
         View RootView =inflater.inflate(R.layout.fragment_liste_notes, container, false);
         String user = FirebaseAuth.getInstance().getUid();
+
+
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://sayarti-122d7-default-rtdb.firebaseio.com/");
         myRef = database.getReference(Objects.requireNonNull(user));
@@ -83,6 +89,7 @@ public class liste_notes extends Fragment {
         });
 
 
+
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -91,10 +98,11 @@ public class liste_notes extends Fragment {
                 String note = Objects.requireNonNull(snapshot.child("note").getValue()).toString();
                 String date = Objects.requireNonNull(snapshot.child("date").getValue()).toString();
 
-                Notes notes1 = new Notes();
-                notes1.setuId(snapshot.getKey());
+                //child key
+                Arraykey.add(snapshot.getKey());
 
-                Log.put("Uid",snapshot.getKey());
+
+
                 Log.put("matricule", matricule);
                 Log.put("note", note);
                 Log.put("date", date);
@@ -146,11 +154,9 @@ public class liste_notes extends Fragment {
             @Override
             public void create(SwipeMenu menu) {
                 // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(
-                        getApplicationContext());
+                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
                 // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0, 200,
-                        0)));
+                openItem.setBackground(new ColorDrawable(Color.rgb(0, 200, 0)));
                 // set item width
                 openItem.setWidth(170);
 
@@ -159,11 +165,9 @@ public class liste_notes extends Fragment {
                 menu.addMenuItem(openItem);
 
                 // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(
-                        getApplicationContext());
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(255,
-                        0, 0)));
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(255, 0, 0)));
                 // set item width
                 deleteItem.setWidth(170);
                 // set a icon
@@ -180,8 +184,9 @@ public class liste_notes extends Fragment {
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        // open
-                        Snackbar.make(Objects.requireNonNull(getView()), "Update", Snackbar.LENGTH_LONG).show();
+                        //update
+                        UpdateNote(Arraykey.get(position));
+                        adapter.notifyDataSetChanged();
 
                         break;
                     case 1:
@@ -190,11 +195,6 @@ public class liste_notes extends Fragment {
                             DeleteItem(name);
                             adapter.notifyDataSetChanged();
 
-
-                        //Snackbar.make(Objects.requireNonNull(getView()), "La note est supprimer", Snackbar.LENGTH_LONG).show();
-                        //adapter.notifyDataSetChanged();
-
-                        //Snackbar.make(Objects.requireNonNull(getView()), "Delete", Snackbar.LENGTH_LONG).show();
                         break;
                 }
                 // false : close the menu; true : not close the menu
@@ -274,10 +274,52 @@ public class liste_notes extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_SHORT).show();
             }
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+
+    private void UpdateNote(String childKey)
+    {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.update_dialog,null);
+        builder.setView(view).setTitle("Modifier la note").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+                EditText upMat = view.findViewById(R.id.edit_mat);
+                EditText upNote= view.findViewById(R.id.edit_note);
+            //Snackbar.make(Objects.requireNonNull(getView()),upMat.getText().toString()+" "+ upNote.getText().toString(), Snackbar.LENGTH_LONG).show();
+
+                HashMap hashMap = new HashMap();
+                hashMap.put("note",upNote.getText().toString());
+                hashMap.put("matricule",upMat.getText().toString());
+
+                myRef.child(childKey).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        Snackbar.make(Objects.requireNonNull(getView()), "La note est bien modifier", Snackbar.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }

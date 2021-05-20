@@ -70,5 +70,7 @@
     <string name="dt">dt</string>
     <string name="visite_technique">Visite technique</string>
     <string name="ajouter_evnt">Ajouter un événement</string>
+    <string name="update_mat">Entrer la matricule</string>
+    <string name="update_note">Entrer la note</string>
 
 </resources>
