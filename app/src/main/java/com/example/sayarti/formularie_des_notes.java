@@ -89,7 +89,7 @@ public class formularie_des_notes extends Fragment  {
         btn.setOnClickListener(v1 -> {
 
             if(e1.length()==0|| e2.length()==0 ) {
-                Snackbar.make(Objects.requireNonNull(getView()), "vérifier les champs remplis", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(Objects.requireNonNull(getView()), "vérifier les champs remplis", Snackbar.LENGTH_SHORT).show();
             }
             else{
                 note.setMatricule(e1.getText().toString().trim());
@@ -101,7 +101,7 @@ public class formularie_des_notes extends Fragment  {
                 note.setDate(date);
                 note.setuId(FirebaseAuth.getInstance().getUid());
                 db.push().setValue(note);
-                Snackbar.make(Objects.requireNonNull(getView()), "LES DONNEES SONT BIEN AJOUTEES", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(Objects.requireNonNull(getView()), "LES DONNEES SONT BIEN AJOUTEES", Snackbar.LENGTH_SHORT).show();
             }
         });
 

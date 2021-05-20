@@ -3,6 +3,7 @@ package com.example.sayarti;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -101,13 +102,10 @@ public class liste_notes extends Fragment {
                 //child key
                 Arraykey.add(snapshot.getKey());
 
-
-
                 Log.put("matricule", matricule);
                 Log.put("note", note);
                 Log.put("date", date);
                 list.add(Log);
-
 
                 adapter.notifyDataSetChanged();
 
@@ -186,21 +184,21 @@ public class liste_notes extends Fragment {
                     case 0:
                         //update
                         UpdateNote(Arraykey.get(position));
-                        adapter.notifyDataSetChanged();
 
                         break;
                     case 1:
                         //delete
                             DeleteItem(Arraykey.get(position));
-                            adapter.notifyDataSetChanged();
 
                         break;
                 }
                 // false : close the menu; true : not close the menu
+                adapter.notifyDataSetChanged();
                 return false;
             }
         });
 
+        adapter.notifyDataSetChanged();
 
         // Inflate the layout for this fragment
         return RootView;
