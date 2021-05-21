@@ -183,7 +183,10 @@ public class liste_notes extends Fragment {
                 switch (index) {
                     case 0:
                         //update
-                        UpdateNote(Arraykey.get(position));
+                        String mat = list.get(position).get("matricule");
+                        //Snackbar.make(Objects.requireNonNull(getView()), mat, Snackbar.LENGTH_SHORT).show();
+
+                        UpdateNote(Arraykey.get(position),mat);
 
                         break;
                     case 1:
@@ -276,7 +279,7 @@ public class liste_notes extends Fragment {
     }
 
 
-    private void UpdateNote(String childKey)
+    private void UpdateNote(String childKey, String mat)
     {
 
 
@@ -284,12 +287,16 @@ public class liste_notes extends Fragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.update_dialog,null);
         builder.setView(view).setTitle("Modifier la note").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            EditText upMat = view.findViewById(R.id.edit_mat);
+            EditText upNote= view.findViewById(R.id.edit_note);
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
 
-                EditText upMat = view.findViewById(R.id.edit_mat);
-                EditText upNote= view.findViewById(R.id.edit_note);
+
+
+                upMat.setText(mat);
 
                 HashMap hashMap = new HashMap();
                 hashMap.put("note",upNote.getText().toString());
