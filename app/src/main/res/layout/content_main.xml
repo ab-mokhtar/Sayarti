@@ -11,310 +11,322 @@
 
 
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/container_frag">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo"
-            android:contentDescription="@string/todo" />
+
+
+
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+            <LinearLayout
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginVertical="135dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-                    <GridLayout
-                        android:layout_width="318dp"
-                        android:layout_height="350dp"
-                        android:layout_gravity="top|center"
-                        android:layout_marginTop="10dp"
-                        android:columnCount="2"
-                        android:rowCount="4">
+                android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_height="100dp"
+                    card_view:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="@color/black">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/logo"
+                        android:contentDescription="@string/todo" />
+                </androidx.cardview.widget.CardView>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view1"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_row="0"
-                            android:layout_rowWeight="1"
-                            android:layout_column="0"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
-                            android:layout_margin="8dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="@color/trans"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp"
-                            tools:targetApi="lollipop">
+                <GridLayout
+                    android:layout_width="318dp"
+                    android:layout_height="350dp"
+                    android:layout_gravity="top|center"
+                    android:layout_marginTop="10dp"
+                    android:columnCount="2"
+                    android:rowCount="4">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view1"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/trans"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        tools:targetApi="lollipop">
 
-                                <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/car" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="@string/voiture_neuves" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view0"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_row="0"
-                            android:layout_rowWeight="1"
-                            android:layout_column="1"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
-                            android:layout_margin="8dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="@color/trans"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp"
-                            tools:targetApi="lollipop">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="56dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/sos" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="@string/entretien" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view2"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_row="1"
-                            android:layout_rowWeight="1"
-                            android:layout_column="1"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
-                            android:layout_margin="8dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="@color/trans"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp"
-                            tools:targetApi="lollipop">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/elec_station" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="@string/bornes_de_recharge" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view3"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_row="1"
-                            android:layout_rowWeight="1"
-                            android:layout_column="0"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
-                            android:layout_margin="8dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="@color/trans"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp"
-                            tools:targetApi="lollipop">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/gaz_station" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="@string/station_de_kiosque" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view5"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_row="2"
-                            android:layout_rowWeight="1"
-                            android:layout_column="0"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
-                            android:layout_margin="8dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="@color/trans"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp"
-                            tools:targetApi="lollipop">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/key" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="@string/assurance_auto" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view7"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_row="2"
-                            android:layout_rowWeight="1"
-                            android:layout_column="1"
-                            android:layout_columnWeight="1"
-                            android:layout_gravity="fill"
-                            android:layout_margin="8dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            app:cardBackgroundColor="@color/trans"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp"
-                            tools:targetApi="lollipop">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="100dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:contentDescription="@string/todo"
-                                    android:src="@drawable/attt" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:text="@string/visite_technique" />
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-                    </GridLayout>
-
-                    <GridLayout
-                        android:layout_width="318dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-
-                        >
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_view4"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="fill"
-                            android:layout_margin="8dp"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="8dp"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
 
-                            >
                             <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="100dp"
+                                android:layout_height="50dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/afriqueassistance"
-                                android:layout_marginBottom="10dp"
-                                android:contentDescription="@string/todo" />
-                        </androidx.cardview.widget.CardView>
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/car" />
 
-                    </GridLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"/>
-                </LinearLayout></ScrollView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/voiture_neuves" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
-                <com.google.android.gms.ads.AdView
-                    xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adView"
-                    android:layout_width="match_parent"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view0"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="1"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/trans"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        tools:targetApi="lollipop">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="56dp"
+                                android:layout_gravity="center_horizontal"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/sos" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/entretien" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view2"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_row="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="1"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/trans"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        tools:targetApi="lollipop">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/elec_station" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/bornes_de_recharge" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view3"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_row="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/trans"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        tools:targetApi="lollipop">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/gaz_station" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/station_de_kiosque" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view5"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_row="2"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/trans"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        tools:targetApi="lollipop">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/key" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/assurance_auto" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view7"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_row="2"
+                        android:layout_rowWeight="1"
+                        android:layout_column="1"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/trans"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        tools:targetApi="lollipop">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:contentDescription="@string/todo"
+                                android:src="@drawable/attt" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/visite_technique" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </GridLayout>
+
+                <GridLayout
+                    android:layout_width="318dp"
                     android:layout_height="wrap_content"
-                    ads:adSize="BANNER"
-                    android:layout_gravity="bottom"
-                    ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-                </com.google.android.gms.ads.AdView>
+                    android:layout_gravity="center"
 
-            </FrameLayout>
+                    >
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="fill"
+                        android:layout_margin="8dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+
+                        >
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/afriqueassistance"
+                            android:layout_marginBottom="10dp"
+                            android:contentDescription="@string/todo" />
+                    </androidx.cardview.widget.CardView>
+
+                </GridLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"/>
+            </LinearLayout>
+        </ScrollView>
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            android:layout_gravity="bottom"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+
+    </FrameLayout>
 
 
-        </LinearLayout>
-
+</LinearLayout>
