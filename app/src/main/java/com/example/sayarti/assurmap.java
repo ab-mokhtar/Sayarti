@@ -105,7 +105,58 @@ public class assurmap extends Fragment {
                     String info = name+"/"+tel+"/"+marque;
                     markerOptions.title(info);
                     // markerOptions.title(nameOfPlace);
-                    markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.marker_assur));
+                    switch (marques)
+                    {
+                        case "bh":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_bh));
+                            break;
+                        case "comar":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_comar));
+                            break;
+                        case "ami":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_ami));
+                            break;
+                        case "biat":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_biat));
+                            break;
+                        case  "lloyd":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_lloyd));
+                            break;
+                        case  "gat":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_gat));
+                            break;
+                        case "star":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.star));
+                            break;
+                        case"hayet":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_hayet));
+                            break;
+                        case "carte":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_carte));
+                            break;
+                        case "astree":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_astree));
+                            break;
+                        case "maghrebia":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_maghrebia));
+                            break;
+                        case "ctama":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_ctama));
+                            break;
+                        case "mae":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_mae));
+                            break;
+                        case "attakafulia":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_attakafulia));
+                            break;
+                        case "zitouna":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_zitouna));
+                            break;
+                        case "attijari":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_attijeri));
+                            break;
+                    }
+
                     googleMap.addMarker(markerOptions);
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                     googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {

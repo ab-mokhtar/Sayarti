@@ -109,10 +109,6 @@ public class formularie_des_notes extends Fragment  {
         return v;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mAuth.signOut();
-        LoginManager.getInstance().logOut();
-    }
+  
+
 }

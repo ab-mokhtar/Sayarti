@@ -113,7 +113,28 @@ public class map_entretien extends Fragment {
                 markerOptions.title(info);
 
                 // markerOptions.title(nameOfPlace);
-                markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.marker_entretien));
+                switch (marques)
+                {
+                    case "midas":
+                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_midas));
+                        break;
+                    case "fixngo":
+                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_fixngo));
+                        break;
+                    case "bosh":
+                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_bosch));
+                        break;
+                    case "eurorepar":
+                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_eurorepar));
+                        break;
+                    case  "speedy":
+                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_speedy));
+                        break;
+                    case  "otop":
+                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_otop));
+                        break;
+                   }
+
                 googleMap.addMarker(markerOptions);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
 
