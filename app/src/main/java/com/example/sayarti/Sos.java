@@ -95,6 +95,7 @@ public class Sos extends Fragment {
         getCurretLocation();
         i2.setEnabled(false);
 
+
         //declaration = new Declaration();
         btn.setOnClickListener(v12 -> {
             String mat = e2.getText().toString().trim();
@@ -105,7 +106,7 @@ public class Sos extends Fragment {
             String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 
             if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
-                Snackbar.make(Objects.requireNonNull(getView()), "vérifier que les champs rempli ou vérifier votre correction internet", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(Objects.requireNonNull(getView()), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
             }
             else
             {
@@ -114,7 +115,7 @@ public class Sos extends Fragment {
                         response -> {
 
                             if(response.equalsIgnoreCase("Data Inserted")){
-                                Snackbar.make(Objects.requireNonNull(getView()), "Data Inserted", Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(Objects.requireNonNull(getView()), "La déclaration était bien envoyée"+"\n"+"Vous pouvez passer l'appel maintenant", Snackbar.LENGTH_SHORT).show();
 
                             }
                             else{
