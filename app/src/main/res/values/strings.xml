@@ -2,7 +2,7 @@
     <string name="app_name">Sayarti</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="input">Recherche par : marque, modèle, catégorie …</string>
-    <string name="in">Voir toutes la liste</string>
+    <string name="in">Voir toute la liste</string>
     <string name="remember">Sauvgarder mes données</string>
     <string name="checkbox">checkbox</string>
     <string name="mail">EMAIL</string>

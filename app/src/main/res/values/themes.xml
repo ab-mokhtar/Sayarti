@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/pathway</item>
+        <item name="fontFamily">@font/pathway</item> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
     </style>
 
     <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -25,10 +27,9 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Customize your theme here. Publica Sans Round Light -->
+        <item name="android:fontFamily">@font/pathway</item>
+        <item name="fontFamily">@font/pathway</item> <!-- target android sdk versions < 26 and > 14 if theme other than AppCompat -->
     </style>
-    <style name="publica" >
-        <item name="android:fontFamily">Publica Sans Round Light
-        </item>
-    </style>
+
 </resources>

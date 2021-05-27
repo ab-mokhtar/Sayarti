@@ -88,7 +88,7 @@ public class liste_notes extends Fragment {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-               HashMap<String,String>Log= new HashMap<>();
+                HashMap<String,String>Log= new HashMap<>();
                 String matricule = Objects.requireNonNull(snapshot.child("matricule").getValue()).toString();
                 String note = Objects.requireNonNull(snapshot.child("note").getValue()).toString();
                 String date = Objects.requireNonNull(snapshot.child("date").getValue()).toString();
@@ -96,10 +96,13 @@ public class liste_notes extends Fragment {
                 //child key
                 Arraykey.add(snapshot.getKey());
 
+
+
                 Log.put("matricule", matricule);
                 Log.put("note", note);
                 Log.put("date", date);
                 list.add(Log);
+
 
                 adapter.notifyDataSetChanged();
 
@@ -177,25 +180,22 @@ public class liste_notes extends Fragment {
                 switch (index) {
                     case 0:
                         //update
-                        String mat = list.get(position).get("matricule");
-                        //Snackbar.make(Objects.requireNonNull(getView()), mat, Snackbar.LENGTH_SHORT).show();
-
-                        UpdateNote(Arraykey.get(position),mat);
+                        UpdateNote(Arraykey.get(position));
+                        adapter.notifyDataSetChanged();
 
                         break;
                     case 1:
                         //delete
-                            DeleteItem(Arraykey.get(position));
+                        DeleteItem(Arraykey.get(position));
+                        adapter.notifyDataSetChanged();
 
                         break;
                 }
                 // false : close the menu; true : not close the menu
-                adapter.notifyDataSetChanged();
                 return false;
             }
         });
 
-        adapter.notifyDataSetChanged();
 
         // Inflate the layout for this fragment
         return RootView;
@@ -273,7 +273,7 @@ public class liste_notes extends Fragment {
     }
 
 
-    private void UpdateNote(String childKey, String mat)
+    private void UpdateNote(String childKey)
     {
 
 
@@ -281,16 +281,12 @@ public class liste_notes extends Fragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.update_dialog,null);
         builder.setView(view).setTitle("Modifier la note").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-            EditText upMat = view.findViewById(R.id.edit_mat);
-            EditText upNote= view.findViewById(R.id.edit_note);
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
 
-
-
-                upMat.setText(mat);
+                EditText upMat = view.findViewById(R.id.edit_mat);
+                EditText upNote= view.findViewById(R.id.edit_note);
 
                 HashMap hashMap = new HashMap();
                 hashMap.put("note",upNote.getText().toString());

@@ -90,8 +90,9 @@ public class MainActivity extends AppCompatActivity  {
                             getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new voiture_neuve()).addToBackStack(null).commit();
                             break;
                         case R.id.entretien :
-                        case R.id.borne_charge :
                             getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new entretien()).addToBackStack(null).commit();
+                        case R.id.borne_charge :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new charge_bornes()).addToBackStack(null).commit();
                             break;
                         case R.id.kiosque :
                             getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Kiosque()).addToBackStack(null).commit();
