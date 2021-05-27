@@ -41,6 +41,11 @@
 
             android:actionLayout="@layout/toolbar"
             android:title="@string/assurance_auto"/>
+        <item
+            android:id="@+id/Visite_technique"
+
+            android:actionLayout="@layout/toolbar"
+            android:title="@string/visite_technique"/>
     </group>
 
 
