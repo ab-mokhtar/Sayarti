@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity  {
                         case R.id.assur :
                             getSupportFragmentManager().beginTransaction().replace(R.id.container_frag,new Assurance()).addToBackStack(null).commit();
                             break;
+                        case R.id.visite :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.container_frag, new Visite_technique()).addToBackStack("frg").commit();
+                            break;
                     }
                     drawerLayout.closeDrawer(GravityCompat.START);
                     return true;

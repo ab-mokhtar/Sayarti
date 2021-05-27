@@ -79,6 +79,9 @@ public class notes_home extends AppCompatActivity {
                         case R.id.profil :
                             startActivity(new Intent(getApplicationContext(), notes_home.class));
                             break;
+                        case R.id.Visite_technique :
+                            getSupportFragmentManager().beginTransaction().replace(R.id.contt, new Visite_technique()).addToBackStack("frg").commit();
+                            break;
                     }
                     drawerLayout.closeDrawer(GravityCompat.START);
                     return true;
