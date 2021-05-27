@@ -32,6 +32,7 @@
     </LinearLayout>
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:padding="20dp"
         android:id="@+id/ListeView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
