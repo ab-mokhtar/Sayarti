@@ -4,62 +4,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="5dp">
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
         <ImageView
             android:layout_marginTop="10dp"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:adjustViewBounds="true"
-            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
             android:layout_height="200dp"
             android:contentDescription="@string/todo" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|end"
+        android:background="@color/yellow">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/prix"
+            android:textColor="@color/black" />
+
+        <TextView
+        android:id="@+id/prix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dt"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp" /> </LinearLayout>
+
+</FrameLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
         <TextView
             android:id="@+id/nomVoiture"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:textColor="#000000"
-            android:textSize="30dp"
+            style="@style/publica"
+            android:textSize="20dp"
             android:textStyle="bold"
             android:layout_marginStart="5dp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="end">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/prix"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp" />
 
-                <TextView
-                    android:id="@+id/prix"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@color/yellow"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dt"
-                    android:textColor="@color/black"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="5dp" />
-            </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -69,7 +78,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="5dp"
-                    android:src="@drawable/ic_tc"/>
+                    android:src="@drawable/carburant"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,7 +98,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageView
@@ -118,7 +127,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageView
@@ -148,7 +157,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageView
@@ -178,7 +187,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                     <ImageView

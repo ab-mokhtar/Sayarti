@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="5dp">
-
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@mipmap/route_background"
+    android:orientation="vertical">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
-        android:layout_marginVertical="40dp"/>
+        android:background="@color/black"
+        />
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+       >
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingHorizontal="5dp"
-        android:background="@drawable/border">
+        android:background="@color/trans"
+       >
 
             <ImageView
                 android:layout_width="120dp"
@@ -92,6 +99,7 @@
         android:orientation="horizontal"
         android:layout_marginVertical="50dp"
         android:layout_gravity="center"
+        android:background="@color/yellow"
         android:id="@+id/logoutbtn">
         <ImageView
             android:layout_width="50dp"
@@ -109,4 +117,4 @@
 
 </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

@@ -41,7 +41,8 @@
                 android:id="@+id/carburant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -68,7 +69,8 @@
                 android:id="@+id/fiscale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -95,7 +97,8 @@
                 android:id="@+id/boite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -121,7 +124,8 @@
                 android:id="@+id/transmission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
