@@ -96,7 +96,7 @@ public class map_entretien extends Fragment {
             ArrayList<posi> data = (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
             if(data.size()>0){
             for (int i = 0; i< data.size(); i++){
-                if (data.get(i).getMarque().equals( marques )){
+                if (data.get(i).getMarque().toLowerCase().equals( marques )){
                     data2.add(data.get(i));
 
                    }

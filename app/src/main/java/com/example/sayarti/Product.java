@@ -32,6 +32,12 @@ public class Product {
     }
 
     public String getPrix() {
+        int pos=prix.length();
+        String ch1=prix.substring(pos-3,pos);
+        ch1=" "+ch1;
+        String ch2=prix.substring(0,pos-3);
+        prix=ch2+ch1;
+
         return prix;
     }
 

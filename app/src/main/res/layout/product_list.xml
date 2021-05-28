@@ -28,7 +28,10 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
                 android:text="@string/prix"
+
                 android:textColor="@color/black" />
 
             <TextView
@@ -47,8 +50,9 @@
                 android:text="@string/dt"
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="5dp" /> </LinearLayout>
+               /> </LinearLayout>
 
     </FrameLayout>
     <LinearLayout

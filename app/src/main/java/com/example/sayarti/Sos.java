@@ -1,5 +1,6 @@
 package com.example.sayarti;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +17,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -104,6 +106,18 @@ public class Sos extends Fragment {
             String local = Mylocalisation;
             Calendar calendar=Calendar.getInstance();
             String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+            // To get the correct window token, lets first get the currently focused view
+            View view = getActivity().getCurrentFocus();
+
+            // To get the window token when there is no currently focused view, we have a to create a view
+            if (view == null) {
+                view = new View(getActivity());
+            }
+
+            // hide the keyboard
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
             if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
                 Snackbar.make(Objects.requireNonNull(getView()), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
@@ -161,7 +175,7 @@ public class Sos extends Fragment {
 
         i2.setOnClickListener(v1 -> {
             Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:71200300"));
+            intent.setData(Uri.parse("tel:71104555"));
             startActivity(intent);
         });
 
