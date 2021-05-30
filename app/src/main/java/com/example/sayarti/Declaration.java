@@ -5,6 +5,7 @@ public class Declaration {
     private String type_panne;
     private String localisation;
     private Boolean etat;
+    private String  tel;
 
     public Declaration(String matricule, String type_panne, String localisation) {
         this.matricule = matricule;

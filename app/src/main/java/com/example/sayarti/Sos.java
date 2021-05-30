@@ -50,7 +50,7 @@ public class Sos extends Fragment {
 
     SupportMapFragment supportMapFragment;
     String Mylocalisation;
-    EditText e2,e3;
+    EditText e2,e3,e4;
     Button btn;
     FusedLocationProviderClient client;
     ImageView i2;
@@ -63,6 +63,7 @@ public class Sos extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sos, container, false);
         e2 = v.findViewById(R.id.matricule);
         e3= v.findViewById(R.id.autre);
+        e4=v.findViewById(R.id.tel);
         btn = v.findViewById(R.id.env);
         i2 = v.findViewById(R.id.callsos);
         client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
@@ -101,6 +102,7 @@ public class Sos extends Fragment {
         //declaration = new Declaration();
         btn.setOnClickListener(v12 -> {
             String mat = e2.getText().toString().trim();
+            String tel ="+216"+e4.getText().toString().trim();
             String type_panne = spinner.getSelectedItem().toString().trim();
             String au = e3.getText().toString().trim();
             String local = Mylocalisation;
@@ -156,6 +158,7 @@ public class Sos extends Fragment {
 
                         params.put("localisation",local);
                         params.put("date",date);
+                        params.put("tel",tel);
 
 
 
@@ -171,6 +174,7 @@ public class Sos extends Fragment {
             i2.setEnabled(true);
             e2.getText().clear();
             e3.getText().clear();
+            e4.getText().clear();
         });
 
         i2.setOnClickListener(v1 -> {
