@@ -1,5 +1,7 @@
 package com.example.sayarti;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,10 +36,15 @@ public class ListVoiture extends Fragment {
     RecyclerView recyclerView;
 
     public static final String URL_PRODUCTS = "http://dev.goodlinks.tn/sayarti-apps/test.php";
+    public static final String URL_LINK_PROD = "http://dev.goodlinks.tn/sayarti-apps/linkCar.php";
 
     //a list to store all the products
     List<Product> productList;
-   private final String sear;
+    ArrayList<String> ProdcarNames = new ArrayList();
+    private final String sear;
+    //ArrayList<String> selectedcar = new ArrayList();
+    ArrayList<String> selectedcar = new ArrayList<String>();
+    //private final String selc;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -79,7 +87,69 @@ public class ListVoiture extends Fragment {
             productList.clear();
             postProducts();
         }
+
+        this.configureOnClickRecyclerView();
+
         return v;
+    }
+
+    private void configureOnClickRecyclerView() {
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_list_voiture)
+            .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                @Override
+                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                    ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
+                    String searchedCar = adapter.getCarNames(position);
+
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LINK_PROD,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        JSONArray P_array = new JSONArray(response);
+
+
+                                        //traversing through all the object
+                                        for (int i = 0; i < P_array.length(); i++) {
+
+                                            //getting product object from json array
+                                            JSONObject product = P_array.getJSONObject(i);
+
+                                            selectedcar.add(product.getString("Car_PostName"));
+
+                                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                                            String url = "https://www.sayarti.tn/prix-des-voitures/"+selectedcar.get(position).toString();
+                                            intent.setData(Uri.parse(url));
+                                            getActivity().startActivity(intent);
+
+                                        }
+                                    }
+                                    catch (Exception e){
+                                        e.printStackTrace();
+                                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast.makeText(getContext(),error.toString(),Toast.LENGTH_LONG).show();
+                                }
+                            }){
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String,String> params = new HashMap<>();
+                            params.put("selectedCar",searchedCar);
+
+                            return params;
+                        }
+                    };
+                    RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
+                    requestQueue.add(stringRequest);
+
+                }
+            });
     }
 
     private void postProducts()
@@ -113,9 +183,10 @@ public class ListVoiture extends Fragment {
                                         product.getString("trans").toUpperCase()
 
                                 ));
+                                //ProdcarNames.add(product.getString("post_title"));
                             }
                             //creating adapter object and setting it to recyclerview
-                            ProductAdapter adapter = new ProductAdapter(getContext(), productList);
+                            ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
                             recyclerView.setAdapter(adapter);
                         }
                         catch (Exception e){
@@ -168,9 +239,10 @@ public class ListVoiture extends Fragment {
                                     product.getString("path"),
                                     product.getString("trans").toUpperCase()
                             ));
+                            //ProdcarNames.add(product.getString("post_title"));
                         }
                         //creating adapter object and setting it to recyclerview
-                        ProductAdapter adapter = new ProductAdapter(getContext(), productList);
+                        ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
                         recyclerView.setAdapter(adapter);
                     } catch (JSONException e) {
                         e.printStackTrace();

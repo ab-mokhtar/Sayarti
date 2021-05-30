@@ -11,15 +11,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private final Context mCtx;
     private final List<Product> productList;
 
-    public ProductAdapter(Context mCtx, List<Product> productList) {
+
+
+    private ArrayList<String> carNames = new ArrayList();
+
+    public ProductAdapter(Context mCtx, List<Product> productList, ArrayList<String> carNames) {
         this.mCtx = mCtx;
         this.productList = productList;
+        this.carNames = carNames;
+    }
+
+
+    public String getCarNames(int index) {
+        return carNames.get(index);
     }
 
     @Override
@@ -37,7 +48,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //        Glide.with(mCtx)
 //                .load(product.getImage())
 //                .into(holder.imageView);
-
+        carNames.add(product.getNom());
         holder.nom.setText(product.getNom());
         holder.prix.setText(product.getPrix());
         holder.type_carburant.setText(product.getType_carburant());

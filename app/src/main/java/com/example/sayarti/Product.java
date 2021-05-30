@@ -1,7 +1,16 @@
 package com.example.sayarti;
 
 public class Product {
-    private String nom,prix,type_carburant,puissance_fiscale,puissance_ch,boite,path,trans;
+    private String nom;
+    private String prix;
+    private String type_carburant;
+    private String puissance_fiscale;
+    private String puissance_ch;
+    private String boite;
+    private String path;
+    private String trans;
+
+
 
     public void setPrix(String prix) {
         this.prix = prix;

@@ -108,18 +108,17 @@ public class Sos extends Fragment {
             String local = Mylocalisation;
             Calendar calendar=Calendar.getInstance();
             String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+            //get view to hide keyboard
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-
-            // To get the correct window token, lets first get the currently focused view
             View view = getActivity().getCurrentFocus();
-
-            // To get the window token when there is no currently focused view, we have a to create a view
             if (view == null) {
                 view = new View(getActivity());
             }
-
             // hide the keyboard
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+
 
             if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
                 Snackbar.make(Objects.requireNonNull(getView()), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
