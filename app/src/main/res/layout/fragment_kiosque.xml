@@ -52,7 +52,11 @@
               android:contentDescription="@string/todo" />
 
       </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
           <ImageView
               android:id="@+id/STAROIL"
               android:layout_width="match_parent"
@@ -61,11 +65,16 @@
               android:layout_gravity="center"
               android:contentDescription="@string/todo" />
 
-
-
-
-
-
+        <ImageView
+            android:id="@+id/random_gas"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/border"
+            android:src="@drawable/random_gas_station"
+            android:layout_gravity="center"
+            android:contentDescription="@string/todo" />
+    </LinearLayout>
   </LinearLayout>
 
 </FrameLayout>
