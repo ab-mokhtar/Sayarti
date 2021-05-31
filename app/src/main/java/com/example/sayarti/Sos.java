@@ -120,7 +120,7 @@ public class Sos extends Fragment {
 
 
 
-            if(mat.length()==0|| type_panne.equals("Choisissez le type de panne") || local.length()==0) {
+            if(mat.length()==0 || (e4.getText().toString().length()==0 || e4.getText().toString().length()<8) || type_panne.equals("Choisissez le type de panne") ||  local.length()==0) {
                 Snackbar.make(Objects.requireNonNull(getView()), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
             }
             else
