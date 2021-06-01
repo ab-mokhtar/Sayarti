@@ -39,11 +39,10 @@ public class Kiosque extends Fragment {
         total.setOnClickListener(v13 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("TOTAL")).addToBackStack(null).commit());
         ola.setOnClickListener(v12 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("ola")).addToBackStack(null).commit());
         staroil.setOnClickListener(v1 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("STAROIL")).addToBackStack(null).commit());
-        //random.setOnClickListener(v1 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("STAROIL")).addToBackStack(null).commit());
-        random.setOnClickListener(v1 -> {
+        random.setOnClickListener(v1 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("")).addToBackStack(null).commit());
+        /*random.setOnClickListener(v1 -> {
             Snackbar.make(Objects.requireNonNull(getView()), "random", Snackbar.LENGTH_LONG).show();
-        });
-
+*/
         return v;
     }
 }
