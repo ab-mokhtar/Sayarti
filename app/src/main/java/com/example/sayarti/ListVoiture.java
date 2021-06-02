@@ -183,7 +183,8 @@ public class ListVoiture extends Fragment {
                                     catch (Exception e){
                                         e.printStackTrace();
                                         //Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
-                                        Snackbar.make(Objects.requireNonNull(getView()), "En cours de chargement de cette voiture", Snackbar.LENGTH_LONG).show();
+                                        Snackbar.make(Objects.requireNonNull(getView()), "En cours de chargement de cette voiture"+ "\n" +
+                                                "Veuillez patienter quelques secondes", Snackbar.LENGTH_LONG).show();
 
                                     }
                                 }
