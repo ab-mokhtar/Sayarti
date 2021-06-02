@@ -1,5 +1,7 @@
 package com.example.sayarti;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,9 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -50,6 +55,7 @@ public class ListVoiture extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    ProgressDialog progressDoalog;
     public ListVoiture(String sear) {
         // Required empty public constructor
         this.sear = sear;
@@ -80,11 +86,15 @@ public class ListVoiture extends Fragment {
         // Inflate the layout for this fragment
         if(sear.equals(""))
         {
+            hidkeyboard();
+            progressDialog(10);
             loadProducts();
         }
         else
         {
+            hidkeyboard();
             productList.clear();
+            progressDialog(30);
             postProducts();
         }
 
@@ -92,7 +102,52 @@ public class ListVoiture extends Fragment {
 
         return v;
     }
+    private void hidkeyboard()
+    {
+        //get view to hide keyboard
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = getActivity().getCurrentFocus();
+        if (view == null) {
+            view = new View(getActivity());
+        }
+        // hide the keyboard
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+    private void progressDialog(int val)
+    {
+        Handler handle = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                progressDoalog.incrementProgressBy(val);
+            }
+        };
+        progressDoalog = new ProgressDialog(getContext());
+        progressDoalog.setMax(100);
+        progressDoalog.setMessage("Chargement en cours . . . . ");
+        progressDoalog.setTitle(R.string.loading);
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDoalog.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (progressDoalog.getProgress() <= progressDoalog
+                            .getMax()) {
+                        Thread.sleep(200);
+                        handle.sendMessage(handle.obtainMessage());
+                        if (progressDoalog.getProgress() == progressDoalog
+                                .getMax()) {
+                            progressDoalog.dismiss();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
+    }
     private void configureOnClickRecyclerView() {
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_list_voiture)
             .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -259,6 +314,7 @@ public class ListVoiture extends Fragment {
 
         //adding our stringrequest to queue
         Volley.newRequestQueue(Objects.requireNonNull(getContext())).add(stringRequest);
+        //progress.dismiss();
 
     }
 }

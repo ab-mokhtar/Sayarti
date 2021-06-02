@@ -22,6 +22,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -141,19 +142,6 @@ public class Authenfication extends Fragment {
         }
 
 
-        //    @Override
-//    public void onStart() {
-//        super.onStart();
-//        mAuth.addAuthStateListener(mAuthStateListener);
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        if (mAuthStateListener != null) {
-//            mAuth.removeAuthStateListener(mAuthStateListener);
-//        }
-//    }
         @Override
         public void onPause() {
             super.onPause();
@@ -222,8 +210,8 @@ public class Authenfication extends Fragment {
                     .addOnCompleteListener(Objects.requireNonNull(Authenfication.this.getActivity()), task -> {
                         String message;
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(getContext(), notes_home.class));
                             message = "Bienvenu "+ Objects.requireNonNull(task.getResult().getUser()).getDisplayName();
+                            startActivity(new Intent(getContext(), notes_home.class));
                         } else {
                             message = "Erreur de se connecté";
                         }
@@ -243,7 +231,7 @@ public class Authenfication extends Fragment {
             mFacebookLoginButton.registerCallback(mFacebookCallbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
-                    Snackbar.make(Objects.requireNonNull(getView()), "Connecté", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(Objects.requireNonNull(getView()), "Bienvenu", Snackbar.LENGTH_LONG).show();
                     handleFacebookAccessToken(loginResult.getAccessToken());
                 }
 
@@ -261,19 +249,6 @@ public class Authenfication extends Fragment {
             });
         }
 
-//        private void handleFacebookAccessToken(AccessToken token) {
-//            AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-//            mAuth.signInWithCredential(credential).addOnCompleteListener(Objects.requireNonNull(Authenfication.this.getActivity()), task -> {
-//                        String message;
-//                        if (task.isSuccessful()) {
-//                            startActivity(new Intent(getContext(), notes_home.class));
-//                            message = "Bienvenu "+ Objects.requireNonNull(task.getResult().getUser()).getDisplayName();
-//                        } else {
-//                            message = "Erreur de se connecté";
-//                        }
-//                        Snackbar.make(Objects.requireNonNull(getView()), message, Snackbar.LENGTH_LONG).show();
-//                    });
-//        }
 private void handleFacebookAccessToken(AccessToken token) {
     AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
     mAuth.signInWithCredential(credential)
@@ -284,8 +259,6 @@ private void handleFacebookAccessToken(AccessToken token) {
                         // Sign in success, update UI with the signed-in user's information
                         FirebaseUser user = mAuth.getCurrentUser();
                         startActivity(new Intent(getContext(), notes_home.class));
-                        Snackbar.make(Objects.requireNonNull(getView()), "Bienvenu", Snackbar.LENGTH_LONG).show();
-
 
                     } else {
                         // If sign in fails, display a message to the user.
@@ -307,7 +280,7 @@ private void handleFacebookAccessToken(AccessToken token) {
             //sign in with firebase
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Snackbar.make(Objects.requireNonNull(getView()), "Connexion réussie", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(Objects.requireNonNull(getView()), "Bienvenu", Snackbar.LENGTH_LONG).show();
                     startActivity(new Intent(getContext(), notes_home.class));
                 } else {
                     Snackbar.make(Objects.requireNonNull(getView()), "échec de la connexion, veuillez vérifier vos informations d'identification et réessayer", Snackbar.LENGTH_LONG).show();
