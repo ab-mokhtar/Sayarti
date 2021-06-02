@@ -114,9 +114,9 @@ public class notes_home extends AppCompatActivity {
     public void onDestroy() {
 
         super.onDestroy();
-        super.onStop();
-        mAuth.signOut();
-        LoginManager.getInstance().logOut();
+//        super.onStop();
+//        mAuth.signOut();
+  //      LoginManager.getInstance().logOut();
 
     }
     @Override
