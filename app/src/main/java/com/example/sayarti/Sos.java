@@ -94,9 +94,8 @@ public class Sos extends Fragment {
                 // TODO Auto-generated method stub
             }
         });
-
-        getCurretLocation();
         i2.setEnabled(false);
+        getCurretLocation();
 
 
         //declaration = new Declaration();
@@ -121,6 +120,7 @@ public class Sos extends Fragment {
 
 
             if(mat.length()==0 || (e4.getText().toString().length()==0 || e4.getText().toString().length()<8) || type_panne.equals("Choisissez le type de panne") ||  local.length()==0) {
+                i2.setEnabled(false);
                 Snackbar.make(Objects.requireNonNull(getView()), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
             }
             else
@@ -164,13 +164,12 @@ public class Sos extends Fragment {
                         return params;
                     }
                 };
-
+                i2.setEnabled(true);
 
                 RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
                 requestQueue.add(request);
 
             }
-            i2.setEnabled(true);
             e2.getText().clear();
             e3.getText().clear();
             e4.getText().clear();

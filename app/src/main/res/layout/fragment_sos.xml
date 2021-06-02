@@ -48,17 +48,44 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:textSize="18sp"/>
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:id="@+id/tel"
-            android:hint="00000000"
-            android:padding="12dp"
-            android:maxLength="8"
-            android:background="@drawable/custom_input"
-            android:autofillHints=""
-            android:inputType="text" />
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:background="@drawable/back_spinner"
+                android:layout_marginRight="5dp"
+                android:padding="5dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/tun"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="+216"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:textSize="18sp"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tel"
+                android:hint="00000000"
+                android:padding="12dp"
+                android:maxLength="8"
+                android:background="@drawable/custom_input"
+                android:autofillHints=""
+                android:inputType="phone" />
+        </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,12 +95,34 @@
         android:text="@string/type_de_panne"
         android:textSize="18sp"/>
 
-        <Spinner
-            android:id="@+id/type_panne"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="30dp"
-            android:layout_marginTop="10dp" />
+            android:background="@drawable/back_spinner"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Spinner
+                android:id="@+id/type_panne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_drop" />
+
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/autre"
@@ -97,6 +146,7 @@
 
 
         <fragment
+            android:layout_marginTop="5dp"
             android:id="@+id/map_sos"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
