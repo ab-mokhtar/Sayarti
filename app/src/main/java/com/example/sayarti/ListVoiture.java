@@ -174,7 +174,7 @@ public class ListVoiture extends Fragment {
                                             selectedcar.add(product.getString("Car_PostName"));
 
                                             Intent intent = new Intent(Intent.ACTION_VIEW);
-                                            String url = "https://www.sayarti.tn/prix-des-voitures/"+selectedcar.get(position).toString();
+                                            String url = "https://www.sayarti.tn/prix-des-voitures/"+selectedcar.get(position);
                                             intent.setData(Uri.parse(url));
                                             getActivity().startActivity(intent);
 
@@ -182,7 +182,9 @@ public class ListVoiture extends Fragment {
                                     }
                                     catch (Exception e){
                                         e.printStackTrace();
-                                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
+                                        Snackbar.make(Objects.requireNonNull(getView()), "En cours de chargement de cette voiture", Snackbar.LENGTH_LONG).show();
+
                                     }
                                 }
                             },
