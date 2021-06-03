@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/route_background"
+    android:id="@+id/actBien">
+
+<ScrollView  android:layout_width="match_parent"
+android:layout_height="match_parent"
+  >
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+       >
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:cardBackgroundColor="@color/black">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/logo"
+                android:contentDescription="@string/todo"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+
+    <!--______________________Recherche__________________-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp"
+        >
+
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card_view:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/trans">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/inp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_margin="12dp"
+                    android:hint="@string/input"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_input"
+                    android:autofillHints="" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:id="@+id/rech"
+                    android:textColor="@color/black"
+                    android:background="@drawable/custom_button"
+                    android:text="@string/in"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp"
+        android:gravity="center">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+
+
+        app:cardBackgroundColor="@color/trans">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/alfa"
+                    android:id="@+id/alfa"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/audi"
+                    android:id="@+id/audi"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/baic1"
+                    android:id="@+id/baic"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/bmw"
+                    android:id="@+id/bmw"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/changan"
+                    android:id="@+id/changan"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/chery"
+                    android:id="@+id/chery"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/chevrolet"
+                    android:id="@+id/chevrolet"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/citreon"
+                    android:id="@+id/citroen"
+                    android:contentDescription="@string/todo" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/dacia"
+                    android:id="@+id/dacia"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/dfsk"
+                    android:id="@+id/dfsk"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/dongfeng"
+                    android:id="@+id/dongfeng"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/ds"
+                    android:id="@+id/ds"
+                    android:contentDescription="@string/todo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/fiat"
+                    android:id="@+id/fiat"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/foday"
+                    android:id="@+id/foday"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/ford"
+                    android:id="@+id/ford"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/foton"
+                    android:id="@+id/foton"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/geely"
+                    android:id="@+id/geely"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/great"
+                    android:id="@+id/great"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/haval"
+                    android:id="@+id/haval"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/honda"
+                    android:id="@+id/honda"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/hyundai"
+                    android:id="@+id/hyundai"
+                    android:contentDescription="@string/todo" />
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/isuzu"
+                    android:id="@+id/isuzu"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/jaguar"
+                    android:id="@+id/jaguar"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/jeep"
+                    android:id="@+id/jeep"
+                    android:contentDescription="@string/todo" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/kia"
+                    android:id="@+id/kia"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/lada"
+                    android:id="@+id/lada"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/landrover"
+                    android:id="@+id/landrover"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/mahindra"
+                    android:id="@+id/mahindra"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/mazda"
+                    android:id="@+id/mazda"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/mercedes"
+                    android:id="@+id/mercedes"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/mini"
+                    android:id="@+id/mini"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/mitshi"
+                    android:id="@+id/mitshi"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/mg"
+                    android:id="@+id/mg"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/nissan"
+                    android:id="@+id/nissan"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/opel"
+                    android:id="@+id/opel"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/peugeot"
+                    android:id="@+id/peugeot"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/porshe"
+                    android:id="@+id/porshe"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/renault"
+                    android:id="@+id/renault"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/seat"
+                    android:id="@+id/seat"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/skoda"
+                    android:id="@+id/skoda"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/sangyoung"
+                    android:id="@+id/sangyoung"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/suzuki"
+                    android:id="@+id/suzuki"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/tata"
+                    android:id="@+id/tata"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/toyota"
+                    android:id="@+id/toyota"
+                    android:contentDescription="@string/todo" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/wallys"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/todo"
+                    android:src="@mipmap/wallys" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/volkswagen"
+                    android:id="@+id/volkswagen"
+                    android:clickable="true"
+                    android:contentDescription="@string/todo"
+                    android:focusable="true" />
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/volvo"
+                    android:id="@+id/volvo"
+                    android:contentDescription="@string/todo" />
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/zxauto"
+                    android:id="@+id/zxauto"
+                    android:contentDescription="@string/todo" />
+
+            </LinearLayout>
+        </LinearLayout></androidx.cardview.widget.CardView></LinearLayout>
+
+
+
+</LinearLayout>
+
+</ScrollView>
+</RelativeLayout>
+

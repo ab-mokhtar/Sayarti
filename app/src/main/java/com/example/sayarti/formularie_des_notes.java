@@ -61,7 +61,7 @@ public class formularie_des_notes extends Fragment  {
         Calendar calendar=Calendar.getInstance();
         date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         Toolbar toolbar = v.findViewById(R.id.toolbar);
-        ((AppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
 
         Notes note = new Notes();
 
@@ -83,7 +83,7 @@ public class formularie_des_notes extends Fragment  {
         btn.setOnClickListener(v1 -> {
 
             if(e1.length()==0|| e2.length()==0 ) {
-                Snackbar.make(Objects.requireNonNull(getView()), "vérifier les champs remplis", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(requireView(), "vérifier les champs remplis", Snackbar.LENGTH_SHORT).show();
             }
             else{
                 note.setMatricule(e1.getText().toString().trim());
@@ -95,7 +95,7 @@ public class formularie_des_notes extends Fragment  {
                 note.setDate(date);
                 note.setuId(FirebaseAuth.getInstance().getUid());
                 db.push().setValue(note);
-                Snackbar.make(Objects.requireNonNull(getView()), "LES DONNEES SONT BIEN AJOUTEES", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(requireView(), "LES DONNEES SONT BIEN AJOUTEES", Snackbar.LENGTH_SHORT).show();
             }
         });
 

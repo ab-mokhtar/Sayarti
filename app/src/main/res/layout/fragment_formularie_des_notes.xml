@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="70dp"
+            android:layout_marginBottom="70dp"
             card_view:cardCornerRadius="10dp"
             card_view:cardBackgroundColor="@color/trans">
 

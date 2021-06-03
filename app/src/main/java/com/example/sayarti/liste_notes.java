@@ -71,10 +71,10 @@ public class liste_notes extends Fragment {
         //final ListView list1 = RootView.findViewById(R.id.ListeView1);
         final SwipeMenuListView list1 = RootView.findViewById(R.id.ListeView1);
         final ArrayList<HashMap<String,String>> list= new ArrayList();
-        final SimpleAdapter adapter = new SimpleAdapter(Objects.requireNonNull(getActivity()).getBaseContext(),list,R.layout.ligne, from, to);
+        final SimpleAdapter adapter = new SimpleAdapter(requireActivity().getBaseContext(),list,R.layout.ligne, from, to);
         list1.setAdapter(adapter);
         list1.setOnItemLongClickListener((parent, view, position, id) -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
             builder.setTitle("Sélection Item");
             builder.setMessage(list.get(position).get("note")+"\n"+list.get(position).get("date"));
             builder.setCancelable(true);
@@ -134,7 +134,7 @@ public class liste_notes extends Fragment {
         c.setOnClickListener(v -> {
             if(adapter.getCount()==0)
             {
-                Snackbar.make(Objects.requireNonNull(getView()), "Rien à supprimer !", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(requireView(), "Rien à supprimer !", Snackbar.LENGTH_SHORT).show();
 
             }
             else
@@ -144,56 +144,49 @@ public class liste_notes extends Fragment {
             }
         });
 
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
+        SwipeMenuCreator creator = menu -> {
+            // create "open" item
+            SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
+            // set item background
+            openItem.setBackground(new ColorDrawable(Color.rgb(0, 200, 0)));
+            // set item width
+            openItem.setWidth(170);
 
-            @Override
-            public void create(SwipeMenu menu) {
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(getApplicationContext());
-                // set item background
-                openItem.setBackground(new ColorDrawable(Color.rgb(0, 200, 0)));
-                // set item width
-                openItem.setWidth(170);
+            openItem.setIcon(R.drawable.ic_update);
+            // add to menu
+            menu.addMenuItem(openItem);
 
-                openItem.setIcon(R.drawable.ic_update);
-                // add to menu
-                menu.addMenuItem(openItem);
-
-                // create "delete" item
-                SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
-                // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(255, 0, 0)));
-                // set item width
-                deleteItem.setWidth(170);
-                // set a icon
-                deleteItem.setIcon(R.drawable.ic_delete);
-                // add to menu
-                menu.addMenuItem(deleteItem);
-            }
+            // create "delete" item
+            SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
+            // set item background
+            deleteItem.setBackground(new ColorDrawable(Color.rgb(255, 0, 0)));
+            // set item width
+            deleteItem.setWidth(170);
+            // set a icon
+            deleteItem.setIcon(R.drawable.ic_delete);
+            // add to menu
+            menu.addMenuItem(deleteItem);
         };
 
         list1.setMenuCreator(creator);
 
-        list1.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                switch (index) {
-                    case 0:
-                        //update
-                        UpdateNote(Arraykey.get(position));
-                        adapter.notifyDataSetChanged();
+        list1.setOnMenuItemClickListener((position, menu, index) -> {
+            switch (index) {
+                case 0:
+                    //update
+                    UpdateNote(Arraykey.get(position));
+                    adapter.notifyDataSetChanged();
 
-                        break;
-                    case 1:
-                        //delete
-                        DeleteItem(Arraykey.get(position));
-                        adapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                    //delete
+                    DeleteItem(Arraykey.get(position));
+                    adapter.notifyDataSetChanged();
 
-                        break;
-                }
-                // false : close the menu; true : not close the menu
-                return false;
+                    break;
             }
+            // false : close the menu; true : not close the menu
+            return false;
         });
 
 
@@ -205,32 +198,23 @@ public class liste_notes extends Fragment {
 
     private void DeleteItem(String childkey)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         builder.setTitle("Supprimer Item");
         builder.setMessage("vous etes sure de supprimer ?");
-        builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("oui", (dialog, which) -> myRef.child(childkey).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                myRef.child(childkey).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        myRef.child(childkey).removeValue();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                myRef.child(childkey).removeValue();
             }
-        });
-        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
+        }));
+        builder.setNegativeButton("Annuler", (dialog, which) -> {
+            dialog.dismiss();
+            Snackbar.make(requireView(), "Annuler", Snackbar.LENGTH_SHORT).show();
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -238,35 +222,29 @@ public class liste_notes extends Fragment {
 
     private void ClearList()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         builder.setTitle("Supprimer tous les notes");
         builder.setMessage("vous êtes sure de supprimer ?");
-        builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Query query = myRef.orderByChild("uId");
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                            snapshot1.getRef().removeValue();
-                        }
-                        Snackbar.make(Objects.requireNonNull(getView()), "Les notes ont supprimé", Snackbar.LENGTH_SHORT).show();
+        builder.setPositiveButton("oui", (dialog, which) -> {
+            Query query = myRef.orderByChild("uId");
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                        snapshot1.getRef().removeValue();
                     }
+                    Snackbar.make(requireView(), "Les notes ont supprimé", Snackbar.LENGTH_SHORT).show();
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-            }
+                }
+            });
         });
-        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_SHORT).show();
-            }
+        builder.setNegativeButton("Annuler", (dialog, which) -> {
+            dialog.dismiss();
+            Snackbar.make(requireView(), "Annuler", Snackbar.LENGTH_SHORT).show();
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -277,36 +255,25 @@ public class liste_notes extends Fragment {
     {
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getActivity()));
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.update_dialog,null);
-        builder.setView(view).setTitle("Modifier la note").setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setView(view).setTitle("Modifier la note").setPositiveButton("OK", (dialog, which) -> {
 
 
-                EditText upMat = view.findViewById(R.id.edit_mat);
-                EditText upNote= view.findViewById(R.id.edit_note);
+            EditText upMat = view.findViewById(R.id.edit_mat);
+            EditText upNote= view.findViewById(R.id.edit_note);
 
-                HashMap hashMap = new HashMap();
-                hashMap.put("note",upNote.getText().toString());
-                hashMap.put("matricule",upMat.getText().toString());
+            HashMap hashMap = new HashMap();
+            hashMap.put("note",upNote.getText().toString());
+            hashMap.put("matricule",upMat.getText().toString());
 
-                myRef.child(childKey).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
-                    @Override
-                    public void onSuccess(Object o) {
-                        Snackbar.make(Objects.requireNonNull(getView()), "La note a été modifiée", Snackbar.LENGTH_SHORT).show();
-                    }
-                });
+            myRef.child(childKey).updateChildren(hashMap).addOnSuccessListener(o -> Snackbar.make(requireView(), "La note a été modifiée", Snackbar.LENGTH_SHORT).show());
 
-            }
         });
-        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_SHORT).show();
-            }
+        builder.setNegativeButton("Annuler", (dialog, which) -> {
+            dialog.dismiss();
+            Snackbar.make(requireView(), "Annuler", Snackbar.LENGTH_SHORT).show();
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();

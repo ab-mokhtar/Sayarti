@@ -38,10 +38,7 @@
             android:layout_margin="20dp"
             android:src="@drawable/entretien_fixngo"
             android:id="@+id/fixngo"
-            android:contentDescription="@string/todo" /></LinearLayout><LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal">
+            android:contentDescription="@string/todo" />
         <ImageView
             android:layout_width="150dp"
             android:layout_height="100dp"
@@ -50,26 +47,19 @@
             android:src="@drawable/entretien_bosh"
             android:id="@+id/bosh"
             android:contentDescription="@string/todo" />
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:layout_margin="20dp"
-            android:src="@drawable/entretien_eurorepar"
-            android:id="@+id/eurorepar"
-            android:contentDescription="@string/todo" /></LinearLayout><LinearLayout
+    </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:orientation="horizontal">
-
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:layout_margin="20dp"
-            android:src="@drawable/entretien_speedy"
-            android:id="@+id/speedy"
-            android:contentDescription="@string/todo" />
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:layout_margin="20dp"
+        android:src="@drawable/entretien_speedy"
+        android:id="@+id/speedy"
+        android:contentDescription="@string/todo" />
 
         <ImageView
             android:layout_width="150dp"
@@ -78,7 +68,17 @@
             android:layout_margin="20dp"
             android:src="@drawable/entretien_otop"
             android:id="@+id/otop"
+            android:contentDescription="@string/todo" />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:src="@drawable/entretien_eurorepar"
+            android:id="@+id/eurorepar"
             android:contentDescription="@string/todo" /></LinearLayout>
+
 
     </LinearLayout>
 

@@ -66,11 +66,11 @@ public class Sos extends Fragment {
         e4=v.findViewById(R.id.tel);
         btn = v.findViewById(R.id.env);
         i2 = v.findViewById(R.id.callsos);
-        client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
+        client = LocationServices.getFusedLocationProviderClient(requireActivity());
 
         //spinner
         spinner = v.findViewById(R.id.type_panne);
-        String [] values = {"Choisissez le type de panne","Batterie","Pneumatique","Essence","Accident","Incendie","Autre"};
+        String [] values = {getString(R.string.Choisissez_le_type_de_panne),getString(R.string.Batterie),getString(R.string.Pneumatique),getString(R.string.Essence),getString(R.string.Accident),getString(R.string.Incendie),getString(R.string.Autre)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, values);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
@@ -121,7 +121,7 @@ public class Sos extends Fragment {
 
             if(mat.length()==0 || (e4.getText().toString().length()==0 || e4.getText().toString().length()<8) || type_panne.equals("Choisissez le type de panne") ||  local.length()==0) {
                 i2.setEnabled(false);
-                Snackbar.make(Objects.requireNonNull(getView()), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(requireView(), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
             }
             else
             {
@@ -130,16 +130,16 @@ public class Sos extends Fragment {
                         response -> {
 
                             if(response.equalsIgnoreCase("Data Inserted")){
-                                Snackbar.make(Objects.requireNonNull(getView()), "La déclaration était bien envoyée"+"\n"+"Vous pouvez passer l'appel maintenant", Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(requireView(), "La déclaration était bien envoyée"+"\n"+"Vous pouvez passer l'appel maintenant", Snackbar.LENGTH_SHORT).show();
 
                             }
                             else{
-                                Snackbar.make(Objects.requireNonNull(getView()), response, Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(requireView(), response, Snackbar.LENGTH_LONG).show();
 
 
                             }
 
-                        }, error -> Snackbar.make(Objects.requireNonNull(getView()), Objects.requireNonNull(error.getMessage()), Snackbar.LENGTH_LONG).show()
+                        }, error -> Snackbar.make(requireView(), Objects.requireNonNull(error.getMessage()), Snackbar.LENGTH_LONG).show()
 
                 ){
                     @Override
@@ -166,7 +166,7 @@ public class Sos extends Fragment {
                 };
                 i2.setEnabled(true);
 
-                RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
+                RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
                 requestQueue.add(request);
 
             }
@@ -192,13 +192,13 @@ public class Sos extends Fragment {
             getCurretLocation();
         }
         else{
-            Snackbar.make(Objects.requireNonNull(getView()), "Permission refusée", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(requireView(), "Permission refusée", Snackbar.LENGTH_LONG).show();
         }
     }
 
     @SuppressLint("MissingPermission")
     public void getCurretLocation() {
-        LocationManager locationManager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)|| locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
 
         {client.getLastLocation().addOnCompleteListener(task -> {

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sayarti</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="input">Recherche par : marque, modèle, catégorie …</string>
+    <string name="in">Voir toute la liste</string>
+    <string name="remember">Sauvgarder mes données</string>
+    <string name="checkbox">case à cocher</string>
+    <string name="mail">E-MAIL</string>
+    <string name="pass">le mot de passe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="facebook_app_id">866028170666491</string>
+
+
+
+    <string name="voiture_neuves">Voitures Neuves</string>
+
+    <string name="station_de_kiosque">Kiosques à essence</string>
+
+
+
+    <string name="my_location">Ma position</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="cr_er_un_compte">Créer un compte</string>
+
+    <string name="bornes_de_recharge">Bornes de recharge</string>
+    <string name="assurance_auto">Assurance Auto</string>
+    <string name="entretien">Entretien Autos</string>
+
+    <string name="profil">Profil</string>
+
+
+    <string name="ecrire_votre_note">Ecrire votre note:</string>
+    <string name="ajouter_une_note">Ajouter une note</string>
+    <string name="notes">Notes</string>
+
+    <string name="entrez_votre_matricule">Entrez votre matricule :</string>
+    <string name="exp_120tun1559">exp:120Tun1559</string>
+    <string name="type_de_panne">Type de panne :</string>
+    <string name="decrire_votre_panne">Décrire votre panne</string>
+    <string name="localisation">Localisation :</string>
+    <string name="envoyer">Envoyer</string>
+    <string name="matricule">matricule</string>
+    <string name="note">Note</string>
+    <string name="date">Date</string>
+    <string name="add_note">ajouter une note</string>
+    <string name="entrez_votre_email">Entrez votre email :</string>
+    <string name="entrez_votre_mot_de_passe">Entrez votre mot de passe :</string>
+    <string name="confirmez_votre_mot_de_passe">Confirmez votre mot de passe :</string>
+    <string name="connecter">Connecter</string>
+    <string name="name">Nom:</string>
+    <string name="tel">Mobile:</string>
+    <string name="marque">Marque:</string>
+    <string name="prix">A PARTIR DE </string>
+    <string name="puissance_fiscale">Puissance Fiscale</string>
+    <string name="type_carburant">Type carburant</string>
+    <string name="bo_te">Boîte</string>
+    <string name="puissance_ch_din">Puissance (CH DIN)</string>
+    <string name="transmission">Transmission</string>
+    <string name="todo">TODO</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="ville">Ville:</string>
+    <string name="deco">Déconnexion</string>
+    <string name="profile">Profil</string>
+    <string name="dt">dt</string>
+    <string name="visite_technique">Visite technique</string>
+    <string name="ajouter_evnt">Ajouter un événement</string>
+    <string name="update_mat">Entrer la matricule</string>
+    <string name="update_note">Entrer la note</string>
+    <string name="loading">Chargement des voitures</string>
+    <string name="Choisissez_le_type_de_panne">Choisissez le type de panne</string>
+    <string name="Batterie">Batterie</string>
+    <string name="Pneumatique">Pneumatique</string>
+    <string name="Essence">Essence</string>
+    <string name="Accident">Accident</string>
+    <string name="Incendie">Incendie</string>
+    <string name="Autre">Autre</string>
+    <string name="_00000000">00000000</string>
+
+
+</resources>

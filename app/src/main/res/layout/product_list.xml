@@ -15,7 +15,8 @@
             android:adjustViewBounds="true"
             android:layout_marginRight="5dp"
             android:layout_height="200dp"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/todo"
+            android:layout_marginEnd="5dp" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/black"/>
@@ -65,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginStart="5dp" />
 
@@ -81,7 +82,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/carburant"/>
+                android:src="@drawable/carburant"
+                android:contentDescription="@string/todo" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,7 +112,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/eng"/>
+                android:src="@drawable/eng"
+                android:contentDescription="@string/todo" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,7 +142,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/speed"/>
+                android:src="@drawable/speed"
+                android:contentDescription="@string/todo" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -169,7 +173,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/gear"/>
+                android:src="@drawable/gear"
+                android:contentDescription="@string/todo" />
             <TextView
 
                 android:layout_width="wrap_content"
@@ -199,7 +204,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/trans"/>
+                android:src="@drawable/trans"
+                android:contentDescription="@string/todo" />
             <TextView
 
                 android:layout_width="wrap_content"

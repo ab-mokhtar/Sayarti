@@ -62,8 +62,8 @@ public class map_entretien extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
-            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            client = LocationServices.getFusedLocationProviderClient(requireActivity());
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -95,85 +95,85 @@ public class map_entretien extends Fragment {
 
             ArrayList<posi> data = (ArrayList<posi>) PrefConfig.readListFromPref(getContext());
             if(data.size()>0){
-            for (int i = 0; i< data.size(); i++){
-                if (data.get(i).getMarque().toLowerCase().equals( marques )){
-                    data2.add(data.get(i));
+                for (int i = 0; i< data.size(); i++){
+                    if (data.get(i).getMarque().toLowerCase().equals( marques )){
+                        data2.add(data.get(i));
 
-                   }
-
-            }
-            for (int i=0;i<data2.size();i++){
-               String   name=data2.get(i).getName();
-                String tel=data2.get(i).getTel();
-                String marque=data2.get(i).getMarque();
-                LatLng location = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(location);
-                String info = name+"/"+tel+"/"+marque;
-                markerOptions.title(info);
-
-                // markerOptions.title(nameOfPlace);
-                switch (marques)
-                {
-                    case "midas":
-                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_midas));
-                        break;
-                    case "fixngo":
-                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_fixngo));
-                        break;
-                    case "bosh":
-                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_bosch));
-                        break;
-                    case "eurorepar":
-                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_eurorepar));
-                        break;
-                    case  "speedy":
-                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_speedy));
-                        break;
-                    case  "otop":
-                        markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_otop));
-                        break;
-                   }
-
-                googleMap.addMarker(markerOptions);
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-
-                googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-                    @Override
-                    public View getInfoWindow(Marker marker) {
-                        return null;
                     }
 
-                    @Override
-                    public View getInfoContents( Marker marker) {
+                }
+                for (int i=0;i<data2.size();i++){
+                    String   name=data2.get(i).getName();
+                    String tel=data2.get(i).getTel();
+                    String marque=data2.get(i).getMarque();
+                    LatLng location = new LatLng(data2.get(i).getLati(), data2.get(i).getLongi());
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(location);
+                    String info = name+"/"+tel+"/"+marque;
+                    markerOptions.title(info);
 
-                        LayoutInflater layoutInflater=LayoutInflater.from(getContext());
-                        View v = getLayoutInflater().inflate(R.layout.snippet,null);
-                        TextView t1 = v.findViewById(R.id.text1);
-                        TextView t2 = v.findViewById(R.id.text22);
-                        TextView t3 = v.findViewById(R.id.text3);
-                        String info=marker.getTitle();
-                        assert info != null;
-                        if(info.contains("/")){
-                        String name =info.substring(0,info.indexOf("/"));
-                        info =  info.substring(info.indexOf("/")+1);
-                        String tel = info.substring(0,info.indexOf("/"));
-                        info =  info.substring(info.indexOf("/")+1);
-                        t1.setText(name);
-                        t2.setText(tel);
-                        t3.setText(info);}
-                        else
-                        {
-                            t1.setText(R.string.my_location);
+                    // markerOptions.title(nameOfPlace);
+                    switch (marques)
+                    {
+                        case "midas":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_midas));
+                            break;
+                        case "fixngo":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_fixngo));
+                            break;
+                        case "bosh":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_bosch));
+                            break;
+                        case "eurorepar":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_eurorepar));
+                            break;
+                        case  "speedy":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_speedy));
+                            break;
+                        case  "otop":
+                            markerOptions.icon(bitmapDescriptordescriptor(getContext(),R.drawable.mark_otop));
+                            break;
+                    }
 
+                    googleMap.addMarker(markerOptions);
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
 
+                    googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                        @Override
+                        public View getInfoWindow(Marker marker) {
+                            return null;
                         }
 
-                        return  v;
-                    }
-                });
+                        @Override
+                        public View getInfoContents( Marker marker) {
 
-            }
+                            LayoutInflater layoutInflater=LayoutInflater.from(getContext());
+                            View v = getLayoutInflater().inflate(R.layout.snippet,null);
+                            TextView t1 = v.findViewById(R.id.text1);
+                            TextView t2 = v.findViewById(R.id.text22);
+                            TextView t3 = v.findViewById(R.id.text3);
+                            String info=marker.getTitle();
+                            assert info != null;
+                            if(info.contains("/")){
+                                String name =info.substring(0,info.indexOf("/"));
+                                info =  info.substring(info.indexOf("/")+1);
+                                String tel = info.substring(0,info.indexOf("/"));
+                                info =  info.substring(info.indexOf("/")+1);
+                                t1.setText(name);
+                                t2.setText(tel);
+                                t3.setText(info);}
+                            else
+                            {
+                                t1.setText(R.string.my_location);
+
+
+                            }
+
+                            return  v;
+                        }
+                    });
+
+                }
             }
 
         }

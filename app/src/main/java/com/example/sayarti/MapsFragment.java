@@ -88,8 +88,8 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            client = LocationServices.getFusedLocationProviderClient(Objects.requireNonNull(getActivity()));
-            if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            client = LocationServices.getFusedLocationProviderClient(requireActivity());
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -121,7 +121,7 @@ public class MapsFragment extends Fragment {
                         transferData[1] = url;
                         getnerabyplaces.execute(transferData);
                         //Toast.makeText(getActivity()," search for : "+placeNameList[i],Toast.LENGTH_SHORT).show();
-                        Snackbar.make(Objects.requireNonNull(getView()), "RECHERCHER " + kiosque, Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(requireView(), "RECHERCHER " + kiosque, Snackbar.LENGTH_LONG).show();
 
 
                     });

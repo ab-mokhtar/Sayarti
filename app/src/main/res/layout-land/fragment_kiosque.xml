@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Kiosque"
     android:background="@color/white"
     android:id="@+id/kiosqueconten">
@@ -30,13 +35,6 @@
               android:layout_height="150dp"
               android:src="@drawable/logo_agil"
               android:contentDescription="@string/todo" />
-
-      </LinearLayout>
-      <LinearLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:padding="20dp">
           <ImageView
               android:layout_width="150dp"
               android:layout_height="150dp"
@@ -44,19 +42,20 @@
               android:id="@+id/TOTAL"
               android:contentDescription="@string/todo" />
 
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:padding="20dp">
+
+
           <ImageView
               android:layout_width="150dp"
               android:layout_height="150dp"
               android:src="@drawable/logo_olaenergy"
               android:id="@+id/OLA"
               android:contentDescription="@string/todo" />
-
-      </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
           <ImageView
               android:id="@+id/STAROIL"
               android:layout_width="match_parent"
@@ -65,17 +64,19 @@
               android:layout_gravity="center"
               android:contentDescription="@string/todo" />
 
-        <ImageView
-            android:id="@+id/random_gas"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="1dp"
-            android:background="@drawable/border"
-            android:src="@drawable/random_gas_station"
-            android:layout_gravity="center"
-            android:contentDescription="@string/todo"
-            android:layout_marginStart="1dp" />
-    </LinearLayout>
+          <ImageView
+              android:id="@+id/random_gas"
+              android:layout_width="150dp"
+              android:layout_height="100dp"
+              android:layout_marginLeft="1dp"
+              android:background="@drawable/border"
+              android:src="@drawable/random_gas_station"
+              android:layout_gravity="center"
+              android:contentDescription="@string/todo"
+              android:layout_marginStart="1dp" />
+
+      </LinearLayout>
+
   </LinearLayout>
 
-</FrameLayout>
+</FrameLayout></ScrollView>

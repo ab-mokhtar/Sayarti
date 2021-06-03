@@ -22,7 +22,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -146,7 +145,7 @@ public class Authenfication extends Fragment {
         public void onPause() {
             super.onPause();
 
-            mGoogleApiClient.stopAutoManage(Objects.requireNonNull(getActivity()));
+            mGoogleApiClient.stopAutoManage(requireActivity());
             mGoogleApiClient.disconnect();
         }
 
@@ -161,7 +160,7 @@ public class Authenfication extends Fragment {
                     GoogleSignInAccount account = result.getSignInAccount();
                     firebaseAuthWithGoogle(Objects.requireNonNull(account));
                 } else {
-                    Snackbar.make(Objects.requireNonNull(getView()), "Erreur", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireView(), "Erreur", Snackbar.LENGTH_LONG).show();
                 }
             } else if (requestCode == FACEBOOK_LOG_IN_REQUEST_CODE) {
                 mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
@@ -181,7 +180,7 @@ public class Authenfication extends Fragment {
                 } else {
                     message = "onAuthStateChanged signed out";
                 }
-                Snackbar.make(Objects.requireNonNull(getView()), message, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show();
             };
         }
 
@@ -196,7 +195,7 @@ public class Authenfication extends Fragment {
 
             Context context = getContext();
             mGoogleApiClient = new GoogleApiClient.Builder(Objects.requireNonNull(context))
-                    .enableAutoManage(Objects.requireNonNull(getActivity()), connectionResult -> Snackbar.make(Objects.requireNonNull(getView()), Objects.requireNonNull(connectionResult.getErrorMessage()), Snackbar.LENGTH_LONG).show()).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+                    .enableAutoManage(requireActivity(), connectionResult -> Snackbar.make(requireView(), Objects.requireNonNull(connectionResult.getErrorMessage()), Snackbar.LENGTH_LONG).show()).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
         }
 
         private void signInWithGoogleSignIn() {
@@ -207,7 +206,7 @@ public class Authenfication extends Fragment {
         private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
             AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
             mAuth.signInWithCredential(credential)
-                    .addOnCompleteListener(Objects.requireNonNull(Authenfication.this.getActivity()), task -> {
+                    .addOnCompleteListener(Authenfication.this.requireActivity(), task -> {
                         String message;
                         if (task.isSuccessful()) {
                             message = "Bienvenu "+ Objects.requireNonNull(task.getResult().getUser()).getDisplayName();
@@ -215,9 +214,9 @@ public class Authenfication extends Fragment {
                         } else {
                             message = "Erreur de se connecté";
                         }
-                        Snackbar.make(Objects.requireNonNull(getView()), message, Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show();
                     }).addOnFailureListener(e -> {
-                Snackbar.make(Objects.requireNonNull(getView()), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(requireView(), Objects.requireNonNull(e.getMessage()), Snackbar.LENGTH_LONG).show();
                 e.printStackTrace();
             });
         }
@@ -231,18 +230,18 @@ public class Authenfication extends Fragment {
             mFacebookLoginButton.registerCallback(mFacebookCallbackManager, new FacebookCallback<LoginResult>() {
                 @Override
                 public void onSuccess(LoginResult loginResult) {
-                    Snackbar.make(Objects.requireNonNull(getView()), "Bienvenu", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireView(), "Bienvenu", Snackbar.LENGTH_LONG).show();
                     handleFacebookAccessToken(loginResult.getAccessToken());
                 }
 
                 @Override
                 public void onCancel() {
-                    Snackbar.make(Objects.requireNonNull(getView()), "Annuler", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireView(), "Annuler", Snackbar.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onError(FacebookException error) {
-                    Snackbar.make(Objects.requireNonNull(getView()), "error : " + error.getMessage(), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireView(), "error : " + error.getMessage(), Snackbar.LENGTH_LONG).show();
 
                 }
 
@@ -252,21 +251,18 @@ public class Authenfication extends Fragment {
 private void handleFacebookAccessToken(AccessToken token) {
     AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
     mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        startActivity(new Intent(getContext(), notes_home.class));
+            .addOnCompleteListener(getActivity(), task -> {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    startActivity(new Intent(getContext(), notes_home.class));
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Snackbar.make(Objects.requireNonNull(getView()), task.getException().getMessage(), Snackbar.LENGTH_LONG).show();
-                        Log.d("MYTAG", task.getException().getMessage());
-                    }
-
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Snackbar.make(requireView(), task.getException().getMessage(), Snackbar.LENGTH_LONG).show();
+                    Log.d("MYTAG", task.getException().getMessage());
                 }
+
             });
 }
 
@@ -280,10 +276,10 @@ private void handleFacebookAccessToken(AccessToken token) {
             //sign in with firebase
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Snackbar.make(Objects.requireNonNull(getView()), "Bienvenu", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireView(), "Bienvenu", Snackbar.LENGTH_LONG).show();
                     startActivity(new Intent(getContext(), notes_home.class));
                 } else {
-                    Snackbar.make(Objects.requireNonNull(getView()), "échec de la connexion, veuillez vérifier vos informations d'identification et réessayer", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(requireView(), "échec de la connexion, veuillez vérifier vos informations d'identification et réessayer", Snackbar.LENGTH_LONG).show();
                 }
 
             });

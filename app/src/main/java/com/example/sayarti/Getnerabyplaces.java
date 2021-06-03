@@ -77,7 +77,7 @@ public class Getnerabyplaces extends AsyncTask<Object, String, String> {
 
 
             }
-            else if (nameOfPlace.toLowerCase().contains("ola") || nameOfPlace.toLowerCase().contains("oilibya")) {
+            else if (nameOfPlace.toLowerCase().contains("ola") || nameOfPlace.toLowerCase().contains("oilibya")|| nameOfPlace.toLowerCase().contains("أويليبيا")) {
                 markerOptions.icon(bitmapDescriptordescriptor(mContext, R.drawable.mark_ola));
 
 

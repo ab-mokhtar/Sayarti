@@ -8,12 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_mat"
-        android:hint="@string/update_mat"/>
+        android:hint="@string/update_mat"
+        android:autofillHints="" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/update_note"
-        android:id="@+id/edit_note"/>
+        android:id="@+id/edit_note"
+        android:autofillHints="" />
 
 </LinearLayout>

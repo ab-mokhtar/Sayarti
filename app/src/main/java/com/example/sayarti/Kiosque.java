@@ -9,10 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Objects;
-
 
 public class Kiosque extends Fragment {
     ImageView shell,ola,total,agil,staroil,random;
@@ -34,12 +30,12 @@ public class Kiosque extends Fragment {
         ola=v.findViewById(R.id.OLA);
         staroil=v.findViewById(R.id.STAROIL);
         random = v.findViewById(R.id.random_gas);
-        shell.setOnClickListener(v15 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("SHELL")).addToBackStack(null).commit());
-        agil.setOnClickListener(v14 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("AGIL")).addToBackStack(null).commit());
-        total.setOnClickListener(v13 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("TOTAL")).addToBackStack(null).commit());
-        ola.setOnClickListener(v12 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("ola")).addToBackStack(null).commit());
-        staroil.setOnClickListener(v1 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("STAROIL")).addToBackStack(null).commit());
-        random.setOnClickListener(v1 -> Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("")).addToBackStack(null).commit());
+        shell.setOnClickListener(v15 -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("SHELL")).addToBackStack(null).commit());
+        agil.setOnClickListener(v14 -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("AGIL")).addToBackStack(null).commit());
+        total.setOnClickListener(v13 -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("TOTAL")).addToBackStack(null).commit());
+        ola.setOnClickListener(v12 -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("ola")).addToBackStack(null).commit());
+        staroil.setOnClickListener(v1 -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("STAROIL")).addToBackStack(null).commit());
+        random.setOnClickListener(v1 -> requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.kiosqueconten,new MapsFragment("")).addToBackStack(null).commit());
         /*random.setOnClickListener(v1 -> {
             Snackbar.make(Objects.requireNonNull(getView()), "random", Snackbar.LENGTH_LONG).show();
 */

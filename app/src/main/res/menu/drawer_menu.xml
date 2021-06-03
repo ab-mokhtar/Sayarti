@@ -19,7 +19,7 @@
             android:id="@+id/voit_neuv"
 
             android:actionLayout="@layout/toolbar"
-            android:title="@string/se_voitures_neuves"/>
+            android:title="@string/voiture_neuves"/>
 
         <item
             android:id="@+id/entretien"

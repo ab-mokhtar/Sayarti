@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragassur"
+    android:background="@color/white"
+    tools:context=".Assurance">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/assurance_bh"
+        android:id="@+id/bh"
+        android:contentDescription="@string/todo" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/assurance_comar"
+        android:id="@+id/comar"
+        android:contentDescription="@string/todo" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/assurance_ami"
+        android:contentDescription="@string/todo"
+        android:id="@+id/ami"/> <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:id="@+id/biat"
+    android:src="@drawable/assurance_biat"
+    android:contentDescription="@string/todo" />
+
+</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/assurance_lloyd"
+                    android:contentDescription="@string/todo"
+                    android:id="@+id/lloyd"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/gat"
+                    android:src="@drawable/assurance_gat"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/star"
+                    android:src="@drawable/assurance_star"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/hayet"
+                    android:src="@drawable/assurance_hayet"
+                    android:contentDescription="@string/todo" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/carte"
+                    android:src="@drawable/assurance_carte"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/astree"
+                    android:src="@drawable/assurance_astree"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/maghrebia"
+                    android:src="@drawable/assurance_maghrebia"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/ctama"
+                    android:src="@drawable/assurance_ctama"
+                    android:contentDescription="@string/todo" />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/mae"
+                    android:src="@drawable/assurance_mae"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/attakafulia"
+                    android:src="@drawable/assurance_attakafulia"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/zitouna"
+                    android:src="@drawable/assurance_zitouna"
+                    android:contentDescription="@string/todo" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/attijari"
+                    android:src="@drawable/assurance_attijari"
+                    android:contentDescription="@string/todo" />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView></FrameLayout>

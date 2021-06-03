@@ -45,16 +45,17 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8846074163917225~5996371400" />
 
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity android:name=".SplashScreen">
+
+        <activity android:name=".SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.NoActionBar" />
 
         <!-- facebook meta data -->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
@@ -63,7 +64,7 @@
             <intent-filter> <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="@string/fb_login_protocol_scheme" />
+                <data android:scheme="fb866028170666491" />
             </intent-filter>
         </activity>
         <!-- /facebook meta data -->

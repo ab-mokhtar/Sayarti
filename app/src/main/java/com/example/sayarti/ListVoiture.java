@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 
 public class ListVoiture extends Fragment {
@@ -48,7 +47,7 @@ public class ListVoiture extends Fragment {
     ArrayList<String> ProdcarNames = new ArrayList();
     private final String sear;
     //ArrayList<String> selectedcar = new ArrayList();
-    ArrayList<String> selectedcar = new ArrayList<String>();
+    ArrayList<String> selectedcar = new ArrayList<>();
     //private final String selc;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -128,138 +127,115 @@ public class ListVoiture extends Fragment {
         progressDoalog.setTitle(R.string.loading);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDoalog.show();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (progressDoalog.getProgress() <= progressDoalog
+        new Thread(() -> {
+            try {
+                while (progressDoalog.getProgress() <= progressDoalog
+                        .getMax()) {
+                    Thread.sleep(200);
+                    handle.sendMessage(handle.obtainMessage());
+                    if (progressDoalog.getProgress() == progressDoalog
                             .getMax()) {
-                        Thread.sleep(200);
-                        handle.sendMessage(handle.obtainMessage());
-                        if (progressDoalog.getProgress() == progressDoalog
-                                .getMax()) {
-                            progressDoalog.dismiss();
-                        }
+                        progressDoalog.dismiss();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }).start();
 
     }
     private void configureOnClickRecyclerView() {
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_list_voiture)
-            .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-                @Override
-                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+            .setOnItemClickListener((recyclerView, position, v) -> {
 
-                    ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
-                    String searchedCar = adapter.getCarNames(position);
+                ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
+                String searchedCar = adapter.getCarNames(position);
 
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LINK_PROD,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    try {
-                                        JSONArray P_array = new JSONArray(response);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LINK_PROD,
+                        response -> {
+                            try {
+                                JSONArray P_array = new JSONArray(response);
 
 
-                                        //traversing through all the object
-                                        for (int i = 0; i < P_array.length(); i++) {
+                                //traversing through all the object
+                                for (int i = 0; i < P_array.length(); i++) {
 
-                                            //getting product object from json array
-                                            JSONObject product = P_array.getJSONObject(i);
+                                    //getting product object from json array
+                                    JSONObject product = P_array.getJSONObject(i);
 
-                                            selectedcar.add(product.getString("Car_PostName"));
+                                    selectedcar.add(product.getString("Car_PostName"));
 
-                                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                                            String url = "https://www.sayarti.tn/prix-des-voitures/"+selectedcar.get(position);
-                                            intent.setData(Uri.parse(url));
-                                            getActivity().startActivity(intent);
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    String url = "https://www.sayarti.tn/prix-des-voitures/" + selectedcar.get(position);
+                                    intent.setData(Uri.parse(url));
+                                    getActivity().startActivity(intent);
 
-                                        }
-                                    }
-                                    catch (Exception e){
-                                        e.printStackTrace();
-                                        //Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
-                                        Snackbar.make(Objects.requireNonNull(getView()), "En cours de chargement de cette voiture"+ "\n" +
-                                                "Veuillez patienter quelques secondes", Snackbar.LENGTH_LONG).show();
-
-                                    }
                                 }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Toast.makeText(getContext(),error.toString(),Toast.LENGTH_LONG).show();
-                                }
-                            }){
-                        @Override
-                        protected Map<String, String> getParams() {
-                            Map<String,String> params = new HashMap<>();
-                            params.put("selectedCar",searchedCar);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                //Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
+                                Snackbar.make(requireView(), "En cours de chargement de cette voiture" + "\n" +
+                                        "Veuillez patienter quelques secondes", Snackbar.LENGTH_LONG).show();
 
-                            return params;
-                        }
-                    };
-                    RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
-                    requestQueue.add(stringRequest);
+                            }
+                        },
+                        error -> Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show()){
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String,String> params = new HashMap<>();
+                        params.put("selectedCar",searchedCar);
 
-                }
+                        return params;
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+                requestQueue.add(stringRequest);
+
             });
     }
 
     private void postProducts()
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_PRODUCTS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //Toast.makeText(MainActivity.this,response.trim(),Toast.LENGTH_LONG).show();
+                response -> {
+                    //Toast.makeText(MainActivity.this,response.trim(),Toast.LENGTH_LONG).show();
 
-                        try {
+                    try {
 //                            JSONObject jsonObject = new JSONObject(response);
 //                            input.setText(jsonObject.getString("data"));
-                            JSONArray P_array = new JSONArray(response);
+                        JSONArray P_array = new JSONArray(response);
 
-                            //traversing through all the object
-                            for (int i = 0; i < P_array.length(); i++) {
+                        //traversing through all the object
+                        for (int i = 0; i < P_array.length(); i++) {
 
-                                //getting product object from json array
-                                JSONObject product = P_array.getJSONObject(i);
+                            //getting product object from json array
+                            JSONObject product = P_array.getJSONObject(i);
 
-                                //adding the product to product list
-                                productList.add(new Product(
-                                        product.getString("post_title").toUpperCase(),
-                                        product.getString("sale_price").toUpperCase(),
-                                        product.getString("type_de_carburant").toUpperCase(),
-                                        product.getString("engine").toUpperCase(),
-                                        product.getString("puissance_ch_din").toUpperCase(),
-                                        product.getString("boite").toUpperCase(),
-                                        product.getString("path"),
-                                        product.getString("trans").toUpperCase()
+                            //adding the product to product list
+                            productList.add(new Product(
+                                    product.getString("post_title").toUpperCase(),
+                                    product.getString("sale_price").toUpperCase(),
+                                    product.getString("type_de_carburant").toUpperCase(),
+                                    product.getString("engine").toUpperCase(),
+                                    product.getString("puissance_ch_din").toUpperCase(),
+                                    product.getString("boite").toUpperCase(),
+                                    product.getString("path"),
+                                    product.getString("trans").toUpperCase()
 
-                                ));
-                                //ProdcarNames.add(product.getString("post_title"));
-                            }
-                            //creating adapter object and setting it to recyclerview
-                            ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
-                            recyclerView.setAdapter(adapter);
+                            ));
+                            //ProdcarNames.add(product.getString("post_title"));
                         }
-                        catch (Exception e){
-                            e.printStackTrace();
-                            //erreur.setText(e.getMessage());
-                            Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
-                        }
+                        //creating adapter object and setting it to recyclerview
+                        ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
+                        recyclerView.setAdapter(adapter);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                        //erreur.setText(e.getMessage());
+                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }){
+                error -> Toast.makeText(getContext(),error.toString(),Toast.LENGTH_LONG).show()){
             @Override
             protected Map<String, String> getParams() {
                 Map<String,String> params = new HashMap<>();
@@ -268,7 +244,7 @@ public class ListVoiture extends Fragment {
                 return params;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         requestQueue.add(stringRequest);
     }
     private void loadProducts() {
@@ -308,15 +284,10 @@ public class ListVoiture extends Fragment {
                         Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                error -> Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show());
 
         //adding our stringrequest to queue
-        Volley.newRequestQueue(Objects.requireNonNull(getContext())).add(stringRequest);
+        Volley.newRequestQueue(requireContext()).add(stringRequest);
         //progress.dismiss();
 
     }

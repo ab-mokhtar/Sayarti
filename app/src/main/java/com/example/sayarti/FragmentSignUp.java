@@ -16,8 +16,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Objects;
-
 
 public class FragmentSignUp extends Fragment {
     private FirebaseAuth mAuth;
@@ -41,22 +39,22 @@ public class FragmentSignUp extends Fragment {
             String pass2 = mdp2.getText().toString().trim();
             if(email.length()==0|| pass1.length()==0 || pass2.length()==0) {
 
-                Snackbar.make(Objects.requireNonNull(getView()), "VERIFIER VOS CHAMPS", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(requireView(), "VERIFIER VOS CHAMPS", Snackbar.LENGTH_LONG).show();
             }
             if(!pass1.equals(pass2))
             {
-                Snackbar.make(Objects.requireNonNull(getView()), "les mots de passe ne correspondent pas", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(requireView(), "les mots de passe ne correspondent pas", Snackbar.LENGTH_LONG).show();
             }
             else{
                 mAuth.createUserWithEmailAndPassword(email, pass1).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.isSuccessful()) {
-                            Snackbar.make(Objects.requireNonNull(getView()), "votre compte était bien créé", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(requireView(), "votre compte était bien créé", Snackbar.LENGTH_LONG).show();
                         } else {
-                            Snackbar.make(Objects.requireNonNull(getView()), "Création échoué! veuillez réessayer", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(requireView(), "Création échoué! veuillez réessayer", Snackbar.LENGTH_LONG).show();
                         }
                     } else {
-                        Snackbar.make(Objects.requireNonNull(getView()), "Création échouée", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(requireView(), "Création échouée", Snackbar.LENGTH_LONG).show();
                     }
 
                 });

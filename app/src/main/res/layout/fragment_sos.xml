@@ -59,17 +59,19 @@
                 android:layout_gravity="center"
                 android:background="@drawable/back_spinner"
                 android:layout_marginRight="5dp"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:layout_marginEnd="5dp">
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/tun"/>
+                android:src="@drawable/tun"
+                android:contentDescription="@string/todo" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="+216"
+                android:text="@string/_216"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="5dp"
                 android:textSize="18sp"/>
@@ -78,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tel"
-                android:hint="00000000"
+                android:hint="@string/_00000000"
                 android:padding="12dp"
                 android:maxLength="8"
                 android:background="@drawable/custom_input"
@@ -112,7 +114,8 @@
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:layout_marginLeft="5dp"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"
+                android:layout_marginStart="5dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -120,7 +123,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_drop" />
+                android:src="@drawable/ic_drop"
+                android:contentDescription="@string/todo"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
