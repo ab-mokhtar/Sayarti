@@ -40,7 +40,7 @@ public class ListVoiture extends Fragment {
     RecyclerView recyclerView;
 
     public static final String URL_PRODUCTS = "http://dev.goodlinks.tn/sayarti-apps/test.php";
-    public static final String URL_LINK_PROD = "http://dev.goodlinks.tn/sayarti-apps/linkCar.php";
+
 
     //a list to store all the products
     List<Product> productList;
@@ -144,52 +144,17 @@ public class ListVoiture extends Fragment {
         }).start();
 
     }
+
+
+
     private void configureOnClickRecyclerView() {
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_list_voiture)
             .setOnItemClickListener((recyclerView, position, v) -> {
 
-                ProductAdapter adapter = new ProductAdapter(getContext(), productList,ProdcarNames);
-                String searchedCar = adapter.getCarNames(position);
-
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LINK_PROD,
-                        response -> {
-                            try {
-                                JSONArray P_array = new JSONArray(response);
-
-
-                                //traversing through all the object
-                                for (int i = 0; i < P_array.length(); i++) {
-
-                                    //getting product object from json array
-                                    JSONObject product = P_array.getJSONObject(i);
-
-                                    selectedcar.add(product.getString("Car_PostName"));
-
-                                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                                    String url = "https://www.sayarti.tn/prix-des-voitures/" + selectedcar.get(position);
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    String url = "https://www.sayarti.tn/prix-des-voitures/" + productList.get(position).getLien();
                                     intent.setData(Uri.parse(url));
-                                    getActivity().startActivity(intent);
-
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                //Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
-                                Snackbar.make(requireView(), "En cours de chargement de cette voiture" + "\n" +
-                                        "Veuillez patienter quelques secondes", Snackbar.LENGTH_LONG).show();
-
-                            }
-                        },
-                        error -> Toast.makeText(getContext(), error.toString(), Toast.LENGTH_LONG).show()){
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String,String> params = new HashMap<>();
-                        params.put("selectedCar",searchedCar);
-
-                        return params;
-                    }
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-                requestQueue.add(stringRequest);
+    getActivity().startActivity(intent);
 
             });
     }
@@ -220,7 +185,8 @@ public class ListVoiture extends Fragment {
                                     product.getString("puissance_ch_din").toUpperCase(),
                                     product.getString("boite").toUpperCase(),
                                     product.getString("path"),
-                                    product.getString("trans").toUpperCase()
+                                    product.getString("trans").toUpperCase(),
+                                    product.getString("lien")
 
                             ));
                             //ProdcarNames.add(product.getString("post_title"));
@@ -271,7 +237,8 @@ public class ListVoiture extends Fragment {
                                     product.getString("puissance_ch_din").toUpperCase(),
                                     product.getString("boite").toUpperCase(),
                                     product.getString("path"),
-                                    product.getString("trans").toUpperCase()
+                                    product.getString("trans").toUpperCase(),
+                                    product.getString("lien")
                             ));
                             //ProdcarNames.add(product.getString("post_title"));
                         }

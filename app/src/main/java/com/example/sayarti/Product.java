@@ -9,6 +9,7 @@ public class Product {
     private String boite;
     private String path;
     private String trans;
+    private  String lien;
 
 
 
@@ -79,6 +80,14 @@ public class Product {
         }
     }
 
+    public String getLien() {
+        return lien;
+    }
+
+    public void setLien(String lien) {
+        this.lien = lien;
+    }
+
     public String getTrans() {
         return trans;
     }
@@ -92,7 +101,7 @@ public class Product {
     }
 
     public Product(String nom, String prix, String type_carburant, String puissance_fiscale,
-                   String puissance_ch, String boite, String path,String trans) {
+                   String puissance_ch, String boite, String path,String trans,String lien) {
         this.nom = nom;
         this.prix = prix;
         this.type_carburant = type_carburant;
@@ -100,6 +109,7 @@ public class Product {
         this.puissance_ch = puissance_ch;
         this.boite = boite;
         this.trans = trans;
+        this.lien = lien;
         setPath(path);
     }
 
