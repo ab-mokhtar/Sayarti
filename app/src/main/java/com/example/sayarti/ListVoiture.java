@@ -121,7 +121,9 @@ public class ListVoiture extends Fragment {
                 progressDoalog.incrementProgressBy(val);
             }
         };
+
         progressDoalog = new ProgressDialog(getContext());
+        progressDoalog.setCancelable(false);
         progressDoalog.setMax(100);
         progressDoalog.setMessage("Chargement en cours . . . . ");
         progressDoalog.setTitle(R.string.loading);

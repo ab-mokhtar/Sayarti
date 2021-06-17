@@ -72,7 +72,9 @@ public class liste_notes extends Fragment {
         final SwipeMenuListView list1 = RootView.findViewById(R.id.ListeView1);
         final ArrayList<HashMap<String,String>> list= new ArrayList();
         final SimpleAdapter adapter = new SimpleAdapter(requireActivity().getBaseContext(),list,R.layout.ligne, from, to);
+        adapter.notifyDataSetChanged();
         list1.setAdapter(adapter);
+
         list1.setOnItemLongClickListener((parent, view, position, id) -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
             builder.setTitle("Sélection Item");
@@ -96,16 +98,12 @@ public class liste_notes extends Fragment {
                 //child key
                 Arraykey.add(snapshot.getKey());
 
-
-
                 Log.put("matricule", matricule);
                 Log.put("note", note);
                 Log.put("date", date);
                 list.add(Log);
 
-
                 adapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -135,12 +133,10 @@ public class liste_notes extends Fragment {
             if(adapter.getCount()==0)
             {
                 Snackbar.make(requireView(), "Rien à supprimer !", Snackbar.LENGTH_SHORT).show();
-
             }
             else
             {
                 ClearList();
-                adapter.notifyDataSetChanged();
             }
         });
 
@@ -155,7 +151,6 @@ public class liste_notes extends Fragment {
             openItem.setIcon(R.drawable.ic_update);
             // add to menu
             menu.addMenuItem(openItem);
-
             // create "delete" item
             SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
             // set item background
@@ -175,30 +170,23 @@ public class liste_notes extends Fragment {
                 case 0:
                     //update
                     UpdateNote(Arraykey.get(position));
-                    adapter.notifyDataSetChanged();
-
                     break;
                 case 1:
                     //delete
                     DeleteItem(Arraykey.get(position));
-                    adapter.notifyDataSetChanged();
-
                     break;
             }
             // false : close the menu; true : not close the menu
             return false;
         });
-
-
         // Inflate the layout for this fragment
         return RootView;
-
-
     }
 
     private void DeleteItem(String childkey)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setCancelable(false);
         builder.setTitle("Supprimer Item");
         builder.setMessage("vous etes sure de supprimer ?");
         builder.setPositiveButton("oui", (dialog, which) -> myRef.child(childkey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -223,6 +211,7 @@ public class liste_notes extends Fragment {
     private void ClearList()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setCancelable(false);
         builder.setTitle("Supprimer tous les notes");
         builder.setMessage("vous êtes sure de supprimer ?");
         builder.setPositiveButton("oui", (dialog, which) -> {
@@ -253,9 +242,8 @@ public class liste_notes extends Fragment {
 
     private void UpdateNote(String childKey)
     {
-
-
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setCancelable(false);
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.update_dialog,null);
         builder.setView(view).setTitle("Modifier la note").setPositiveButton("OK", (dialog, which) -> {

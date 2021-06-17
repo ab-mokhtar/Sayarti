@@ -1,6 +1,7 @@
 package com.example.sayarti;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -11,9 +12,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -26,6 +29,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity  {
     private static  final String BASE_URL = "http://dev.goodlinks.tn/sayarti-apps/getdata.php";
     private DrawerLayout drawerLayout;
     private final ArrayList<posi> data= new ArrayList<>();
-
+    Context  context ;
 
 
     @SuppressLint("NonConstantResourceId")
@@ -46,6 +50,39 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         getProducts();
         setContentView(R.layout.activity_main);
+
+        if (!isConnected())
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setCancelable(false);
+            builder.setTitle(R.string.internetTitle);
+            builder.setMessage(R.string.internetMsg);
+            builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Vous utilisez SAYARTI sans connection internet !", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            });
+
+            builder.setNegativeButton("Ressayer", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(isConnected())
+                    {
+                        dialog.dismiss();
+                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Connexion établie", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    }
+                    else
+                    {
+                        builder.show();
+                    }
+                }
+            });
+            builder.show();
+        }
 
         MobileAds.initialize(this, initializationStatus -> {
         });
@@ -244,13 +281,10 @@ public class MainActivity extends AppCompatActivity  {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void getProducts (){
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, BASE_URL,
                 response -> {
-
-
                     try {
 
                         JSONArray array = new JSONArray(response);
@@ -267,7 +301,6 @@ public class MainActivity extends AppCompatActivity  {
                             posi p =new posi(lat,longi,name,marque,tel,type);
                             data.add(p);
 
-
                         }
                         PrefConfig.writeListInPref(getApplicationContext(), data);
 
@@ -275,18 +308,16 @@ public class MainActivity extends AppCompatActivity  {
                     }catch (Exception ignored){
 
                     }
-
-
-
-
-
                 }, null);
-
-
         Volley.newRequestQueue(MainActivity.this).add(stringRequest);
     }
 
 
+    private boolean isConnected()
+    {
+        ConnectivityManager connectivityManager  = (ConnectivityManager) getApplicationContext().getSystemService(context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getActiveNetworkInfo()!=null && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
 
 }
 
