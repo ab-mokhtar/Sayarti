@@ -98,6 +98,7 @@
         android:textSize="18sp"/>
 
         <RelativeLayout
+            android:id="@+id/relative_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/back_spinner"
@@ -133,6 +134,7 @@
             android:id="@+id/autre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_input"
             android:hint="@string/decrire_votre_panne"

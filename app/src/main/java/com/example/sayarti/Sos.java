@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.android.volley.Request;
@@ -46,6 +47,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static android.graphics.Color.rgb;
+
 public class Sos extends Fragment {
 
     SupportMapFragment supportMapFragment;
@@ -55,6 +58,7 @@ public class Sos extends Fragment {
     FusedLocationProviderClient client;
     ImageView i2;
     Spinner spinner;
+    RelativeLayout Rlative_spin ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class Sos extends Fragment {
         client = LocationServices.getFusedLocationProviderClient(requireActivity());
 
         //spinner
+        Rlative_spin =v.findViewById(R.id.relative_spinner);
         spinner = v.findViewById(R.id.type_panne);
         String [] values = {getString(R.string.Choisissez_le_type_de_panne),getString(R.string.Batterie),getString(R.string.Pneumatique),getString(R.string.Essence),getString(R.string.Accident),getString(R.string.Incendie),getString(R.string.Autre)};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, values);
@@ -119,13 +124,27 @@ public class Sos extends Fragment {
 
 
 
-            if(mat.length()==0 || (e4.getText().toString().length()==0 || e4.getText().toString().length()<8) || type_panne.equals("Choisissez le type de panne") ||  local.length()==0) {
-                i2.setEnabled(false);
-                Snackbar.make(requireView(), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
+//            if(mat.length()==0  ||(e4.getText().toString().length()==0 || e4.getText().toString().length()<8) || type_panne.equals("Choisissez le type de panne") ||  local.length()==0) {
+//                i2.setEnabled(false);
+//                Snackbar.make(requireView(), "Vérifier les champs remplis ou vérifier votre connexion internet", Snackbar.LENGTH_LONG).show();
+//            }
+            if(mat.length()==0)
+            {
+                e2.setBackgroundResource(R.drawable.back_error);
+                e2.setError("Entrez la matricule");
+            }
+            else if(e4.getText().toString().length()==0 || e4.getText().toString().length()<8)
+            {
+                e4.setBackgroundResource(R.drawable.back_error);
+                e4.setError("Entrez le numéro du téléphone");
+            }
+            else if(type_panne.equals("Choisissez le type de panne") )
+            {
+                Rlative_spin.setBackgroundResource(R.drawable.back_error);
+                Snackbar.make(requireView(), "Veuillez choisir le type de panne", Snackbar.LENGTH_LONG).show();
             }
             else
             {
-
                 StringRequest request = new StringRequest(Request.Method.POST, "http://dev.goodlinks.tn/sayarti-apps/insert.php",
                         response -> {
 
@@ -134,9 +153,7 @@ public class Sos extends Fragment {
 
                             }
                             else{
-                                Snackbar.make(requireView(), response, Snackbar.LENGTH_LONG).show();
-
-
+                                Snackbar.make(requireView(), "Erreur d'envoiyer votre déclaration"+"\n"+"Veuillez verifier votre connexion internet", Snackbar.LENGTH_LONG).show();
                             }
 
                         }, error -> Snackbar.make(requireView(), Objects.requireNonNull(error.getMessage()), Snackbar.LENGTH_LONG).show()
@@ -159,8 +176,6 @@ public class Sos extends Fragment {
                         params.put("date",date);
                         params.put("tel",tel);
 
-
-
                         return params;
                     }
                 };
@@ -169,10 +184,16 @@ public class Sos extends Fragment {
                 RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
                 requestQueue.add(request);
 
+                e2.getText().clear();
+                e2.setBackgroundResource(R.drawable.custom_input);
+                e3.getText().clear();
+                e3.setBackgroundResource(R.drawable.custom_input);
+                Rlative_spin.setBackgroundResource(R.drawable.back_spinner);
+                e4.getText().clear();
+                e4.setBackgroundResource(R.drawable.custom_input);
+
+
             }
-            e2.getText().clear();
-            e3.getText().clear();
-            e4.getText().clear();
         });
 
         i2.setOnClickListener(v1 -> {

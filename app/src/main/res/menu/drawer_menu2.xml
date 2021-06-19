@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
+    <item
+        android:id="@+id/profil"
+        android:icon="@drawable/ic_profil"
+        android:actionLayout="@layout/toolbar"
+        android:title="@string/profil"/>
     <group>
         <item
             android:id="@+id/voit_neuv"
-
+            android:icon="@drawable/ic_car_menu"
             android:actionLayout="@layout/toolbar"
             android:title="@string/voiture_neuves"/>
 
         <item
             android:id="@+id/entretien"
-
             android:actionLayout="@layout/toolbar"
+            android:icon="@drawable/sos"
             android:title="@string/entretien"/>
         <item
             android:id="@+id/kiosque"
-
+            android:icon="@drawable/ic_kiosk_menu"
             android:actionLayout="@layout/toolbar"
             android:title="@string/station_de_kiosque"/>
         <item
             android:id="@+id/borne_charge"
-
+            android:icon="@drawable/elec_station"
             android:actionLayout="@layout/toolbar"
             android:title="@string/bornes_de_recharge"/>
         <item
             android:id="@+id/assur"
-
+            android:icon="@drawable/assurance_auto"
             android:actionLayout="@layout/toolbar"
             android:title="@string/assurance_auto"/>
         <item
-            android:id="@+id/profil"
-
-            android:actionLayout="@layout/toolbar"
-            android:title="@string/profil"/>
-        <item
             android:id="@+id/Visite_technique"
-
+            android:icon="@drawable/ic_visit"
             android:actionLayout="@layout/toolbar"
             android:title="@string/visite_technique"/>
-
     </group>
 </menu>
